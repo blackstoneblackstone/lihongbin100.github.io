@@ -1,0 +1,17 @@
+.archive-year {
+  color: #333;
+  font-size: 2em;
+}
+.archives {
+  padding-left: 1.75em;
+}
+.archives a {
+  color: #4a4a4a;
+}
+.archives a:hover {
+  color: #7cc04b;
+}
+.archives .archive-section-item {
+  height: 2em;
+  font-size: 1.3em;
+}
