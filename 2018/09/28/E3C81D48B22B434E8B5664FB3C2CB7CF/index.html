@@ -184,13 +184,10 @@ vue简单的双向绑定原理
 </li>
 <li>array的基本方法</li>
 <li>arguments转化为真正的数组Array.prototype.slice.call(arguments)</li>
-<li>js数组去重</li>
-<li>创建一个新的数组存放结果</li>
-<li>创建一个空对象</li>
-<li><p>for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它存放到结果数组中，同时把这个元素的内容作为对象的一个属性，并赋值为1，存入到第2步建立的对象中。</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.unique3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">var</span> res = [];</span><br><span class="line"> <span class="keyword">var</span> json = &#123;&#125;;</span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(!json[<span class="keyword">this</span>[i]])&#123;</span><br><span class="line">   res.push(<span class="keyword">this</span>[i]);</span><br><span class="line">   json[<span class="keyword">this</span>[i]] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">112</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="string">'你好'</span>,<span class="number">112</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="string">'你好'</span>,<span class="string">'str'</span>,<span class="string">'str1'</span>];</span><br><span class="line">alert(arr.unique3());</span><br></pre></td></tr></table></figure>
+<li><p>js数组去重</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//for循环时，每次取出一个元素与对象///进行对比，如果这个元素不重复，则把//它存放到结果数组中，同时把这个元素的内容作为对象的一个属性，并赋值为1，存入到第2步建立的对象中。</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.unique3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">var</span> res = [];</span><br><span class="line"> <span class="keyword">var</span> json = &#123;&#125;;</span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(!json[<span class="keyword">this</span>[i]])&#123;</span><br><span class="line">   res.push(<span class="keyword">this</span>[i]);</span><br><span class="line">   json[<span class="keyword">this</span>[i]] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">112</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="string">'你好'</span>,<span class="number">112</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="string">'你好'</span>,<span class="string">'str'</span>,<span class="string">'str1'</span>];</span><br><span class="line">alert(arr.unique3());</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>深拷贝</p>
+<li><p>深拷贝 <a href="https://codepen.io/lihongbin100/pen/deYzpy" target="_blank" rel="noopener">CodePen</a></p>
   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clone = <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> o = v.constructor === <span class="built_in">Array</span> ? [] : &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> v) &#123;</span><br><span class="line">    o[i] = <span class="keyword">typeof</span> v[i] === <span class="string">"Object"</span> ? clone(v[i]) : v[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>闭包</p>
@@ -223,7 +220,7 @@ vue简单的双向绑定原理
 </li>
 <li><p>js继承<br><a href="http://www.cnblogs.com/ayqy/p/4471638.html" target="_blank" rel="noopener">理解JS的6种继承方式</a></p>
 </li>
-<li><p>call 和apply<br><a href="http://uule.iteye.com/blog/1158829" target="_blank" rel="noopener">详解call和apply</a></p>
+<li><p>call 和apply<br><a href="https://github.com/lin-xin/blog/issues/7" target="_blank" rel="noopener">详解call和apply</a></p>
 </li>
 <li><p>node延迟函数执行顺序是什么？ </p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">console.log(3)</span><br><span class="line">&#125;,0);</span><br><span class="line">setImmediate(()=&gt;&#123;</span><br><span class="line">console.log(2)</span><br><span class="line">&#125;);</span><br><span class="line">process.nextTick(()=&gt;&#123;</span><br><span class="line">console.log(4)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 4 2 3</span><br><span class="line"> </span><br><span class="line">以上代码的执行顺序为：</span><br><span class="line"> </span><br><span class="line">1. process.nextTick</span><br><span class="line">2. setImmediate</span><br><span class="line">3. setTimeout</span><br></pre></td></tr></table></figure>
@@ -315,8 +312,8 @@ vue简单的双向绑定原理
 <li>保护cookies httpOnly为true，阻止js调用该cookies属性。</li>
 </ul>
 <h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><ul>
-<li>vue 更新机制，双向绑定</li>
-<li>react 更新机制，diff算法</li>
+<li>vue 更新机制，双向绑定。</li>
+<li>react 更新机制，diff算法。</li>
 <li>事件机制 emit和 on实现。</li>
 </ul>
 <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><ul>
@@ -426,9 +423,9 @@ vue简单的双向绑定原理
     <script>
     window.disqus_config = function () {
         this.language = 'zh';
-        this.page.url = 'http://lihongbin100.github.io/2018/09/20/E3C81D48B22B434E8B5664FB3C2CB7CF/';
+        this.page.url = 'http://lihongbin100.github.io/2018/09/28/E3C81D48B22B434E8B5664FB3C2CB7CF/';
         this.page.title = '';
-        this.page.identifier = '2018/09/20/E3C81D48B22B434E8B5664FB3C2CB7CF/';
+        this.page.identifier = '2018/09/28/E3C81D48B22B434E8B5664FB3C2CB7CF/';
     };
     (function() { // DON'T EDIT BELOW THIS LINE
         var d = document, s = d.createElement('script');
