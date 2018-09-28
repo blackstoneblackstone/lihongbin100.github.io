@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>使用命令打开idea指定目录 | 程序员的自我修养</title>
+    <meta name="author" content="lihb" />
+    <meta name="version" content="1.0.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="  最终实现的效果是：idea&amp;nbsp;目录/文件，可以使用idea打开改目录或者该文件庆幸的是IDEA天然支持该方法：IDEA可以自动生成对应的命令，点击Tools-&amp;gt;Create&amp;nbsp;Command-Line&amp;nbsp;Launcher，IDEA就会建立一个/usr/local/bin/idea的可执行文件，命令行中就可以调用了：" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="baidu-site-verification" content="F0CXvmUgA9" />
+
+    
+    
+    <link rel="icon" href="https://tvax1.sinaimg.cn/crop.0.0.750.750.180/5c2e98bfly8fgf1weephpj20ku0kuabj.jpg">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="app">
+        <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+
+    <nav class="nav-inner">
+
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Code">Code</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Read">Read</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Life">Life</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/English">English</a>
+        </li>
+        
+        
+        
+        <li class="nav-item nav-item-tag">
+            <a id="nav-tag" class="nav-link" href="#">Tags</a>
+            <div id="nav-tags" class="nav-tag-wrap">
+                <i class="nav-tag-arrow"></i>
+                
+  <div class="widget-wrap">
+    <h3 class="widget-title">
+        <i class="icon-tag vm"></i>
+        <span class="vm">Tags</span>
+    </h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+            </div>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/archives">Docs</a>
+        </li>
+        
+        
+        
+
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+  <div id="aside-mask" class="aside-mask"></div>
+  <div id="aside-inner" class="aside-inner">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="http://lihongbin100.github.io"></form>
+
+    
+    
+    
+    
+
+    
+    <div class="author-meta">
+      
+      <div class="author-avatar">
+        <a href="/">
+          <img src="https://tvax1.sinaimg.cn/crop.0.0.750.750.180/5c2e98bfly8fgf1weephpj20ku0kuabj.jpg" title="Sanonz">
+        </a>
+      </div>
+      
+      <div class="author-name">Steven</div>
+      <div class="author-work">Coder &amp; A life learner</div>
+      <div class="author-location">
+        <i class="icon-location vm"></i>
+        <span class="vm">Beijing, China</span>
+      </div>
+      
+      <div class="author-thread-wrap">
+        <div class="author-threads clearfix">
+          
+          <a class="thread-item" href="https://github.com/lihongbin100" target="_blank" rel="noopener"><i
+                    class="icon-github"></i></a>
+          
+          
+          <a title="codePen" class="thread-item" href="https://codepen.io/lihongbin100/pens/public/?grid_type=list" target="_blank" rel="noopener">
+            <div class="icon-codepen"></div>
+          </a>
+          
+          
+          <a class="thread-item" href="http://www.simamedia.cn" target="_blank" rel="noopener"><i
+                    class="icon-circle-more"></i></a>
+          
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            使用命令打开idea指定目录
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2018/09/12/WEBd298ca20dc60346959703d8462658c88/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-09-11T16:00:00.000Z" itemprop="datePublished">2018-09-12</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+          <div yne-bulb-block="paragraph" style="white-space: pre-wrap;">最终实现的效果是：idea&nbsp;目录/文件，可以使用idea打开改目录或者该文件</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">庆幸的是IDEA天然支持该方法：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-size:15px;color:#444444;background-color:#ffffff;">IDEA可以自动生成对应的命令，点击Tools-&gt;Create&nbsp;Command-Line&nbsp;Launcher，IDEA就会建立一个/usr/local/bin/idea的可执行文件，命令行</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-size:15px;color:#444444;background-color:#ffffff;">中就可以调用了：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="image"><img data-media-type="image" src="http://note.youdao.com/yws/public/resource/68223916cc24226197cdb4defa392e3f/xmlnote/WEBd298ca20dc60346959703d8462658c88/FA703DBE9C1F4B7CA5C14563CB9F3596/3757" alt=""></div><div yne-bulb-block="image"><img data-media-type="image" src="http://note.youdao.com/yws/public/resource/68223916cc24226197cdb4defa392e3f/xmlnote/WEBd298ca20dc60346959703d8462658c88/2E1A02421C6A40E1A0A348F3C406479D/3756" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div>
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+    <div id="disqus_thread">
+        <p class="comment-tips">国内查看评论需要代理~</p>
+    </div>
+    <script>
+    window.disqus_config = function () {
+        this.language = 'zh';
+        this.page.url = 'http://lihongbin100.github.io/2018/09/12/WEBd298ca20dc60346959703d8462658c88/';
+        this.page.title = '使用命令打开idea指定目录';
+        this.page.identifier = '2018/09/12/WEBd298ca20dc60346959703d8462658c88/';
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://lihb.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+</div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+</footer>
+
+<script>
+  //腾讯云分析
+  var _mtac = {};
+  (function() {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500419572");
+
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+  })();
+</script>
+
+<script src="https://js.fundebug.cn/fundebug.1.2.0.min.js"
+        apikey="ae360215ad4a1bc4bedf1e1836aae88cca3fcf69de81c7c0bd4599a170818650"></script>
+
+    </div>
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="/js/scrollspy.min.js"></script>
+    
+    <script type="text/javascript">
+        $(function() {
+            var nodes = {
+                nav: $('#nav'),
+                aside: $('#aside'),
+                navTags: $('#nav-tags')
+            };
+
+            $('#open-panel, #aside-mask').on('click', function() {
+                nodes.aside.toggleClass('panel-show');
+            });
+            $('#nav-tag').on('click', function(event) {
+                event.preventDefault();console.log(nodes.navTags.attr('class'))
+                nodes.navTags.toggleClass('tag-show');console.log(nodes.navTags.attr('class'))
+            })/*.hover(function() {
+                nodes.navTags.addClass('tag-show');
+            }, function() {
+                nodes.navTags.removeClass('tag-show');
+            });*/
+
+            
+            $(document.body).scrollspy({target: '#aside-inner'});
+            
+        });
+    </script>
+
+</body>
+</html>
