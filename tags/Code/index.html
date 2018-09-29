@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
-
+    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE" />
+    <meta name="baidu-site-verification" content="U4hzSuyexT" />
     
-
     
 
     <title>Tag: Code | 程序员的自我修养</title>
@@ -142,6 +142,17 @@
   </div>
 </aside>
 
+
+  <!-- Begin SessionStack code -->
+  <script type="text/javascript">
+    !function(a,b){var c=window;c.SessionStackKey=a,c[a]=c[a]||{t:b,
+        q:[]};for(var d=["start","stop","identify","getSessionId","log","setOnDataCallback"],e=0;e<d.length;e++)!function(b){
+      c[a][b]=c[a][b]||function(){c[a].q.push([b].concat([].slice.call(arguments,0)));
+        }}(d[e]);var f=document.createElement("script");f.async=1,f.src="https://cdn.sessionstack.com/sessionstack.js";
+      var g=document.getElementsByTagName("script")[0];g.parentNode.insertBefore(f,g);
+    }("SessionStack","1fc1cd3ba4644cb3a60d35056791d225");
+  </script>
+  <!-- End SessionStack Code -->
 </header>
 
         <div id="content" class="content">
@@ -371,11 +382,11 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
+            <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
         </h1>
         
         <div class="article-meta clearfix">
-            <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
+            <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
     
     <i class="icon-calendar"></i>
     
@@ -394,20 +405,41 @@
     
     <section class="article-body markdown-body">
         
-        <blockquote>
-<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
-</blockquote>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
-<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>wq！保存。</p>
+        <ol>
+<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
+<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>成功！</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
+</li>
+<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
+</li>
+<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fixed 浏览器问题</p>
+</li>
+<li>弹出问题</li>
+<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片加载失败的时候的缺省图片问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
+<ol start="11">
+<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
+</ol>
 
         
     </section>
@@ -574,102 +606,6 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
 <h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
 <h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-</a>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
-<p>yum安装的版本只有5.1，所以手动安装</p>
-</blockquote>
-<ol>
-<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
-<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
-<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
-<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
-<li>安装  <code>curl</code>: yum -y install curl-devel</li>
-<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
-<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
-<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
-<li><p>执行下面的配置</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>复制php-fpm.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>php-fpm 全局启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
-<p>14.成功</p>
-<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
-<li>yum 安装 <code>yum -y install nginx</code></li>
-<li>删除 /etc/nginx/conf.d下所有文件</li>
-<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
- <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
-</li>
-</ol>
-<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
-<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="2">
-<li><p>开机启动</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>密码设置</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置全网访问<code>mysql -uroot -p</code></p>
-</li>
-</ol>
-<ul>
-<li>输入：<code>use mysql</code>;</li>
-<li>查询host输入： <code>select user,host from user</code>;</li>
-<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
-<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>授权用户</p>
-<ul>
-<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
-<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-
         
     </section>
 </article>
@@ -853,11 +789,11 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
+            <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
         </h1>
         
         <div class="article-meta clearfix">
-            <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
+            <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
     
     <i class="icon-calendar"></i>
     
@@ -876,41 +812,116 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-        <ol>
-<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
-<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
+        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
+<p>yum安装的版本只有5.1，所以手动安装</p>
+</blockquote>
+<ol>
+<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
+<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
+<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
+<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
+<li>安装  <code>curl</code>: yum -y install curl-devel</li>
+<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
+<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
+<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
+<li><p>执行下面的配置</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制php-fpm.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>php-fpm 全局启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
+<p>14.成功</p>
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
+<li>yum 安装 <code>yum -y install nginx</code></li>
+<li>删除 /etc/nginx/conf.d下所有文件</li>
+<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
+ <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
 </li>
 </ol>
-<ol start="3">
-<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
-</li>
-<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
-</li>
-<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>fixed 浏览器问题</p>
-</li>
-<li>弹出问题</li>
-<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片加载失败的时候的缺省图片问题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
+<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
-<ol start="11">
-<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
+<ol start="2">
+<li><p>开机启动</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>密码设置</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置全网访问<code>mysql -uroot -p</code></p>
+</li>
 </ol>
+<ul>
+<li>输入：<code>use mysql</code>;</li>
+<li>查询host输入： <code>select user,host from user</code>;</li>
+<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
+<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权用户</p>
+<ul>
+<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
+<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <blockquote>
+<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
+</blockquote>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>wq！保存。</p>
+</li>
+</ol>
+<p>成功！</p>
 
         
     </section>
@@ -1635,13 +1646,15 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 
 </div>
         <footer class="footer">
-    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+  Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a
+          href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+  ,<a target="_blank" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Flihongbin.xyz%2F">google search</a>
 </footer>
 
 <script>
   //腾讯云分析
   var _mtac = {};
-  (function() {
+  (function () {
     var mta = document.createElement("script");
     mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
     mta.setAttribute("name", "MTAH5");
@@ -1650,10 +1663,20 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(mta, s);
   })();
+
+  SessionStack.identify({
+    userId: 10086, // Replace the USER-ID with the user id from your app
+    displayName: 'Steven', // Not required
+    // Add your own custom user variables here.
+    role: 'user',
+    pricingPlan: 'free'
+  });
+
 </script>
 
 <script src="https://js.fundebug.cn/fundebug.1.2.0.min.js"
         apikey="ae360215ad4a1bc4bedf1e1836aae88cca3fcf69de81c7c0bd4599a170818650"></script>
+
 
     </div>
 
