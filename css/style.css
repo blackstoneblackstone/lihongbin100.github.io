@@ -1544,7 +1544,8 @@ body {
   border-top: solid 1px #cccccc;
 }
 .article h1 {
-  font-size: 20px;
+  font-size: 30px;
+  color: #6a737d;
 }
 .article img {
   border: solid #f2f2f2 5px;
