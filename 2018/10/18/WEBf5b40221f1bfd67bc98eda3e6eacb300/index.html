@@ -7,12 +7,22 @@
     
     
 
-    <title>linux命令 | 程序员的自我修养</title>
+    <title>打造一个秒杀系统 | 程序员的自我修养</title>
     <meta name="author" content="lihb" />
     <meta name="version" content="1.0.0" />
     <meta name="keywords" content="" />
-    <meta name="description" content="ab工具 ab -n 1000 -c 100 -v 3  https://mobile.vipkid.com.cn/rest/pd-activity/api/activity/user/activity/getActivityAwardDetailByActivityIdToMobile/47
-查看文档神器 man man
+    <meta name="description" content="
+大并发，高可用，高一致性。
+
+数据尽量少（序列化，反序列化）
+数据库
+请求要少
+合并css和js
+路径要短（socket链接要少），强依赖的服务要靠近。
+较少依赖，去掉不必要的弱依赖。
+不要有单点。（服务无状态化，配置动态化）
+
+
 " />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
@@ -108,7 +118,7 @@
     
 
     
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ab工具"><span class="toc-number">1.</span> <span class="toc-text">ab工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看文档神器-man"><span class="toc-number">2.</span> <span class="toc-text">查看文档神器 man</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据尽量少（序列化，反序列化）"><span class="toc-number">1.</span> <span class="toc-text">数据尽量少（序列化，反序列化）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请求要少"><span class="toc-number">2.</span> <span class="toc-text">请求要少</span></a></li></ol>
     
   </div>
 </aside>
@@ -131,15 +141,15 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            linux命令
+            打造一个秒杀系统
         </h1>
         
         <div class="article-meta clearfix">
-            <a class="article-date" href="/2018/07/24/WEB0ca879a2c996cd655d738e0bd44f9d99/">
+            <a class="article-date" href="/2018/10/18/WEBf5b40221f1bfd67bc98eda3e6eacb300/">
     
     <i class="icon-calendar"></i>
     
-    <time datetime="2018-07-23T16:00:00.000Z" itemprop="datePublished">2018-07-24</time>
+    <time datetime="2018-10-17T16:00:00.000Z" itemprop="datePublished">2018-10-18</time>
 </a>
 
             
@@ -154,8 +164,18 @@
     
     <section class="article-body markdown-body">
         
-        <h1 id="ab工具"><a href="#ab工具" class="headerlink" title="ab工具"></a>ab工具</h1><p> <code>ab -n 1000 -c 100 -v 3  https://mobile.vipkid.com.cn/rest/pd-activity/api/activity/user/activity/getActivityAwardDetailByActivityIdToMobile/47</code></p>
-<h1 id="查看文档神器-man"><a href="#查看文档神器-man" class="headerlink" title="查看文档神器 man"></a>查看文档神器 man</h1><p> <code>man</code></p>
+        <blockquote>
+<p>大并发，高可用，高一致性。</p>
+</blockquote>
+<h2 id="数据尽量少（序列化，反序列化）"><a href="#数据尽量少（序列化，反序列化）" class="headerlink" title="数据尽量少（序列化，反序列化）"></a>数据尽量少（序列化，反序列化）</h2><ul>
+<li>数据库</li>
+<li><h2 id="请求要少"><a href="#请求要少" class="headerlink" title="请求要少"></a>请求要少</h2></li>
+<li>合并css和js</li>
+<li>路径要短（socket链接要少），强依赖的服务要靠近。</li>
+<li>较少依赖，去掉不必要的弱依赖。</li>
+<li>不要有单点。（服务无状态化，配置动态化）</li>
+<li></li>
+</ul>
 
         
     </section>
