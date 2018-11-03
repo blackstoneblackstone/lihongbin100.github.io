@@ -7,22 +7,25 @@
     
     
 
-    <title>在php类里，对象数组按照属性排序，usort的使用 | 程序员的自我修养</title>
+    <title>人生的三条建议 | 程序员的自我修养</title>
     <meta name="author" content="lihb" />
     <meta name="version" content="1.0.0" />
     <meta name="keywords" content="" />
-    <meta name="description" content="usort， create_function
-该问题主要使用的是 create_function() 方法
+    <meta name="description" content="
+世界变化快
 
+寻找那些不变的规律
+学习每个学科都是学习一种思维方式
+创新也是回到不变的东西，很多符号不会变。
 
-class Test{
- public  function s(){
-  $res=arry()
-  array_push($res,array(&#39;id&#39;=&amp;gt;2))
-  array_push($res,array(&#39;id&#39;=&amp;gt;1))
+做简单的事
+复杂的事简单做，简单的事重复做。
+做一件简单且又有价值的事，持续的做。
 
-  $cmp_func = create_function(&#39;$a,$b&#39;, &#39;
-    if($a[&#34;id&#34;]  ==  $b[&#34;id&#34;]" />
+真诚
+没有任何道路可以通向真诚，真诚是通向一切的道路。
+
+" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
     <meta name="baidu-site-verification" content="F0CXvmUgA9" />
@@ -117,7 +120,7 @@ class Test{
     
 
     
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#usort，-create-function"><span class="toc-number">1.</span> <span class="toc-text">usort， create_function</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#寻找那些不变的规律"><span class="toc-number">1.</span> <span class="toc-text">寻找那些不变的规律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#做简单的事"><span class="toc-number">2.</span> <span class="toc-text">做简单的事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#真诚"><span class="toc-number">3.</span> <span class="toc-text">真诚</span></a></li></ol>
     
   </div>
 </aside>
@@ -140,21 +143,21 @@ class Test{
     <header class="article-header">
         
         <h1 itemprop="name">
-            在php类里，对象数组按照属性排序，usort的使用
+            人生的三条建议
         </h1>
         
         <div class="article-meta clearfix">
-            <a class="article-date" href="/2018/06/24/WEB6c771e65712528efe28eadcdb63120f2/">
+            <a class="article-date" href="/2018/10/27/WEBb9ad165ae262b9fddc896fc93abcdf44/">
     
     <i class="icon-calendar"></i>
     
-    <time datetime="2018-06-23T16:00:00.000Z" itemprop="datePublished">2018-06-24</time>
+    <time datetime="2018-10-26T16:00:00.000Z" itemprop="datePublished">2018-10-27</time>
 </a>
 
             
 <div class="article-tag-list">
     <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
+    <a class="article-tag-link" href="/tags/Life/">Life</a>
 </div>
 
 
@@ -163,25 +166,20 @@ class Test{
     
     <section class="article-body markdown-body">
         
-        <h2 id="usort，-create-function"><a href="#usort，-create-function" class="headerlink" title="usort， create_function"></a>usort， create_function</h2><blockquote>
-<p>该问题主要使用的是 create_function() 方法</p>
+        <blockquote>
+<p>世界变化快</p>
 </blockquote>
-<pre><code class="php">
-<span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>{
- <span class="keyword">public</span>  <span class="function"><span class="keyword">function</span> <span class="title">s</span><span class="params">()</span></span>{
-  $res=arry()
-  array_push($res,<span class="keyword">array</span>(<span class="string">'id'</span>=&gt;<span class="number">2</span>))
-  array_push($res,<span class="keyword">array</span>(<span class="string">'id'</span>=&gt;<span class="number">1</span>))
-
-  $cmp_func = create_function(<span class="string">'$a,$b'</span>, <span class="string">'</span>
-<span class="string">    if($a["id"]  ==  $b["id"])  return  0;</span>
-<span class="string">    return  $a["id"]&gt;$b["id"]?-1:1;'</span>);
-        <span class="comment">// 对结果排序 保证目录在前面</span>
-  usort($res, $cmp_func);
-    }
-}
-
-</code></pre>
+<h2 id="寻找那些不变的规律"><a href="#寻找那些不变的规律" class="headerlink" title="寻找那些不变的规律"></a>寻找那些不变的规律</h2><ul>
+<li>学习每个学科都是学习一种思维方式</li>
+<li>创新也是回到不变的东西，很多符号不会变。</li>
+</ul>
+<h2 id="做简单的事"><a href="#做简单的事" class="headerlink" title="做简单的事"></a>做简单的事</h2><ul>
+<li>复杂的事简单做，简单的事重复做。</li>
+<li>做一件简单且又有价值的事，持续的做。</li>
+</ul>
+<h2 id="真诚"><a href="#真诚" class="headerlink" title="真诚"></a>真诚</h2><ul>
+<li>没有任何道路可以通向真诚，真诚是通向一切的道路。</li>
+</ul>
 
         
     </section>
