@@ -1163,7 +1163,7 @@ body {
   }
   .content {
     margin-left: 0;
-    padding: 10px 15px;
+    padding: 10px 0 0 30px;
   }
 }
 .nav {
@@ -1698,8 +1698,9 @@ body {
     float: none;
   }
   .article .article-tag-list {
-    float: none;
+    float: left;
     margin-left: 0;
+    margin-right: 20px;
     margin-top: 8px;
   }
   .article-more-link a {
