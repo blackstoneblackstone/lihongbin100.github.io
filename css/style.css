@@ -991,6 +991,8 @@ body {
 }
 .app {
   height: 100%;
+  color: #222;
+  font-family: Baskerville, Times New Roman, Liberation Serif, STFangsong, FangSong, FangSong_GB2312, serif;
 }
 .header {
   position: fixed;
@@ -1152,7 +1154,6 @@ body {
 }
 @media screen and (max-width: 960px) {
   .header {
-    position: none;
     position: static;
     width: auto;
   }
