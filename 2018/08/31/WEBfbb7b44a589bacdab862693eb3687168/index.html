@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+  <meta name="baidu-site-verification" content="U4hzSuyexT"/>
+  
+  
+
+  <title>
+    
+    Openlayers开发热图 |
+    
+    永渡</title>
+  <meta name="author" content="yondu"/>
+  <meta name="version" content="1.0.0"/>
+  <meta name="keywords" content=""/>
+  <meta name="description" content="
+简介：热力图采用PostGis数据库存储地图和人流点数据，通过Geoserver服务发布，前端采用OpenLayers引入并展现完成。
+
+##开发流程图
+
+详细说明Postgis数据准备
+the_geom用于存储坐标信息
+
+企业客户地图：
+WGS84
+Postgis 文件  
+monitor库
+
+人流定位数据：
+存入Postgis，坐标系：EPSG:4326  该表只存储5分钟内的定位数据，每5分钟刷新一次，并删除之前5分钟的数据 
+一个企业客户占一个表，一个表里含有多个楼层
+monitor库"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+
+  
+  
+  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+    <a href="http://www.simamedia.cn:10000/refresh?shareKey=68223916cc24226197cdb4defa392e3f" style="
+    float: right;
+    color: #fff;
+    margin-top: 10px;
+    margin-right: 20px;">永渡</a>
+    <nav class="nav-inner">
+
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Code">Code</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Read">Read</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Life">Life</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Media">Media</a>
+        </li>
+        
+        
+        
+        <li class="nav-item nav-item-tag">
+            <a id="nav-tag" class="nav-link" href="#">Tags</a>
+            <div id="nav-tags" class="nav-tag-wrap">
+                <i class="nav-tag-arrow"></i>
+                
+  <div class="widget-wrap">
+    <h3 class="widget-title">
+        <i class="icon-tag vm"></i>
+        <span class="vm">Tags</span>
+    </h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+            </div>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/archives">Docs</a>
+        </li>
+        
+        
+        
+
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+  <div id="aside-mask" class="aside-mask"></div>
+  <div id="aside-inner" class="aside-inner">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://lihongbin.xyz"></form>
+
+    
+    
+    
+    
+
+    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#详细说明"><span class="toc-number">1.</span> <span class="toc-text">详细说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Postgis数据准备"><span class="toc-number">1.1.</span> <span class="toc-text">Postgis数据准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#企业客户地图："><span class="toc-number">1.1.1.</span> <span class="toc-text">企业客户地图：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#人流定位数据："><span class="toc-number">1.1.2.</span> <span class="toc-text">人流定位数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AP点位数据"><span class="toc-number">1.1.3.</span> <span class="toc-text">AP点位数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建Geoserver图层"><span class="toc-number">1.2.</span> <span class="toc-text">新建Geoserver图层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发布WMS服务-style-sld"><span class="toc-number">1.3.</span> <span class="toc-text">发布WMS服务 style sld</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#发布地图"><span class="toc-number">1.3.1.</span> <span class="toc-text">发布地图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发布AP点位"><span class="toc-number">1.3.2.</span> <span class="toc-text">发布AP点位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发布人流热图"><span class="toc-number">1.3.3.</span> <span class="toc-text">发布人流热图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Openlayers装载图层"><span class="toc-number">1.4.</span> <span class="toc-text">Openlayers装载图层</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+
+</header>
+
+  <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            Openlayers开发热图
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEBfbb7b44a589bacdab862693eb3687168/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <blockquote>
+<p>简介：热力图采用PostGis数据库存储地图和人流点数据，通过Geoserver服务发布，前端采用OpenLayers引入并展现完成。</p>
+</blockquote>
+<p>##开发流程图</p>
+<p><div id="flowchart-0" class="flow-chart"></div></p>
+<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="Postgis数据准备"><a href="#Postgis数据准备" class="headerlink" title="Postgis数据准备"></a>Postgis数据准备</h3><blockquote>
+<p>the_geom用于存储坐标信息</p>
+</blockquote>
+<h4 id="企业客户地图："><a href="#企业客户地图：" class="headerlink" title="企业客户地图："></a>企业客户地图：</h4><ul>
+<li>WGS84</li>
+<li>Postgis 文件  </li>
+<li>monitor库</li>
+</ul>
+<h4 id="人流定位数据："><a href="#人流定位数据：" class="headerlink" title="人流定位数据："></a>人流定位数据：</h4><ul>
+<li>存入Postgis，坐标系：<code>EPSG:4326</code>  该表只存储5分钟内的定位数据，每5分钟刷新一次，并删除之前5分钟的数据 </li>
+<li>一个企业客户占一个表，一个表里含有多个楼层</li>
+<li>monitor库<br><strong>表示例：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>province_id</th>
+<th>city_id</th>
+<th>enterprise</th>
+<th>building</th>
+<th>floor</th>
+<th>the_geom</th>
+<th>postion_time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>116</td>
+<td>11602</td>
+<td>zhongshanyiyuan</td>
+<td>ZS1</td>
+<td>F1</td>
+<td>0101000020E6100000000000C0E9D369410000000028F75141</td>
+<td>2016-08-08 10:00:00</td>
+</tr>
+</tbody>
+</table>
+<h4 id="AP点位数据"><a href="#AP点位数据" class="headerlink" title="AP点位数据"></a>AP点位数据</h4><p>存入Postgis，坐标系：<code>EPSG:4326</code><br><strong>表示例：</strong><br>|ft_id|by|fl_id|ft_name_cn|ft_name_en|ft_type|py_type|c_time|u_time|u_flag|the_geom|<br>|—|<br>|||        ZH0000110100100001|    XH1-B1-AP-001|||||||                            0101000020E61000001C29C7744A655E405CC51EBF08794340|</p>
+<h3 id="新建Geoserver图层"><a href="#新建Geoserver图层" class="headerlink" title="新建Geoserver图层"></a>新建Geoserver图层</h3><ul>
+<li>geoserver地址：<a href="http://10.8.122.77:9080/geoserver/" target="_blank" rel="noopener">http://10.8.122.77:9080/geoserver/</a></li>
+</ul>
+<p><img src="blob:/images/9d2ed800e5e5f70452c0c247004a518f.png" alt="Alt text"><br><img src="blob:/images/7af94e442d6feb858bc15a2eb4e6718e.png" alt="Alt text"><br><img src="blob:/images/78c06894437a2b7354ade6bfbbbd4940.png" alt="Alt text"></p>
+<h3 id="发布WMS服务-style-sld"><a href="#发布WMS服务-style-sld" class="headerlink" title="发布WMS服务 style sld"></a>发布WMS服务 <code>style sld</code></h3><h4 id="发布地图"><a href="#发布地图" class="headerlink" title="发布地图"></a>发布地图</h4><p><img src="./1470730642396.png" alt="Alt text">)</p>
+<h4 id="发布AP点位"><a href="#发布AP点位" class="headerlink" title="发布AP点位"></a>发布AP点位</h4><p><img src="./1470730713092.png" alt="Alt text">)</p>
+<h4 id="发布人流热图"><a href="#发布人流热图" class="headerlink" title="发布人流热图"></a>发布人流热图</h4><p><img src="./1470730768412.png" alt="Alt text">)</p>
+<blockquote>
+<p>热图样式设置</p>
+</blockquote>
+<blockquote>
+<p>一 环境部署<br>正常部署geoserver，本次版本是2.6<br>下载地址：<a href="http://geoserver.org/release/stable/" target="_blank" rel="noopener">http://geoserver.org/release/stable/</a><br>另外要下载<br>Extensions的wps扩展插件。<br>解压wps，将jar包放进geoserver部署的web-INF/lib中，重启geoserver。</p>
+</blockquote>
+<blockquote>
+<p>二 生成热力图的样式文件heatmap.sld</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"ISO-8859-1"</span><span class="meta">?&gt;</span></span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">StyledLayerDescriptor</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.opengis.net/sld StyledLayerDescriptor.xsd"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.opengis.net/sld"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:ogc</span>=<span class="string">"http://www.opengis.net/ogc"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xlink</span>=<span class="string">"http://www.w3.org/1999/xlink"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;<span class="name">NamedLayer</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Heatmap<span class="tag">&lt;/<span class="name">Name</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">UserStyle</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">Title</span>&gt;</span>Heatmap<span class="tag">&lt;/<span class="name">Title</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">Abstract</span>&gt;</span>A heatmap surface showing population density<span class="tag">&lt;/<span class="name">Abstract</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">FeatureTypeStyle</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;<span class="name">Transformation</span>&gt;</span>  </span><br><span class="line">             <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"gs:Heatmap"</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>data<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>weightAttr<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>jan_je<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>radiusPixels<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>radius<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>100<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>pixelsPerCell<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>10<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputBBOX<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_bbox<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputWidth<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_width<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputHeight<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_height<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">             <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">Transformation</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">Rule</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">RasterSymbolizer</span>&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- specify geometry attribute to pass validation --&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">Geometry</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ogc:PropertyName</span>&gt;</span>geom<span class="tag">&lt;/<span class="name">ogc:PropertyName</span>&gt;</span><span class="tag">&lt;/<span class="name">Geometry</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">Opacity</span>&gt;</span>0.6<span class="tag">&lt;/<span class="name">Opacity</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMap</span> <span class="attr">type</span>=<span class="string">"ramp"</span> &gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#0000FF"</span> <span class="attr">quantity</span>=<span class="string">"0"</span> <span class="attr">label</span>=<span class="string">"nodata"</span> <span class="attr">opacity</span>=<span class="string">"0"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#00FFFF"</span> <span class="attr">quantity</span>=<span class="string">"0.02"</span> <span class="attr">label</span>=<span class="string">"nodata"</span>  </span></span><br><span class="line"><span class="tag">                  <span class="attr">opacity</span>=<span class="string">"0"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#00FF00"</span> <span class="attr">quantity</span>=<span class="string">".1"</span> <span class="attr">label</span>=<span class="string">"nodata"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#FFFF00"</span> <span class="attr">quantity</span>=<span class="string">".5"</span> <span class="attr">label</span>=<span class="string">"values"</span> /&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#FF0000"</span> <span class="attr">quantity</span>=<span class="string">"1.0"</span> <span class="attr">label</span>=<span class="string">"values"</span> /&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">ColorMap</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">RasterSymbolizer</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">Rule</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;/<span class="name">FeatureTypeStyle</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;/<span class="name">UserStyle</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;/<span class="name">NamedLayer</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">StyledLayerDescriptor</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>weightAttr</code>标签指定权重字段，在这里我设置weightAttrz权重字段名称为jan_je。colormap中的热力图符号和范围设置，也是可以改和设置的。<br>而<code>&lt;ogc:PropertyName&gt;geom&lt;/ogc:PropertyName&gt;&lt;/Geometry&gt;</code>这里是指定渲染的图形字段，查看数据库空间数据表的图形字段名称，如果是geom就写geom，如果是the_geom就写the_geom，根据自己数据库中图形字段名称来。在<code>geoserver&gt;style</code>中发布这样的一个sld文件。  </p>
+</blockquote>
+<h3 id="Openlayers装载图层"><a href="#Openlayers装载图层" class="headerlink" title="Openlayers装载图层"></a>Openlayers装载图层</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> baseServer = <span class="string">"http://geoserver地址/geoserver/gcks/wms"</span>;</span><br><span class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> ol.Map(&#123;</span><br><span class="line">        target: <span class="string">'map'</span>,</span><br><span class="line">        layers: [</span><br><span class="line">            <span class="keyword">new</span> ol.layer.Tile(&#123;</span><br><span class="line">                source: <span class="keyword">new</span> ol.source.OSM()</span><br><span class="line">            &#125;)</span><br><span class="line">        ],</span><br><span class="line">        view: <span class="keyword">new</span> ol.View(&#123;</span><br><span class="line">            projection: <span class="string">'EPSG:900913'</span>,</span><br><span class="line">            center: [<span class="number">13541202.790897895</span>,<span class="number">4709549.109971935</span>],</span><br><span class="line">            zoom: <span class="number">19</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//人流定位数据图层</span></span><br><span class="line"><span class="keyword">var</span> layer1 = <span class="keyword">new</span> ol.layer.Image(&#123;</span><br><span class="line">        visible: <span class="literal">true</span>,</span><br><span class="line">        source: <span class="keyword">new</span> ol.source.ImageWMS(&#123;</span><br><span class="line">            ratio: <span class="number">1</span>,</span><br><span class="line">            url: baseServer,</span><br><span class="line">            serverType: <span class="string">"geoserver"</span>,</span><br><span class="line">            params: &#123;</span><br><span class="line">                FORMAT: <span class="string">'image/png'</span>,</span><br><span class="line">                VERSION: <span class="string">'1.1.0'</span>,</span><br><span class="line">                LAYERS: <span class="string">'gcks:mod_heatmap_5mins'</span>,</span><br><span class="line">                STYLES: <span class="string">''</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//地图数据图层</span></span><br><span class="line">    <span class="keyword">var</span> layer2 = <span class="keyword">new</span> ol.layer.Image(&#123;</span><br><span class="line">        visible: <span class="literal">true</span>,</span><br><span class="line">        source: <span class="keyword">new</span> ol.source.ImageWMS(&#123;</span><br><span class="line">            ratio: <span class="number">1</span>,</span><br><span class="line">            url: baseServer,</span><br><span class="line">            serverType: <span class="string">"geoserver"</span>,</span><br><span class="line">            params: &#123;</span><br><span class="line">                FORMAT: <span class="string">'image/png'</span>,</span><br><span class="line">                VERSION: <span class="string">'1.1.0'</span>,</span><br><span class="line">                LAYERS: <span class="string">'gcks:fl_info_1'</span>,</span><br><span class="line">                STYLES: <span class="string">''</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    map.addLayer(layer1);</span><br><span class="line">    map.addLayer(layer2);</span><br></pre></td></tr></table></figure>
+<p><strong>最终展示效果：</strong><br><img src="./1470731868345.png" alt="Alt text">)</p>
+<p><script src="https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script><script src="https://cdn.bootcss.com/flowchart/1.7.0/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
+e=>end: 结束
+p0=>operation: Postgis数据准备
+p1=>operation: 新建Geoserver图层
+p2=>operation: 发布WMS服务
+p3=>operation: Openlayers装载图层
+p4=>operation: 前端展示
+
+st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+
+</div>
+
+
+</div>
+  <footer class="footer">
+  <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
+  <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
+  <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
+  <a target="_blank" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Flihongbin.xyz%2F">google search</a>
+</footer>
+
+<script>
+  //腾讯云分析
+  var _mtac = {};
+  (function () {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500419572");
+
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+  })();
+</script>
+
+
+
+</div>
+
+
+<script type="text/javascript" src="/js/scrollspy.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    var nodes = {
+      nav: $('#nav'),
+      aside: $('#aside'),
+      navTags: $('#nav-tags')
+    };
+
+    $('#open-panel, #aside-mask').on('click', function () {
+      nodes.aside.toggleClass('panel-show');
+    });
+    $('#nav-tag').on('click', function (event) {
+      event.preventDefault();
+      console.log(nodes.navTags.attr('class'))
+      nodes.navTags.toggleClass('tag-show');
+      console.log(nodes.navTags.attr('class'))
+    })
+    /*.hover(function() {
+     nodes.navTags.addClass('tag-show');
+     }, function() {
+     nodes.navTags.removeClass('tag-show');
+     });*/
+
+    
+    $(document.body).scrollspy({target: '#aside-inner'});
+    
+
+    //当前页面打点
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&url=" + encodeURIComponent(location.pathname),
+      function (data) {
+        $("#seeNum").text(data.n)
+      })
+  });
+</script>
+
+</body>
+</html>
