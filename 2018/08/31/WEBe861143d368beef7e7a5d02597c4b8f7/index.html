@@ -244,7 +244,7 @@ PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的�
     
 
     //当前页面打点
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&url=" + encodeURIComponent(location.pathname),
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
       function (data) {
         $("#seeNum").text(data.n)
       })

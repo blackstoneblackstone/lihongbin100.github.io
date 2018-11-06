@@ -193,12 +193,12 @@
 
       <div class="article-tag-list">
         <i class="icon-circle-more"></i>
-        <span class="article-tag-link" id="cjo59t7de000kftow17vn81r4">
+        <span class="article-tag-link" id="cjo59btbu000yi75y7ubo6vtn">
     <script>
       //当前页面打点
-      $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=gt&url=/2018/11/04/WEBc036677fb608837cdbea416a506ae127/",
+      $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=gt&pid=0&url=/2018/11/04/WEBc036677fb608837cdbea416a506ae127/",
         function (data) {
-          $("#cjo59t7de000kftow17vn81r4").text(data.n)
+          $("#cjo59btbu000yi75y7ubo6vtn").text(data.n)
         })
     </script>
   </span>
@@ -268,7 +268,7 @@
     
 
     //当前页面打点
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&url=" + encodeURIComponent(location.pathname),
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
       function (data) {
         $("#seeNum").text(data.n)
       })

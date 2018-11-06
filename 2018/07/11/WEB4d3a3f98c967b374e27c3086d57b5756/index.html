@@ -290,7 +290,7 @@ crx下载地址链接: https://pan.baidu.com/s/1slLL7JZ 密码: 75ws
     
 
     //当前页面打点
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&url=" + encodeURIComponent(location.pathname),
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
       function (data) {
         $("#seeNum").text(data.n)
       })

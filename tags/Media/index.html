@@ -188,7 +188,8 @@
     
     <section class="article-body markdown-body">
         
-        <p>  <img src="/images/9d25606f77315916afa1e399b3b05499.png" alt="timg.jpeg"><br>1126 智能时代的行动指南</p>
+        <p>  <img src="/images/9d25606f77315916afa1e399b3b05499.png" alt="timg.jpeg"></p>
+<p>1126 智能时代的行动指南</p>
 <audio id="audio" controls preload="none"><br><source id="mp3" src="http://games.simamedia.cn/mp3/wj1126.mp3"><br></audio>
 
 <p>1127 职业天花板来自认识的局限性</p>
@@ -360,7 +361,7 @@
     
 
     //当前页面打点
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&url=" + encodeURIComponent(location.pathname),
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
       function (data) {
         $("#seeNum").text(data.n)
       })
