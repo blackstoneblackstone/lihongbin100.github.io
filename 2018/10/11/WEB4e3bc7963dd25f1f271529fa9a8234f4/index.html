@@ -39,7 +39,8 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
   <header class="header clearfix">
     <div id="nav" class="nav">
     <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
-    <a href="http://www.simamedia.cn:10000/refresh?shareKey=68223916cc24226197cdb4defa392e3f"
+    <a
+    id="updateBlog"
     style="
     float: right;
     color: #fff;
@@ -48,7 +49,6 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
       永度
     </a>
     <nav class="nav-inner">
-
         
         
         <li class="nav-item">
@@ -101,10 +101,9 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
         </li>
         
         
-        
-
     </nav>
 </div>
+
 
     <aside id="aside" class="aside">
   <div id="aside-mask" class="aside-mask"></div>
@@ -280,6 +279,22 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
 
 
 </div>
+<div id="tip" style="left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+    position:fixed;
+    z-index:10;
+    height: 100px;
+    width: 200px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+    font-size: 30px">
+  更新完成
+</div>
 
 
 <script type="text/javascript" src="/js/scrollspy.min.js"></script>
@@ -316,6 +331,16 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
       function (data) {
         $("#seeNum").text(data.n)
       })
+    $("#updateBlog").on("click", function (e) {
+      let url = "http://www.simamedia.cn:10000/refresh?shareKey=68223916cc24226197cdb4defa392e3f"
+      $.get(url,
+        function (data) {
+          $("#tip").fadeIn()
+          setTimeout(function () {
+            $("#tip").fadeOut()
+          }, 3000)
+        })
+    })
   });
 </script>
 

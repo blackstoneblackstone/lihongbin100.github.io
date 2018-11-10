@@ -39,7 +39,8 @@
   <header class="header clearfix">
     <div id="nav" class="nav">
     <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
-    <a href="http://www.simamedia.cn:10000/refresh?shareKey=68223916cc24226197cdb4defa392e3f"
+    <a
+    id="updateBlog"
     style="
     float: right;
     color: #fff;
@@ -48,7 +49,6 @@
       永度
     </a>
     <nav class="nav-inner">
-
         
         
         <li class="nav-item">
@@ -101,10 +101,9 @@
         </li>
         
         
-        
-
     </nav>
 </div>
+
 
     <aside id="aside" class="aside">
   <div id="aside-mask" class="aside-mask"></div>
@@ -192,10 +191,10 @@
     <section class="article-body markdown-body">
         
           
-        <div id="aplayer-JyKhwukz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
+        <div id="aplayer-UrTGptqQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
 			  <script>
 				  var options = {"narrow":false,"autoplay":true,"showlrc":0,"mode":"order","mutex":true,"theme":"#e6d0b2","preload":"metadata","listmaxheight":"513px","music":[{"title":"太子奶","author":"李途纯","url":"http://games.simamedia.cn/case/01%E6%9C%88/sy0102.mp3","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"アイロニ","author":"鹿乃","url":"http://games.simamedia.cn/case/01%E6%9C%88/sy0102.mp3","pic":"http://games.simamedia.cn/case/222.jpg"}]};
-				  options.element = document.getElementById("aplayer-JyKhwukz");
+				  options.element = document.getElementById("aplayer-UrTGptqQ");
 				  var ap = new APlayer(options);
 			    window.aplayers || (window.aplayers = []);
 				  window.aplayers.push(ap);
@@ -238,6 +237,22 @@
 
 
 </div>
+<div id="tip" style="left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+    position:fixed;
+    z-index:10;
+    height: 100px;
+    width: 200px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+    font-size: 30px">
+  更新完成
+</div>
 
 
 <script type="text/javascript" src="/js/scrollspy.min.js"></script>
@@ -274,6 +289,16 @@
       function (data) {
         $("#seeNum").text(data.n)
       })
+    $("#updateBlog").on("click", function (e) {
+      let url = "http://www.simamedia.cn:10000/refresh?shareKey=68223916cc24226197cdb4defa392e3f"
+      $.get(url,
+        function (data) {
+          $("#tip").fadeIn()
+          setTimeout(function () {
+            $("#tip").fadeOut()
+          }, 3000)
+        })
+    })
   });
 </script>
 
