@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+  <meta name="baidu-site-verification" content="U4hzSuyexT"/>
+  
+  
+
+  <title>
+    
+    前端的各种库 |
+    
+    永度</title>
+  <meta name="author" content="yondu"/>
+  <meta name="version" content="1.0.0"/>
+  <meta name="keywords" content=""/>
+  <meta name="description" content="  
+Javascript 库
+vue-cropper vue图片裁剪上传插件
+layabox 与白鹭齐名的h5游戏动画库
+AnimatronHTML5 视频编辑平台。video作为 HTML5 的重要特性，很多开发者却仍然搞不清它的发布形式和加载策略，那么在 Animatron 上你可以快速编辑 HTML5 环境下的视频，利用它的自带动画素材库完成有趣的扁平风格卡通动效组件或者视频
+Google Web Designer以视觉设计为核心的代码可扩展工具。用来做布局和设备终端适配测试比较方便，界"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+
+  
+  
+  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+    <a
+    id="updateBlog"
+    style="
+    float: right;
+    color: #fff;
+    margin-top: 10px;
+    margin-right: 20px;">
+      永度
+    </a>
+    <nav class="nav-inner">
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Code">Code</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Read">Read</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Life">Life</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Media">Media</a>
+        </li>
+        
+        
+        
+        <li class="nav-item nav-item-tag">
+            <a id="nav-tag" class="nav-link" href="#">Tags</a>
+            <div id="nav-tags" class="nav-tag-wrap">
+                <i class="nav-tag-arrow"></i>
+                
+  <div class="widget-wrap">
+    <h3 class="widget-title">
+        <i class="icon-tag vm"></i>
+        <span class="vm">Tags</span>
+    </h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+            </div>
+        </li>
+        
+        
+    </nav>
+</div>
+
+
+    <aside id="aside" class="aside">
+  <div id="aside-mask" class="aside-mask"></div>
+  <div id="aside-inner" class="aside-inner">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://yondu.vip"></form>
+
+    
+    
+    
+    
+
+    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript-库"><span class="toc-number">1.</span> <span class="toc-text">Javascript 库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS-库-设计相关"><span class="toc-number">2.</span> <span class="toc-text">CSS 库 / 设计相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#好用的产品"><span class="toc-number">3.</span> <span class="toc-text">好用的产品</span></a></li></ol>
+    
+  </div>
+</aside>
+
+</header>
+
+  <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            前端的各种库
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/10/11/WEB4e3bc7963dd25f1f271529fa9a8234f4/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-10-10T16:00:00.000Z" itemprop="datePublished">2018-10-11</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  <img src="/images/93e69199022ce80aeb6a0a5622b92abc.png" alt="iu-korean-singer-10-anniversary-concert-teaser.jpg"></p>
+<h2 id="Javascript-库"><a href="#Javascript-库" class="headerlink" title="Javascript 库"></a>Javascript 库</h2><ul>
+<li><a href="http://xyxiao.cn/vue-cropper/example/" target="_blank" rel="noopener">vue-cropper</a> vue图片裁剪上传插件</li>
+<li><a href="https://www.layabox.com/" target="_blank" rel="noopener">layabox</a> 与白鹭齐名的h5游戏动画库</li>
+<li><a href="https://www.animatron.com/" target="_blank" rel="noopener">Animatron</a><br>HTML5 视频编辑平台。video作为 HTML5 的重要特性，很多开发者却仍然搞不清它的发布形式和加载策略，那么在 Animatron 上你可以快速编辑 HTML5 环境下的视频，利用它的自带动画素材库完成有趣的扁平风格卡通动效组件或者视频</li>
+<li><a href="https://www.google.com/webdesigner/" target="_blank" rel="noopener">Google Web Designer</a><br>以视觉设计为核心的代码可扩展工具。用来做布局和设备终端适配测试比较方便，界面很有 AE 的风格</li>
+<li><a href="http://tumult.com/hype/" target="_blank" rel="noopener">HYPE3</a><br>专业级本地 HTML5 设计软件。很早以前就向大家推荐过，基于平行时间线逻辑的 HTML5 可视化设计开发平台，你甚至可以用它做一个脱机的交互演示文稿<br>Ember Burger Menu<br>汉堡式菜单样式生成器。越来越多的站点在自适时采用汉堡式折叠菜单，而这个网站就可以快速更改这种菜单的具体属性，并引用到你自己的项目中去▼<br><a href="https://offirgolan.github.io/ember-burger-menu/" target="_blank" rel="noopener">https://offirgolan.github.io/ember-burger-menu/</a></li>
+<li><a href="http://animejs.com/" target="_blank" rel="noopener">Anime</a><br>CSS/JS 动画分享库。像一个在线小商城，有很多开发者自己上传的千奇百怪的 CSS 或者 JS 动画可以参考和引用</li>
+<li><a href="http://inorganik.github.io/countUp.js/" target="_blank" rel="noopener">countUp.js</a> 一个简洁的计数器跳动 js 组件，可以用于在 WEB 完成诸如访问量、分数展示等和数字有关的计数动画</li>
+<li><a href="https://github.com/miguel-perez/smoothState.js" target="_blank" rel="noopener">SmoothState.js</a> 加载优化。对于首页的启动、回跳进行加载动画优化，这对移动端 H5 营销来说尤其重要</li>
+<li><a href="http://mojs.io/" target="_blank" rel="noopener">mo.js</a>CSS 动效库。这是一个正在不断开发完善的 库，虽然目前还未开放路径、弹性等控件，但是它的 CSS 形状库已经非常令人惊喜</li>
+<li><a href="https://github.com/luisvinicius167/ityped" target="_blank" rel="noopener">iTyped</a>打字动画。不需要依赖 jQuery 的打字机效果动画，可以调节速度和大小的小巧工具</li>
+<li><a href="http://git.blivesta.com/animsition/zoom-sm/" target="_blank" rel="noopener">animsition.js</a></li>
+<li><a href="https://sarcadass.github.io/granim.js/" target="_blank" rel="noopener">granim.js</a>一个骚气的 js 库。用于快速创建 WEB 内的令人叹为观止的渐变动画</li>
+<li><a href="http://link.zhihu.com/?target=http%3A//www.createjs.cc/" target="_blank" rel="noopener">create.js</a> 一套完整的js动画库，做2d的动画他就足够了，包括 声音加载库：sound.js，预加载库 ：preload.js，canvas动画库：ease.js，补间动画库：tween.js</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//greensock.com/" target="_blank" rel="noopener">greenscok.js</a> 是国外的一套功能强大的动画库，包含大量插件，文档优雅，可视化操作，代码逻辑简洁，支持动画的回放，支持dom动画，svg动画，canvas，webgl，大量的demo库让你惊艳。<br><a href="http://link.zhihu.com/?target=http%3A//www.jq22.com/jquery-info9838" target="_blank" rel="noopener">Particles.js</a>— 一个用来在 web 中创建炫酷的浮动粒子的库</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fthreejs.org%252F" target="_blank" rel="noopener">Three.js</a> — 一个用来在 web 中创建 3d 物体和 3d 空间的库</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Falvarotrigo.com%252FfullPage%252F%2523firstPage" target="_blank" rel="noopener">Fullpage.js</a>— 快速实现全屏滚动特性</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fwww.mattboldt.com%252Fdemos%252Ftyped-js%252F" target="_blank" rel="noopener">Typed.js</a> — 打字机效果</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fimakewebthings.com%252Fwaypoints%252F" target="_blank" rel="noopener">Waypoints.js </a>— 滚动到某个元素位置时触发一个功能</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fhighlightjs.org%252F" target="_blank" rel="noopener">Highlight.js </a>— web 语法高亮</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fwww.chartjs.org%252F" target="_blank" rel="noopener">Chart.js</a> — 使用 JavaScript 创建漂亮的图表</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Finstantclick.io%252F" target="_blank" rel="noopener">Instantclick</a></strong> — 能够明显加速网站加载时间，鼠标 hover 时预加载资源</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fgionkunz.github.io%252Fchartist-js%252Findex.html" target="_blank" rel="noopener">Chartist</a></strong> — 另一个图表库</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fdarsa.in%252Fmotio%252F%2523%21introduction" target="_blank" rel="noopener">Motio </a></strong>— 一个基于动画和平移的雪碧图库</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fgit.blivesta.com%252Fanimsition%252F" target="_blank" rel="noopener">Animstion</a></strong> — CSS 实现动画过渡的 jQuery 插件</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Fluruke%252Fbarba.js" target="_blank" rel="noopener">Barba.js</a> — 流式页面过渡</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fzurb.com%252Fplayground%252Ftwentytwenty" target="_blank" rel="noopener">TwentyTwenty </a></strong>— 一个对比图片的可视化 diff 工具</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Fmaxwellito%252Fvivus%2523vivusjs" target="_blank" rel="noopener">Vivus.js</a> — 在 SVG 上绘制动画</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fmynameismatthieu.com%252FWOW%252F" target="_blank" rel="noopener">Wow.js </a>— 滚动时展现动画</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Fanthonyly%252FScrolline.js" target="_blank" rel="noopener">Scrolline.js</a> — 页面滚动时显示滚动进度</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fvelocityjs.org%252F" target="_blank" rel="noopener">Velocity.js</a> — 快速流畅的 JavaScript 动画</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fmichalsnik.github.io%252Faos%252F" target="_blank" rel="noopener">Animate on scroll</a></strong> — 漂亮的页面滚动元素动画</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fhandlebarsjs.com%252F" target="_blank" rel="noopener">Handlebars.js</a> — Javascript 模板</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fwww.pixxelfactory.net%252FjInvertScroll%252F" target="_blank" rel="noopener">jInvertScroll</a></strong> — 视差滚动<br><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Fpeachananr%252Fonepage-scroll" target="_blank" rel="noopener">One page scroll</a></strong> — 又一个页面滚动库<br><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Fwagerfield%252Fparallax" target="_blank" rel="noopener">Parallax.js</a> — 对智能设备方向变化做出响应的视差引擎</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Ftwitter.github.io%252Ftypeahead.js%252F" target="_blank" rel="noopener">Typeahead.js </a>— 搜索补全</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fskidding.github.io%252Fdragdealer%252F" target="_blank" rel="noopener">Dragdealer.js</a> — 炫酷拖拽</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fbouncejs.com%252F" target="_blank" rel="noopener">Bounce.js </a>— 创建炫酷的 CSS3 动画</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Falvarotrigo%252FpagePiling.js" target="_blank" rel="noopener">Pagepiling.js</a> — 全屏滚动</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Falvarotrigo%252Fmultiscroll.js" target="_blank" rel="noopener">Multiscroll.js </a>— 两列垂直反向滚动</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Flab.ejci.net%252Ffavico.js%252F" target="_blank" rel="noopener">Favico.js</a> — 动态 favicon</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Faerolab.github.io%252Fmidnight.js%252F" target="_blank" rel="noopener">Midnight.js </a>— 固定头部切换效果</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fanimejs.com%252F" target="_blank" rel="noopener">Anime.js </a>— 动画库</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fkeycode.info%252F" target="_blank" rel="noopener">Keycode</a></strong> — 获取键盘按键的 JavaScript keycode</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Frubaxa.github.io%252FSortable%252F" target="_blank" rel="noopener">Sortable</a></strong> — 拖拽插件</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fprojects.sergiodinislopes.pt%252Fflexdatalist%252F" target="_blank" rel="noopener">Flexdatalist </a></strong>— 自动补全</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fslideout.js.org%252F" target="_blank" rel="noopener">Slideout.js </a>— 移动应用侧滑导航<br><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fjquerymy.com%252F%2523%252F" target="_blank" rel="noopener">Jquerymy</a></strong> — 使用 jQuery 实现双向数据绑定</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fnosir.github.io%252Fcleave.js%252F" target="_blank" rel="noopener">Cleave.js </a>— 实时格式化输入内容</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fsmalljs.org%252Fclient-side-routing%252Fpage%252F" target="_blank" rel="noopener">Page</a></strong> — 客户端单页应用路由</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fselectize.github.io%252Fselectize.js%252F" target="_blank" rel="noopener">Selectize.js</a> — 用来添加 tag 的 Hybrid 选择框</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fhernansartorio.com%252Fjquery-nice-select%252F" target="_blank" rel="noopener">Nice select </a></strong>— 创建漂亮的选择框的 jQuery 库</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Ftether.io%252F" target="_blank" rel="noopener">Tether</a></strong> — 使用固定定位来创建相关元素</li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252FHubSpot%252Fshepherd" target="_blank" rel="noopener">Shepherd.js </a>— 为应用创建新手引导</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252FHubSpot%252Ftooltip" target="_blank" rel="noopener">Tooltip</a></strong> — tooltip 提示框</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fselect2.github.io%252F" target="_blank" rel="noopener">Select2</a></strong> — Jquery 选择框插件</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fizitoast.marcelodolce.com%252F" target="_blank" rel="noopener">IziToast</a></strong> — 通知弹窗实现</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fizimodal.marcelodolce.com%252F" target="_blank" rel="noopener">IziModal </a></strong>— 模态框实现<h2 id="CSS-库-设计相关"><a href="#CSS-库-设计相关" class="headerlink" title="CSS 库 / 设计相关"></a>CSS 库 / 设计相关</h2></li>
+<li><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fdaneden.github.io%252Fanimate.css%252F" target="_blank" rel="noopener">Animate.css</a> — 动画库</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fflatuicolors.com%252F" target="_blank" rel="noopener">Flat UI Colors </a></strong>— 扁平化设计配色</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgetmdl.io%252Findex.html" target="_blank" rel="noopener">Material design lite</a></strong>— 基于 Google material design 的框架</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fwww.webpagefx.com%252Fweb-design%252Frandom-color-picker%252F" target="_blank" rel="noopener">Colorrrs </a></strong>— 随机颜色生成器</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Ftympanus.net%252FDevelopment%252FSectionSeparators%252F" target="_blank" rel="noopener">Section separators</a></strong> — CSS 实现区域分割</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Ftopcoat.io%252F" target="_blank" rel="noopener">Topcoat</a></strong> — 框架</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fwww.kirupa.com%252Fhtml5%252Fken_burns_effect_css.htm" target="_blank" rel="noopener">Create ken burns effect </a></strong>— 使用 CSS3 动画实现 Ken burns 特效</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fwww.vittoriozaccaria.net%252Fdyn-css%252F" target="_blank" rel="noopener">DynCSS</a></strong> — 给 CSS 添加 function，动态化 CSS</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fwww.minimamente.com%252Fexample%252Fmagic_animations%252F" target="_blank" rel="noopener">Magic animations</a></strong> — CSS3 实现动画特效</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fwebkul.github.io%252Fcsspin%252F" target="_blank" rel="noopener">CSSpin</a></strong> — css spinners 合集</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Ffeathericons.com%252F" target="_blank" rel="noopener">Feather icons</a></strong> — Icon 集合</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fionicons.com%252F" target="_blank" rel="noopener">Ion icons</a></strong> — Icon 集合</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Ffontawesome.io%252F" target="_blank" rel="noopener">Font awesome</a></strong> — Icon 集合</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fbrandmark.io%252Ffont-generator%252F" target="_blank" rel="noopener">Font generator</a></strong> — 组合多个字体创建混合字体</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fproto.io%252Ffreebies%252Fonoff%252F" target="_blank" rel="noopener">On/Off switch</a></strong> — 使用 CSS 创建 on/off 开关、radio 按钮</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgetuikit.com%252F" target="_blank" rel="noopener">UI Kit</a></strong> — 框架</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Fgetbootstrap.com%252F" target="_blank" rel="noopener">Bootstrap</a></strong> — 框架</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%253A%252F%252Ffoundation.zurb.com%252F" target="_blank" rel="noopener">Foundation </a></strong>— 框架<h2 id="好用的产品"><a href="#好用的产品" class="headerlink" title="好用的产品"></a>好用的产品</h2></li>
+<li><a href="http://waitanimate.wstone.io/#!/" target="_blank" rel="noopener">waitanimate</a>动效速度测试平台。当我们在 WEB 中构建了一些迷你的 PNG 或者 SVG 图标动画时，如何快速确定动画的延时、间隔、速度关系？反复调整和预览着实令工程师头疼。所以这个网站着力解决关键帧百分比的快速计算问题</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fgithub.com%252Fjoshbuchea%252FHEAD" target="_blank" rel="noopener"><head>cheatsheet</head></a></strong> — 可以写在<head>中的所有标签<ul>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fghost.org%252F" target="_blank" rel="noopener">Ghost </a></strong>— 基于 Node.js 的博客平台</li>
+</ul>
+</head></li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Fwww.whatruns.com%252F" target="_blank" rel="noopener">What runs</a></strong> — 一个用于网站技术分析的 Chrome 插件</li>
+<li><strong><a href="http://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%253A%252F%252Flearn-anything.xyz%252Flearn-anything" target="_blank" rel="noopener">Learn anything </a></strong>— 一个强大的用于分析某个主题的思维导图</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+
+</div>
+
+
+</div>
+  <footer class="footer">
+  <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
+  <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
+  <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
+  <a target="_blank" href="https://kenthigh.github.io/">亚嵩的blog</a>,
+  <a target="_blank" href="https://coolshell.cn/">Cool Shell</a>,
+
+  <a target="_blank" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Flihongbin.xyz%2F">google search</a>
+</footer>
+
+<script>
+  //腾讯云分析
+  var _mtac = {};
+  (function () {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500419572");
+
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+  })();
+</script>
+
+
+
+</div>
+<div id="tip" style="left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+    position:fixed;
+    z-index:10;
+    height: 100px;
+    width: 200px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+    font-size: 30px">
+  更新完成
+</div>
+
+
+<script type="text/javascript" src="/js/scrollspy.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    var nodes = {
+      nav: $('#nav'),
+      aside: $('#aside'),
+      navTags: $('#nav-tags')
+    };
+
+    $('#open-panel, #aside-mask').on('click', function () {
+      nodes.aside.toggleClass('panel-show');
+    });
+    $('#nav-tag').on('click', function (event) {
+      event.preventDefault();
+      console.log(nodes.navTags.attr('class'))
+      nodes.navTags.toggleClass('tag-show');
+      console.log(nodes.navTags.attr('class'))
+    })
+
+    
+    $(document.body).scrollspy({target: '#aside-inner'});
+    
+
+    //当前页面打点
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
+      function (data) {
+        $("#seeNum").text(data.n)
+      })
+    $("#updateBlog").on("click", function (e) {
+      let url = "http://www.simamedia.cn:10000/refresh?shareKey=bf425fe49ab4933f78173872d6b8a3fd"
+      $.get(url,
+        function (data) {
+          $("#tip").fadeIn()
+          setTimeout(function () {
+            $("#tip").fadeOut()
+          }, 3000)
+        })
+    })
+  });
+</script>
+
+</body>
+</html>
