@@ -1153,7 +1153,7 @@ body {
   }
 }
 @media screen and (max-width: 960px) {
-  .app {
+  body {
     background: url("https://shared-https.ydstatic.com/note/edm/ynoteBackground/bgImage/v-31.png") repeat;
   }
   .header {
