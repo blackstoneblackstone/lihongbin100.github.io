@@ -1552,6 +1552,7 @@ body {
   color: #6a737d;
 }
 .article img {
+  box-sizing: border-box;
   border: solid #f2f2f2 5px;
 }
 .article .article-date {
