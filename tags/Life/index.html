@@ -27,6 +27,8 @@
 
   <link rel="stylesheet" href="/css/style.css">
   <script type="text/javascript" src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
+<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
 </head>
 <body>
 
@@ -304,7 +306,28 @@
     
     <section class="article-body markdown-body">
         
-        <h2 id="向下管理"><a href="#向下管理" class="headerlink" title="向下管理"></a>向下管理</h2><ol>
+          
+        <div id="aplayer-DIjJKtSi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-DIjJKtSi"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "斑马",
+              author: "IU",
+              url: "http://static.gm-fitness.com/music/banma.m4a",
+              pic: "https://easyreadfs.nosdn.127.net/fmrB88B4zUy_Yg54Z1HgQQ==/8796093023862095977",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<h2 id="向下管理"><a href="#向下管理" class="headerlink" title="向下管理"></a>向下管理</h2><ol>
 <li>不去写重复的应用代码，去做新的或者更低层的代码研究。</li>
 <li>去关注产品。</li>
 <li>与其他部门，例如pm提出的需求，采用yes，but模式去回答。而不是以工程师思维来思考，遇到需求先考虑资源是否充足，技术难度等，习惯性的说no。</li>
@@ -382,6 +405,7 @@
 <li>P7可以将自己的技术影响力拓展到整个Team。</li>
 <li>P7可以批量解决复杂问题。</li>
 </ol>
+<h3 id="大厂对各个级别能力的要求"><a href="#大厂对各个级别能力的要求" class="headerlink" title="大厂对各个级别能力的要求"></a>大厂对各个级别能力的要求</h3><p><img src="/images/235beef3a9982bfc6ef1f6e4631f28f9.png" alt="v2-37f525b22ae3e81742ddf5fa7e72c8de_r.jpg"></p>
 
         
     </section>
