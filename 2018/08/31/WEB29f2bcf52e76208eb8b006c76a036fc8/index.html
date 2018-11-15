@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+  <meta name="baidu-site-verification" content="U4hzSuyexT"/>
+  
+  
+
+  <title>
+    
+    阿里云ECS：php+nginx+mysql 快速安装脚手架 |
+    
+    永度</title>
+  <meta name="author" content="yondu"/>
+  <meta name="version" content="1.0.0"/>
+  <meta name="keywords" content=""/>
+  <meta name="description" content="安装php
+yum安装的版本只有5.1，所以手动安装
+
+
+百度云下载 php-5.6.16.tar.gz：https://pan.baidu.com/s/1eSxfhXg
+tar -xzvf php-5.6.16.tar.gz
+安装 libxml2 : yum install libxml2-devel
+安装 bzip2: yum install bzip2 bzip2-devel
+安装  curl: yum -y install curl-devel
+安装 libpng :yum instal"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+
+  
+  
+  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+    <a
+    id="updateBlog"
+    style="
+    float: right;
+    color: #fff;
+    margin-top: 10px;
+    margin-right: 20px;">
+      永度
+    </a>
+    <nav class="nav-inner">
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Code">Code</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Read">Read</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Life">Life</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Media">Media</a>
+        </li>
+        
+        
+        
+        <li class="nav-item nav-item-tag">
+            <a id="nav-tag" class="nav-link" href="#">Tags</a>
+            <div id="nav-tags" class="nav-tag-wrap">
+                <i class="nav-tag-arrow"></i>
+                
+  <div class="widget-wrap">
+    <h3 class="widget-title">
+        <i class="icon-tag vm"></i>
+        <span class="vm">Tags</span>
+    </h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
+    </div>
+  </div>
+
+
+            </div>
+        </li>
+        
+        
+    </nav>
+</div>
+
+
+    <aside id="aside" class="aside">
+  <div id="aside-mask" class="aside-mask"></div>
+  <div id="aside-inner" class="aside-inner">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://yondu.vip"></form>
+
+    
+    
+    
+    
+
+    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装php"><span class="toc-number">1.</span> <span class="toc-text">安装php</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装nginx"><span class="toc-number">2.</span> <span class="toc-text">安装nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装mysql"><span class="toc-number">3.</span> <span class="toc-text">安装mysql</span></a></li></ol>
+    
+  </div>
+</aside>
+
+</header>
+
+  <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            阿里云ECS：php+nginx+mysql 快速安装脚手架
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
+<p>yum安装的版本只有5.1，所以手动安装</p>
+</blockquote>
+<ol>
+<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
+<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
+<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
+<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
+<li>安装  <code>curl</code>: yum -y install curl-devel</li>
+<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
+<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
+<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
+<li><p>执行下面的配置</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制php-fpm.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>php-fpm 全局启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
+<p>14.成功</p>
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
+<li>yum 安装 <code>yum -y install nginx</code></li>
+<li>删除 /etc/nginx/conf.d下所有文件</li>
+<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
+ <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
+</li>
+</ol>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
+<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>开机启动</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>密码设置</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置全网访问<code>mysql -uroot -p</code></p>
+</li>
+</ol>
+<ul>
+<li>输入：<code>use mysql</code>;</li>
+<li>查询host输入： <code>select user,host from user</code>;</li>
+<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
+<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权用户</p>
+<ul>
+<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
+<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+
+</div>
+
+
+</div>
+  <footer class="footer">
+  <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
+  <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
+  <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
+  <a target="_blank" href="https://kenthigh.github.io/">亚嵩的blog</a>,
+  <a target="_blank" href="https://coolshell.cn/">Cool Shell</a>,
+  <a target="_blank" href="https://scar007.github.io/">佳睿的blog</a>,
+  <a target="_blank" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Flihongbin.xyz%2F">google search</a>
+</footer>
+
+<script>
+  //腾讯云分析
+  var _mtac = {};
+  (function () {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500419572");
+
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+  })();
+</script>
+
+
+
+</div>
+<div id="tip" style="left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+    position:fixed;
+    z-index:10;
+    height: 100px;
+    width: 200px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+    font-size: 30px">
+  更新完成
+</div>
+
+
+<script type="text/javascript" src="/js/scrollspy.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    var nodes = {
+      nav: $('#nav'),
+      aside: $('#aside'),
+      navTags: $('#nav-tags')
+    };
+
+    $('#open-panel, #aside-mask').on('click', function () {
+      nodes.aside.toggleClass('panel-show');
+    });
+    $('#nav-tag').on('click', function (event) {
+      event.preventDefault();
+      console.log(nodes.navTags.attr('class'))
+      nodes.navTags.toggleClass('tag-show');
+      console.log(nodes.navTags.attr('class'))
+    })
+
+    
+    $(document.body).scrollspy({target: '#aside-inner'});
+    
+
+    //当前页面打点
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
+      function (data) {
+        $("#seeNum").text(data.n)
+      })
+    $("#updateBlog").on("click", function (e) {
+      let url = "http://data.simamedia.cn:10000/refresh?shareKey=bf425fe49ab4933f78173872d6b8a3fd"
+      $.get(url,
+        function (data) {
+          $("#tip").fadeIn()
+          setTimeout(function () {
+            $("#tip").fadeOut()
+          }, 3000)
+        })
+    })
+  });
+</script>
+
+</body>
+</html>
