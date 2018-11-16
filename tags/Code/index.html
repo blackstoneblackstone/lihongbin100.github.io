@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">13</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">20</span></li></ul>
     </div>
   </div>
 
@@ -544,6 +544,244 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
+<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
+</blockquote>
+<blockquote>
+<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+</blockquote>
+<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
+<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
+</blockquote>
+<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
+<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
+</blockquote>
+<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
+<p>npm install express-generator </p>
+</blockquote>
+<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
+<p>express myapp<br>获得以下目录：</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
+<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <ol>
+<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
+<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
+</li>
+<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
+</li>
+<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fixed 浏览器问题</p>
+</li>
+<li>弹出问题</li>
+<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片加载失败的时候的缺省图片问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
+<ol start="11">
+<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
+</ol>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
+<p>yum安装的版本只有5.1，所以手动安装</p>
+</blockquote>
+<ol>
+<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
+<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
+<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
+<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
+<li>安装  <code>curl</code>: yum -y install curl-devel</li>
+<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
+<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
+<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
+<li><p>执行下面的配置</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制php-fpm.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>php-fpm 全局启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
+<p>14.成功</p>
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
+<li>yum 安装 <code>yum -y install nginx</code></li>
+<li>删除 /etc/nginx/conf.d下所有文件</li>
+<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
+ <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
+</li>
+</ol>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
+<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>开机启动</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>密码设置</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置全网访问<code>mysql -uroot -p</code></p>
+</li>
+</ol>
+<ul>
+<li>输入：<code>use mysql</code>;</li>
+<li>查询host输入： <code>select user,host from user</code>;</li>
+<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
+<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权用户</p>
+<ul>
+<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
+<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2018/08/31/WEBa47b3b1a347e1a5f9aba1c1b209b9a75/">数据工程师—java京东面试题</a>
         </h1>
         
@@ -723,81 +961,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <ol>
-<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
-<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-<ol start="3">
-<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
-</li>
-<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
-</li>
-<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>fixed 浏览器问题</p>
-</li>
-<li>弹出问题</li>
-<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片加载失败的时候的缺省图片问题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
-<ol start="11">
-<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
-</ol>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
         </h1>
         
@@ -841,169 +1004,6 @@
 </li>
 </ol>
 <p>成功！</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
-<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
-</blockquote>
-<blockquote>
-<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
-</blockquote>
-<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
-<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
-</blockquote>
-<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
-<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
-</blockquote>
-<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
-<p>npm install express-generator </p>
-</blockquote>
-<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
-<p>express myapp<br>获得以下目录：</p>
-</blockquote>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
-<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
-<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
-<p>yum安装的版本只有5.1，所以手动安装</p>
-</blockquote>
-<ol>
-<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
-<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
-<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
-<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
-<li>安装  <code>curl</code>: yum -y install curl-devel</li>
-<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
-<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
-<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
-<li><p>执行下面的配置</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>复制php-fpm.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>php-fpm 全局启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
-<p>14.成功</p>
-<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
-<li>yum 安装 <code>yum -y install nginx</code></li>
-<li>删除 /etc/nginx/conf.d下所有文件</li>
-<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
- <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
-</li>
-</ol>
-<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
-<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="2">
-<li><p>开机启动</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>密码设置</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置全网访问<code>mysql -uroot -p</code></p>
-</li>
-</ol>
-<ul>
-<li>输入：<code>use mysql</code>;</li>
-<li>查询host输入： <code>select user,host from user</code>;</li>
-<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
-<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>授权用户</p>
-<ul>
-<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
-<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
 
         
     </section>
@@ -1161,6 +1161,153 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <section class="article-body markdown-body">
         
         
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">chrome web devtool技巧</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-22T16:00:00.000Z" itemprop="datePublished">2018-08-23</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="console"><a href="#console" class="headerlink" title="console"></a>console</h2><ul>
+<li><p><em>copy(x)</em>：</p>
+<blockquote>
+<p>是一个很有用的工具函数方便你将任何东西拷贝到系统的粘贴板暂存。<br>给copy函数传入一个没有格式的JSON，会返回格式化的结果。</p>
+</blockquote>
+</li>
+<li><p><em>Eager evaluation</em></p>
+<blockquote>
+<p>选择该选项可以自动联想你所输入的变量的值，并自动打印出来。</p>
+</blockquote>
+</li>
+<li><p><em>debug()</em> </p>
+<blockquote>
+<p>在执行到某个函数的时候暂停，你可以使用debug函数。debug(fn)接收一个函数作为参数，当每次该函数被调用时，Debugger就会在该函数的第一行中断执行。</p>
+</blockquote>
+</li>
+<li><p><em>暂停UI在Hover状态下的展示结果</em></p>
+<ul>
+<li>打开sources面板</li>
+<li>显示tooltip</li>
+<li>使用快捷键来暂停脚本执行(将鼠标停留在暂停的图标上查看快捷键 cmd+\ )</li>
+<li>回到Elements面板，然后像通常一样去检查元素。</li>
+</ul>
+</li>
+</ul>
+<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2>
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">面试技巧</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
+<li>略正式。</li>
+<li>说话幽默，看着对方。</li>
+<li>回答问题到细节，避免面试官追问。</li>
+<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
+</ul>
+<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
+<li>太喜欢你们公司</li>
+<li>没有成长空间</li>
+</ul>
+<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
+<li>急性子，为了做事推进，不太估计别人的感受。</li>
+<li>对做的事情要求太高，team有时压力会比较大。</li>
+</ul>
+<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
+<li>善于学习，高效学习，刻意练习，研究能力。</li>
+<li>有韧性。</li>
+<li>喜欢研究底层和新的技术，比如go语言。</li>
+</ul>
+<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
+<li>公司给不了我理想工作环境和状态。</li>
+<li>我理想的工作环境和状态。</li>
+</ul>
+<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
+<li>转了以后发现自己做的更好。</li>
+<li>学习能力强</li>
+</ul>
+<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
+<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
+<li>你觉得你们公司有什么不好的地方吗？</li>
+<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
+<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
+</ul>
+<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
+<li>死磕某个事</li>
+<li>坚持很久的事</li>
+<li>逆境不放弃</li>
+<li>面对压力，承担责任</li>
+<li>严谨细心，对自己做的产品自信</li>
+<li>面对诱惑，不浮躁</li>
+</ul>
+<p>## </p>
+
         
     </section>
 </article>
@@ -1541,6 +1688,62 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">react-devtools 2.1.9版本 免翻墙下载和使用  闪烁解决方案</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-10T16:00:00.000Z" itemprop="datePublished">2018-07-11</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <blockquote>
+<p>如果不翻墙的话是不能安装chrome的插件的，因此不能下载react devtools， 网上搜到的都是1.3的版本，那个版本会出现react面板闪烁的情况，下载最新的版本就可以解决问题。</p>
+</blockquote>
+<ul>
+<li>crx下载地址<br>链接: <a href="https://pan.baidu.com/s/1slLL7JZ" target="_blank" rel="noopener">https://pan.baidu.com/s/1slLL7JZ</a> 密码: 75ws</li>
+</ul>
+<p><img src="/images/bd8904c92514728bb962960f6a32bb3b.png" alt="Paste_Image.png"></p>
+<ul>
+<li>安装直接将crx拖拽到 chrome://extensions/ 里</li>
+</ul>
+<p><img src="/images/17866e87dfaaf9c180c5dd5731861102.png" alt="Paste_Image.png"></p>
+<ul>
+<li>重启chrome，F12看到react面板</li>
+</ul>
+<p><img src="/images/8685f2107ff0a0dc125a1ce47997b944.png" alt="Paste_Image.png"></p>
+<p>完美搞定！</p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2018/07/11/WEBa4984f7e8dec6088ff67496c1fe1cc44/">未批恩搭建</a>
         </h1>
         
@@ -1600,179 +1803,6 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <p>VPN分为三种模式：全局，PAC自动模式，手动模式<br>一般采用PAC自动模式，其原理就是官方持续更新一组域名的白名单库，只有在库里的域名才会走VPN，当然你也可以自己添加域名或者IP。</p>
 </blockquote>
 
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">react-devtools 2.1.9版本 免翻墙下载和使用  闪烁解决方案</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-07-10T16:00:00.000Z" itemprop="datePublished">2018-07-11</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>如果不翻墙的话是不能安装chrome的插件的，因此不能下载react devtools， 网上搜到的都是1.3的版本，那个版本会出现react面板闪烁的情况，下载最新的版本就可以解决问题。</p>
-</blockquote>
-<ul>
-<li>crx下载地址<br>链接: <a href="https://pan.baidu.com/s/1slLL7JZ" target="_blank" rel="noopener">https://pan.baidu.com/s/1slLL7JZ</a> 密码: 75ws</li>
-</ul>
-<p><img src="/images/bd8904c92514728bb962960f6a32bb3b.png" alt="Paste_Image.png"></p>
-<ul>
-<li>安装直接将crx拖拽到 chrome://extensions/ 里</li>
-</ul>
-<p><img src="/images/17866e87dfaaf9c180c5dd5731861102.png" alt="Paste_Image.png"></p>
-<ul>
-<li>重启chrome，F12看到react面板</li>
-</ul>
-<p><img src="/images/8685f2107ff0a0dc125a1ce47997b944.png" alt="Paste_Image.png"></p>
-<p>完美搞定！</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">委托模式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-07-09T16:00:00.000Z" itemprop="datePublished">2018-07-10</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>  我们再来看 Go 语言这个模式，Go 语言的这个模式挺好玩儿的。声明一个 struct，跟 C 很一样，然后直接把这个 struct 类型放到另一个 struct 里。</p>
-<p>委托的简单示例</p>
-<p>我们来看几个示例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Widget <span class="keyword">struct</span> &#123;  </span><br><span class="line">    X, Y <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Label <span class="keyword">struct</span> &#123; </span><br><span class="line">Widget        <span class="comment">// Embedding (delegation)  </span></span><br><span class="line">Text   <span class="keyword">string</span> <span class="comment">// Aggregation  </span></span><br><span class="line">X <span class="keyword">int</span>         <span class="comment">// Override </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(label Label)</span> <span class="title">Paint</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">// [0xc4200141e0] -Label.Paint("State")   </span></span><br><span class="line">fmt.Printf(<span class="string">"[%p] - Label.Paint(%q)\n"</span>,  &amp;label, label.Text)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面，</p>
-<ul>
-<li>我们声明了一个 Widget，其有 X,Y；</li>
-<li>然后用它来声明一个 Label，直接把 Widget 委托进去；</li>
-<li>然后再给 Label 声明并实现了一个 Paint() 方法。<br>于是，我们就可以这样编程了：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">label := Label&#123; Widget&#123;10, 10&#125;, &quot;State&quot;, 100 &#125;</span><br><span class="line"></span><br><span class="line">// X=100, Y=10, Text=State, Widget.X=10</span><br><span class="line">fmt.Printf(&quot;X=%d, Y=%d, Text=%s Widget.X=%d\n&quot;,label.X, label.Y, label.Text,label.Widget.X)</span><br><span class="line">fmt.Println()</span><br><span class="line"></span><br><span class="line">// &#123;Widget:&#123;X:10 Y:10&#125; Text:State X:100&#125; </span><br><span class="line">// &#123;&#123;10 10&#125; State 100&#125;</span><br><span class="line">fmt.Printf(&quot;%+v\n%v\n&quot;, label, label)</span><br><span class="line">label.Paint()</span><br></pre></td></tr></table></figure>
-<p>我们可以看到，如果有成员变量重名，则需要手动地解决冲突。</p>
-<p>我们继续扩展代码。</p>
-<p>先来一个 Button：</p>
-<p>type Button struct {    Label // Embedding (delegation)}func NewButton(x, y int, text string) Button {    return Button{Label{Widget{x, y}, text, x}}}func (button Button) Paint() { // Override    fmt.Printf(“[%p] - Button.Paint(%q)\n”,         &amp;button, button.Text)}func (button Button) Click() {    fmt.Printf(“[%p] - Button.Click()\n”, &amp;button)}</p>
-<p>再来一个 ListBox：</p>
-<p>type ListBox struct {    Widget          // Embedding (delegation)    Texts  []string // Aggregation    Index  int      // Aggregation}func (listBox ListBox) Paint() {    fmt.Printf(“[%p] - ListBox.Paint(%q)\n”,         &amp;listBox, listBox.Texts)}func (listBox ListBox) Click() {    fmt.Printf(“[%p] - ListBox.Click()\n”, &amp;listBox)}</p>
-<p>然后，声明两个接口用于多态：</p>
-<p>type Painter interface {    Paint()}type Clicker interface {    Click()}</p>
-<p>于是我们就可以这样泛型地使用（注意其中的两个 for 循环）：</p>
-<p>button1 := Button{Label{Widget{10, 70}, “OK”, 10}}button2 := NewButton(50, 70, “Cancel”)listBox := ListBox{Widget{10, 40},     []string{“AL”, “AK”, “AZ”, “AR”}, 0}fmt.Println()//[0xc4200142d0] - Label.Paint(“State”)//[0xc420014300] - ListBox.Paint([“AL” “AK” “AZ” “AR”])//[0xc420014330] - Button.Paint(“OK”)//[0xc420014360] - Button.Paint(“Cancel”)for _, painter := range []Painter{label, listBox, button1, button2} {    painter.Paint()}fmt.Println()//[0xc420014450] - ListBox.Click()//[0xc420014480] - Button.Click()//[0xc4200144b0] - Button.Click()for _, widget := range []interface{}{label, listBox, button1, button2} {    if clicker, ok := widget.(Clicker); ok {        clicker.Click()    }}</p>
-<p>一个 Undo 的委托重构</p>
-<p>上面这个是 Go 语中的委托和接口多态的编程方式，其实是面向对象和原型编程综合的玩法。这个玩法可不可以玩得更有意思呢？这是可以的。</p>
-<p>首先，我们先声明一个数据容器，其中有 Add()、 Delete() 和 Contains() 方法。还有一个转字符串的方法。</p>
-<p>type IntSet struct {    data map[int]bool}func NewIntSet() IntSet {    return IntSet{make(map[int]bool)}}func (set <em>IntSet) Add(x int) {    set.data[x] = true}func (set </em>IntSet) Delete(x int) {    delete(set.data, x)}func (set <em>IntSet) Contains(x int) bool {    return set.data[x]}func (set </em>IntSet) String() string { // Satisfies fmt.Stringer interface    if len(set.data) == 0 {        return “{}”    }    ints := make([]int, 0, len(set.data))    for i := range set.data {        ints = append(ints, i)    }    sort.Ints(ints)    parts := make([]string, 0, len(ints))    for _, i := range ints {        parts = append(parts, fmt.Sprint(i))    }    return “{“ + strings.Join(parts, “,”) + “}”}</p>
-<p>我们如下使用这个数据容器：</p>
-<p>ints := NewIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Print(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}</p>
-<p>这个数据容器平淡无奇，我们想给它加一个 Undo 的功能。我们可以这样来：</p>
-<p>type UndoableIntSet struct { // Poor style    IntSet    // Embedding (delegation)    functions []func()}func NewUndoableIntSet() UndoableIntSet {    return UndoableIntSet{NewIntSet(), nil}}func (set <em>UndoableIntSet) Add(x int) { // Override    if !set.Contains(x) {        set.data[x] = true        set.functions = append(set.functions, func() { set.Delete(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set </em>UndoableIntSet) Delete(x int) { // Override    if set.Contains(x) {        delete(set.data, x)        set.functions = append(set.functions, func() { set.Add(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set *UndoableIntSet) Undo() error {    if len(set.functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(set.functions) - 1    if function := set.functions[index]; function != nil {        function()        set.functions[index] = nil // Free closure for garbage collection    }    set.functions = set.functions[:index]    return nil}</p>
-<p>于是就可以这样使用了：</p>
-<p>ints := NewUndoableIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Println(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}fmt.Println()for {    if err := ints.Undo(); err != nil {        break    }    fmt.Println(ints)}</p>
-<p>但是，需要注意的是，我们用了一个新的 UndoableIntSet 几乎重写了所有的 IntSet 和 “写” 相关的方法，这样就可以把操作记录下来，然后 Undo 了。</p>
-<p>但是，可能别的类也需要 Undo 的功能，我是不是要重写所有的需要这个功能的类啊？这样的代码类似，就是因为数据容器不一样，我就要去重写它们，这太二了。</p>
-<p>我们能不能利用前面学到的泛型编程、函数式编程、IoC 等范式来把这个事干得好一些呢？当然是可以的。</p>
-<p>如下所示：<br>  ● 我们先声明一个 Undo[] 的函数数组（其实是一个栈）。<br>  ● 并实现一个通用 Add()。其需要一个函数指针，并把这个函数指针存放到 Undo[] 函数数组中。<br>  ● 在 Undo() 的函数中，我们会遍历Undo[]函数数组，并执行之，执行完后就弹栈。<br>type Undo []func()func (undo <em>Undo) Add(function func()) {    </em>undo = append(<em>undo, function)}func (undo </em>Undo) Undo() error {    functions := <em>undo    if len(functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(functions) - 1    if function := functions[index]; function != nil {        function()        functions[index] = nil // Free closure for garbage collection    }    </em>undo = functions[:index]    return nil}</p>
-<p>那么我们的 IntSet 就可以改写成如下的形式：</p>
-<p>type IntSet struct {    data map[int]bool    undo Undo}func NewIntSet() IntSet {    return IntSet{data: make(map[int]bool)}}</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">算法练级</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-07-07T16:00:00.000Z" itemprop="datePublished">2018-07-08</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="Two-Sum-algorithm"><a href="#Two-Sum-algorithm" class="headerlink" title="Two Sum algorithm"></a>Two Sum algorithm</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * twoSum indexOf 方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">       <span class="keyword">var</span> index = nums.indexOf(target-nums[i])</span><br><span class="line">       <span class="keyword">if</span> (index&gt;<span class="number">-1</span> &amp;&amp; index!=i)&#123;</span><br><span class="line">              <span class="keyword">return</span> [i,index]</span><br><span class="line">          &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * hash algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">	  <span class="keyword">var</span> map=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (map.hasOwnProperty(target-nums[i]))&#123;</span><br><span class="line">			<span class="keyword">return</span> [map[target-nums[i]],i]</span><br><span class="line">		&#125;</span><br><span class="line">        map[nums[i]]=i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * two point algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l=<span class="number">0</span>,r=nums.length<span class="number">-1</span>, newNums=nums.concat()</span><br><span class="line">		<span class="comment">//At first, sorting.</span></span><br><span class="line">		newNums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)</span><br><span class="line">		<span class="keyword">while</span>(l!=r)&#123;</span><br><span class="line">		<span class="keyword">var</span> m = newNums[l] + newNums[r] - target   </span><br><span class="line">		<span class="keyword">if</span> (m &lt; <span class="number">0</span>)&#123;</span><br><span class="line">			 l++	  </span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="comment">// lastIndexOf for solving : [3,3] and 6 is [0,1]</span></span><br><span class="line">				<span class="keyword">return</span> [nums.indexOf(newNums[l]),nums.lastIndexOf(newNums[r])]</span><br><span class="line">			&#125;</span><br><span class="line">			r--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> re=twoSum([<span class="number">2</span>,<span class="number">11</span>,<span class="number">7</span>,<span class="number">7</span>],<span class="number">9</span>)</span><br><span class="line"><span class="built_in">console</span>.log(re)</span><br></pre></td></tr></table></figure>
         
     </section>
 </article>
