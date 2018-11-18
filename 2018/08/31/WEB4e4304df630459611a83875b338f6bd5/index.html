@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+  <meta name="baidu-site-verification" content="U4hzSuyexT"/>
+  
+  
+
+  <title>
+    
+    前端踩坑日记 |
+    
+    永度</title>
+  <meta name="author" content="yondu"/>
+  <meta name="version" content="1.0.0"/>
+  <meta name="keywords" content=""/>
+  <meta name="description" content="
+IE不支滑动条在可滑动的状态下自定义宽度和隐藏，解决方法是：子div宽度加20px 父级overflow:hidden
+stylus遇到filter怎么写：1filter unquote(&#39;progid:DXImageTransform.Microsoft.Alpha(Opacity=&#39; + round(n * 100) + &#39;)&#39;
+
+
+
+
+
+IE video元素全屏，不能自定义控制条，解决方案是：采用div全屏的方式
+1234&amp;lt;div&amp;gt;//全屏该div   &amp;lt;video&amp;g"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+
+  
+  
+  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+    <a
+    id="updateBlog"
+    style="
+    float: right;
+    color: #fff;
+    margin-top: 10px;
+    margin-right: 20px;">
+      永度
+    </a>
+    <nav class="nav-inner">
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Code">Code</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Read">Read</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Life">Life</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Media">Media</a>
+        </li>
+        
+        
+        
+        <li class="nav-item nav-item-tag">
+            <a id="nav-tag" class="nav-link" href="#">Tags</a>
+            <div id="nav-tags" class="nav-tag-wrap">
+                <i class="nav-tag-arrow"></i>
+                
+  <div class="widget-wrap">
+    <h3 class="widget-title">
+        <i class="icon-tag vm"></i>
+        <span class="vm">Tags</span>
+    </h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+
+            </div>
+        </li>
+        
+        
+    </nav>
+</div>
+
+
+    <aside id="aside" class="aside">
+  <div id="aside-mask" class="aside-mask"></div>
+  <div id="aside-inner" class="aside-inner">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://yondu.vip"></form>
+
+    
+    
+    
+    
+
+    
+    <div class="author-meta">
+      
+      <div class="author-avatar">
+        <a href="/">
+          <img src="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" title="Sanonz">
+        </a>
+      </div>
+      
+      <div class="author-name">Steven</div>
+      <div class="author-work">Coder &amp; A life learner</div>
+      <div class="author-location">
+        <i class="icon-location vm"></i>
+        <span class="vm">Beijing, China</span>
+      </div>
+      
+      <div class="author-thread-wrap">
+        <div class="author-threads clearfix">
+          
+          <a class="thread-item" href="https://github.com/lihongbin100" target="_blank" rel="noopener"><i
+                    class="icon-github"></i></a>
+          
+          
+          <a title="codePen" class="thread-item" href="https://codepen.io/lihongbin100/pens/public/?grid_type=list" target="_blank" rel="noopener">
+            <div class="icon-codepen"></div>
+          </a>
+          
+          
+          <a class="thread-item" href="http://www.simamedia.cn" target="_blank" rel="noopener"><i
+                    class="icon-circle-more"></i></a>
+          
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</aside>
+
+</header>
+
+  <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            前端踩坑日记
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <ol>
+<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
+<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
+</li>
+<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
+</li>
+<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fixed 浏览器问题</p>
+</li>
+<li>弹出问题</li>
+<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片加载失败的时候的缺省图片问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
+<ol start="11">
+<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
+</ol>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+
+</div>
+
+
+</div>
+  <footer class="footer">
+  <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
+  <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
+  <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
+  <a target="_blank" href="https://kenthigh.github.io/">亚嵩的blog</a>,
+  <a target="_blank" href="https://coolshell.cn/">Cool Shell</a>,
+  <a target="_blank" href="https://scar007.github.io/">佳睿的blog</a>,
+  <a target="_blank" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Flihongbin.xyz%2F">google search</a>
+</footer>
+
+<script>
+  //腾讯云分析
+  var _mtac = {};
+  (function () {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500419572");
+
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+  })();
+</script>
+
+
+
+</div>
+<div id="tip" style="left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+    position:fixed;
+    z-index:10;
+    height: 100px;
+    width: 200px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+    font-size: 30px">
+  更新完成
+</div>
+
+
+<script type="text/javascript" src="/js/scrollspy.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    var nodes = {
+      nav: $('#nav'),
+      aside: $('#aside'),
+      navTags: $('#nav-tags')
+    };
+
+    $('#open-panel, #aside-mask').on('click', function () {
+      nodes.aside.toggleClass('panel-show');
+    });
+    $('#nav-tag').on('click', function (event) {
+      event.preventDefault();
+      console.log(nodes.navTags.attr('class'))
+      nodes.navTags.toggleClass('tag-show');
+      console.log(nodes.navTags.attr('class'))
+    })
+
+    
+    $(document.body).scrollspy({target: '#aside-inner'});
+    
+
+    //当前页面打点
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
+      function (data) {
+        $("#seeNum").text(data.n)
+      })
+    $("#updateBlog").on("click", function (e) {
+      let url = "http://data.simamedia.cn:10000/refresh?shareKey=bf425fe49ab4933f78173872d6b8a3fd"
+      $.get(url,
+        function (data) {
+          $("#tip").fadeIn()
+          setTimeout(function () {
+            $("#tip").fadeOut()
+          }, 3000)
+        })
+    })
+  });
+</script>
+
+</body>
+</html>
