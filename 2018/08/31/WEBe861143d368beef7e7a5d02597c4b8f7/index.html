@@ -269,38 +269,36 @@ PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的�
           }, 3000)
         })
     })
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url="+window.location.href,function (data) {
-      wx.config(
-        data.sp
-      );
-      wx.ready(function () {
-        wx.onMenuShareTimeline({
-          title: '1元嗨吃王府井', // 分享标题
-          link: 'http://www.wexue.top/games/zz/wxPayApi/wx-public-pay.php', // 分享链接
-          imgUrl: 'http://www.wexue.top/games/zz/img/rank-bg.png', // 分享图标
-          success: function () {
-            //                MtaH5.clickStat('timelineshare');
-          },
-          cancel: function () {
-          }
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=" + window.location.href, function (data) {
+      $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=" + window.location.href, function (data) {
+        wx.config(
+          data.sp
+        );
+        wx.ready(function () {
+          wx.onMenuShareTimeline({
+            title: window.document.title, // 分享标题
+            link: window.location.href, // 分享链接
+            imgUrl: 'https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240', // 分享图标
+            success: function () {
+            },
+            cancel: function () {
+            }
+          });
+          wx.onMenuShareAppMessage({
+            title: window.document.title, // 分享标题
+            desc: '欢迎访问我的blog，一起做一个终身学习者。', // 分享描述
+            link: window.location.href, // 分享链接
+            imgUrl: 'https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240', // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+            },
+            cancel: function () {
+            }
+          });
         });
-        wx.onMenuShareAppMessage({
-          title: '1元嗨吃王府井', // 分享标题
-          desc: '一元换购92元美食券，王府井负一楼嗨吃嗨喝停不下来！', // 分享描述
-          link: "http://www.wexue.top/games/zz/wxPayApi/wx-public-pay.php", // 分享链接
-          imgUrl: 'http://www.wexue.top/games/zz/img/rank-bg.png', // 分享图标
-          type: 'link', // 分享类型,music、video或link，不填默认为link
-          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-          success: function () {
-          },
-          cancel: function () {
-            // 用户取消分享后执行的回调函数
-          }
-        });
-      });
+      })
     })
-
-
   });
 </script>
 
