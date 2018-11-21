@@ -300,6 +300,7 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
 
 <script type="text/javascript" src="/js/scrollspy.min.js"></script>
 
+<script src="/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
   $(function () {
     var nodes = {
@@ -337,6 +338,38 @@ Google Web Designer以视觉设计为核心的代码可扩展工具。用来做�
           }, 3000)
         })
     })
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url="+window.location.href,function (data) {
+      wx.config(
+        data.sp
+      );
+      wx.ready(function () {
+        wx.onMenuShareTimeline({
+          title: '1元嗨吃王府井', // 分享标题
+          link: 'http://www.wexue.top/games/zz/wxPayApi/wx-public-pay.php', // 分享链接
+          imgUrl: 'http://www.wexue.top/games/zz/img/rank-bg.png', // 分享图标
+          success: function () {
+            //                MtaH5.clickStat('timelineshare');
+          },
+          cancel: function () {
+          }
+        });
+        wx.onMenuShareAppMessage({
+          title: '1元嗨吃王府井', // 分享标题
+          desc: '一元换购92元美食券，王府井负一楼嗨吃嗨喝停不下来！', // 分享描述
+          link: "http://www.wexue.top/games/zz/wxPayApi/wx-public-pay.php", // 分享链接
+          imgUrl: 'http://www.wexue.top/games/zz/img/rank-bg.png', // 分享图标
+          type: 'link', // 分享类型,music、video或link，不填默认为link
+          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          success: function () {
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+      });
+    })
+
+
   });
 </script>
 
