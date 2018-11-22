@@ -311,7 +311,19 @@ page下包含多个目录，每个目录对应一个项目，都要包含main.js
         });
       })
     })
+    //百度自动推送爬虫
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
   });
+
 </script>
 
 </body>

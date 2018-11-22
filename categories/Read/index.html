@@ -189,12 +189,12 @@
 
       <div class="article-tag-list">
         <i class="icon-circle-more"></i>
-        <span class="article-tag-link" id="cjosdus2e0005quowg2bfgagi">
+        <span class="article-tag-link" id="cjosecmd30005v7owoinokvs4">
     <script>
       //当前页面打点
       $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=gt&pid=0&url=/2018/11/19/WEBc3a8a6bbf51b9db8533ce01573d33ff0/",
         function (data) {
-          $("#cjosdus2e0005quowg2bfgagi").text(data.n)
+          $("#cjosecmd30005v7owoinokvs4").text(data.n)
         })
     </script>
   </span>
@@ -1353,7 +1353,19 @@
         });
       })
     })
+    //百度自动推送爬虫
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
   });
+
 </script>
 
 </body>
