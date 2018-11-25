@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">21</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">21</span></li></ul>
     </div>
   </div>
 
@@ -150,46 +150,6 @@
 </header>
 
   <div id="content" class="content">
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">算法练级</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-07-07T16:00:00.000Z" itemprop="datePublished">2018-07-08</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="Two-Sum-algorithm"><a href="#Two-Sum-algorithm" class="headerlink" title="Two Sum algorithm"></a>Two Sum algorithm</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * twoSum indexOf 方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">       <span class="keyword">var</span> index = nums.indexOf(target-nums[i])</span><br><span class="line">       <span class="keyword">if</span> (index&gt;<span class="number">-1</span> &amp;&amp; index!=i)&#123;</span><br><span class="line">              <span class="keyword">return</span> [i,index]</span><br><span class="line">          &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * hash algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">	  <span class="keyword">var</span> map=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (map.hasOwnProperty(target-nums[i]))&#123;</span><br><span class="line">			<span class="keyword">return</span> [map[target-nums[i]],i]</span><br><span class="line">		&#125;</span><br><span class="line">        map[nums[i]]=i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * two point algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l=<span class="number">0</span>,r=nums.length<span class="number">-1</span>, newNums=nums.concat()</span><br><span class="line">		<span class="comment">//At first, sorting.</span></span><br><span class="line">		newNums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)</span><br><span class="line">		<span class="keyword">while</span>(l!=r)&#123;</span><br><span class="line">		<span class="keyword">var</span> m = newNums[l] + newNums[r] - target   </span><br><span class="line">		<span class="keyword">if</span> (m &lt; <span class="number">0</span>)&#123;</span><br><span class="line">			 l++	  </span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="comment">// lastIndexOf for solving : [3,3] and 6 is [0,1]</span></span><br><span class="line">				<span class="keyword">return</span> [nums.indexOf(newNums[l]),nums.lastIndexOf(newNums[r])]</span><br><span class="line">			&#125;</span><br><span class="line">			r--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> re=twoSum([<span class="number">2</span>,<span class="number">11</span>,<span class="number">7</span>,<span class="number">7</span>],<span class="number">9</span>)</span><br><span class="line"><span class="built_in">console</span>.log(re)</span><br></pre></td></tr></table></figure>
-        
-    </section>
-</article>
-
-
     <article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
