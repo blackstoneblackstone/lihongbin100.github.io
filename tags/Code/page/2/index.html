@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
     </div>
   </div>
 
@@ -150,6 +150,123 @@
 </header>
 
   <div id="content" class="content">
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">委托模式</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-09T16:00:00.000Z" itemprop="datePublished">2018-07-10</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  我们再来看 Go 语言这个模式，Go 语言的这个模式挺好玩儿的。声明一个 struct，跟 C 很一样，然后直接把这个 struct 类型放到另一个 struct 里。</p>
+<p>委托的简单示例</p>
+<p>我们来看几个示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Widget <span class="keyword">struct</span> &#123;  </span><br><span class="line">    X, Y <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Label <span class="keyword">struct</span> &#123; </span><br><span class="line">Widget        <span class="comment">// Embedding (delegation)  </span></span><br><span class="line">Text   <span class="keyword">string</span> <span class="comment">// Aggregation  </span></span><br><span class="line">X <span class="keyword">int</span>         <span class="comment">// Override </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(label Label)</span> <span class="title">Paint</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">// [0xc4200141e0] -Label.Paint("State")   </span></span><br><span class="line">fmt.Printf(<span class="string">"[%p] - Label.Paint(%q)\n"</span>,  &amp;label, label.Text)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面，</p>
+<ul>
+<li>我们声明了一个 Widget，其有 X,Y；</li>
+<li>然后用它来声明一个 Label，直接把 Widget 委托进去；</li>
+<li>然后再给 Label 声明并实现了一个 Paint() 方法。<br>于是，我们就可以这样编程了：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">label := Label&#123; Widget&#123;10, 10&#125;, &quot;State&quot;, 100 &#125;</span><br><span class="line"></span><br><span class="line">// X=100, Y=10, Text=State, Widget.X=10</span><br><span class="line">fmt.Printf(&quot;X=%d, Y=%d, Text=%s Widget.X=%d\n&quot;,label.X, label.Y, label.Text,label.Widget.X)</span><br><span class="line">fmt.Println()</span><br><span class="line"></span><br><span class="line">// &#123;Widget:&#123;X:10 Y:10&#125; Text:State X:100&#125; </span><br><span class="line">// &#123;&#123;10 10&#125; State 100&#125;</span><br><span class="line">fmt.Printf(&quot;%+v\n%v\n&quot;, label, label)</span><br><span class="line">label.Paint()</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，如果有成员变量重名，则需要手动地解决冲突。</p>
+<p>我们继续扩展代码。</p>
+<p>先来一个 Button：</p>
+<p>type Button struct {    Label // Embedding (delegation)}func NewButton(x, y int, text string) Button {    return Button{Label{Widget{x, y}, text, x}}}func (button Button) Paint() { // Override    fmt.Printf(“[%p] - Button.Paint(%q)\n”,         &amp;button, button.Text)}func (button Button) Click() {    fmt.Printf(“[%p] - Button.Click()\n”, &amp;button)}</p>
+<p>再来一个 ListBox：</p>
+<p>type ListBox struct {    Widget          // Embedding (delegation)    Texts  []string // Aggregation    Index  int      // Aggregation}func (listBox ListBox) Paint() {    fmt.Printf(“[%p] - ListBox.Paint(%q)\n”,         &amp;listBox, listBox.Texts)}func (listBox ListBox) Click() {    fmt.Printf(“[%p] - ListBox.Click()\n”, &amp;listBox)}</p>
+<p>然后，声明两个接口用于多态：</p>
+<p>type Painter interface {    Paint()}type Clicker interface {    Click()}</p>
+<p>于是我们就可以这样泛型地使用（注意其中的两个 for 循环）：</p>
+<p>button1 := Button{Label{Widget{10, 70}, “OK”, 10}}button2 := NewButton(50, 70, “Cancel”)listBox := ListBox{Widget{10, 40},     []string{“AL”, “AK”, “AZ”, “AR”}, 0}fmt.Println()//[0xc4200142d0] - Label.Paint(“State”)//[0xc420014300] - ListBox.Paint([“AL” “AK” “AZ” “AR”])//[0xc420014330] - Button.Paint(“OK”)//[0xc420014360] - Button.Paint(“Cancel”)for _, painter := range []Painter{label, listBox, button1, button2} {    painter.Paint()}fmt.Println()//[0xc420014450] - ListBox.Click()//[0xc420014480] - Button.Click()//[0xc4200144b0] - Button.Click()for _, widget := range []interface{}{label, listBox, button1, button2} {    if clicker, ok := widget.(Clicker); ok {        clicker.Click()    }}</p>
+<p>一个 Undo 的委托重构</p>
+<p>上面这个是 Go 语中的委托和接口多态的编程方式，其实是面向对象和原型编程综合的玩法。这个玩法可不可以玩得更有意思呢？这是可以的。</p>
+<p>首先，我们先声明一个数据容器，其中有 Add()、 Delete() 和 Contains() 方法。还有一个转字符串的方法。</p>
+<p>type IntSet struct {    data map[int]bool}func NewIntSet() IntSet {    return IntSet{make(map[int]bool)}}func (set <em>IntSet) Add(x int) {    set.data[x] = true}func (set </em>IntSet) Delete(x int) {    delete(set.data, x)}func (set <em>IntSet) Contains(x int) bool {    return set.data[x]}func (set </em>IntSet) String() string { // Satisfies fmt.Stringer interface    if len(set.data) == 0 {        return “{}”    }    ints := make([]int, 0, len(set.data))    for i := range set.data {        ints = append(ints, i)    }    sort.Ints(ints)    parts := make([]string, 0, len(ints))    for _, i := range ints {        parts = append(parts, fmt.Sprint(i))    }    return “{“ + strings.Join(parts, “,”) + “}”}</p>
+<p>我们如下使用这个数据容器：</p>
+<p>ints := NewIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Print(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}</p>
+<p>这个数据容器平淡无奇，我们想给它加一个 Undo 的功能。我们可以这样来：</p>
+<p>type UndoableIntSet struct { // Poor style    IntSet    // Embedding (delegation)    functions []func()}func NewUndoableIntSet() UndoableIntSet {    return UndoableIntSet{NewIntSet(), nil}}func (set <em>UndoableIntSet) Add(x int) { // Override    if !set.Contains(x) {        set.data[x] = true        set.functions = append(set.functions, func() { set.Delete(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set </em>UndoableIntSet) Delete(x int) { // Override    if set.Contains(x) {        delete(set.data, x)        set.functions = append(set.functions, func() { set.Add(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set *UndoableIntSet) Undo() error {    if len(set.functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(set.functions) - 1    if function := set.functions[index]; function != nil {        function()        set.functions[index] = nil // Free closure for garbage collection    }    set.functions = set.functions[:index]    return nil}</p>
+<p>于是就可以这样使用了：</p>
+<p>ints := NewUndoableIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Println(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}fmt.Println()for {    if err := ints.Undo(); err != nil {        break    }    fmt.Println(ints)}</p>
+<p>但是，需要注意的是，我们用了一个新的 UndoableIntSet 几乎重写了所有的 IntSet 和 “写” 相关的方法，这样就可以把操作记录下来，然后 Undo 了。</p>
+<p>但是，可能别的类也需要 Undo 的功能，我是不是要重写所有的需要这个功能的类啊？这样的代码类似，就是因为数据容器不一样，我就要去重写它们，这太二了。</p>
+<p>我们能不能利用前面学到的泛型编程、函数式编程、IoC 等范式来把这个事干得好一些呢？当然是可以的。</p>
+<p>如下所示：<br>  ● 我们先声明一个 Undo[] 的函数数组（其实是一个栈）。<br>  ● 并实现一个通用 Add()。其需要一个函数指针，并把这个函数指针存放到 Undo[] 函数数组中。<br>  ● 在 Undo() 的函数中，我们会遍历Undo[]函数数组，并执行之，执行完后就弹栈。<br>type Undo []func()func (undo <em>Undo) Add(function func()) {    </em>undo = append(<em>undo, function)}func (undo </em>Undo) Undo() error {    functions := <em>undo    if len(functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(functions) - 1    if function := functions[index]; function != nil {        function()        functions[index] = nil // Free closure for garbage collection    }    </em>undo = functions[:index]    return nil}</p>
+<p>那么我们的 IntSet 就可以改写成如下的形式：</p>
+<p>type IntSet struct {    data map[int]bool    undo Undo}func NewIntSet() IntSet {    return IntSet{data: make(map[int]bool)}}</p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">算法练级</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-07T16:00:00.000Z" itemprop="datePublished">2018-07-08</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="Two-Sum-algorithm"><a href="#Two-Sum-algorithm" class="headerlink" title="Two Sum algorithm"></a>Two Sum algorithm</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * twoSum indexOf 方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">       <span class="keyword">var</span> index = nums.indexOf(target-nums[i])</span><br><span class="line">       <span class="keyword">if</span> (index&gt;<span class="number">-1</span> &amp;&amp; index!=i)&#123;</span><br><span class="line">              <span class="keyword">return</span> [i,index]</span><br><span class="line">          &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * hash algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">	  <span class="keyword">var</span> map=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (map.hasOwnProperty(target-nums[i]))&#123;</span><br><span class="line">			<span class="keyword">return</span> [map[target-nums[i]],i]</span><br><span class="line">		&#125;</span><br><span class="line">        map[nums[i]]=i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * two point algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l=<span class="number">0</span>,r=nums.length<span class="number">-1</span>, newNums=nums.concat()</span><br><span class="line">		<span class="comment">//At first, sorting.</span></span><br><span class="line">		newNums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)</span><br><span class="line">		<span class="keyword">while</span>(l!=r)&#123;</span><br><span class="line">		<span class="keyword">var</span> m = newNums[l] + newNums[r] - target   </span><br><span class="line">		<span class="keyword">if</span> (m &lt; <span class="number">0</span>)&#123;</span><br><span class="line">			 l++	  </span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="comment">// lastIndexOf for solving : [3,3] and 6 is [0,1]</span></span><br><span class="line">				<span class="keyword">return</span> [nums.indexOf(newNums[l]),nums.lastIndexOf(newNums[r])]</span><br><span class="line">			&#125;</span><br><span class="line">			r--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> re=twoSum([<span class="number">2</span>,<span class="number">11</span>,<span class="number">7</span>,<span class="number">7</span>],<span class="number">9</span>)</span><br><span class="line"><span class="built_in">console</span>.log(re)</span><br></pre></td></tr></table></figure>
+        
+    </section>
+</article>
+
+
     <article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
