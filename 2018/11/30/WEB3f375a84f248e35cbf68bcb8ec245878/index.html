@@ -15,7 +15,28 @@
   <meta name="author" content="yondu"/>
   <meta name="version" content="1.0.0"/>
   <meta name="keywords" content=""/>
-  <meta name="description" content=""/>
+  <meta name="description" content="怎么快速配置一个好用的WebStorm?
+以下是我的配置，好用不好用不知道了，你自己感受。
+
+
+下载 settings.jar
+file &amp;gt; import settings 选择优化的jar包。
+重启一下吧。
+
+快捷键
+打开设置：CMD+,
+格式化代码：alt+cmd+l
+
+如何快速打开一个项目？
+菜单栏 tools -&amp;gt; Create Command-line launcher
+
+
+
+创建 全局命令行，ws 比较简单。
+
+
+
+打开命令行输入 ws app/，app/ 是你打开的项目"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
   <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
@@ -111,40 +132,7 @@
     
 
     
-    <div class="author-meta">
-      
-      <div class="author-avatar">
-        <a href="/">
-          <img src="/images/actor.jpg" title="Sanonz">
-        </a>
-      </div>
-      
-      <div class="author-name">Steven</div>
-      <div class="author-work">Coder &amp; A life learner</div>
-      <div class="author-location">
-        <i class="icon-location vm"></i>
-        <span class="vm">Beijing, China</span>
-      </div>
-      
-      <div class="author-thread-wrap">
-        <div class="author-threads clearfix">
-          
-          <a class="thread-item" href="https://github.com/lihongbin100" target="_blank" rel="noopener"><i
-                    class="icon-github"></i></a>
-          
-          
-          <a title="codePen" class="thread-item" href="https://codepen.io/lihongbin100/pens/public/?grid_type=list" target="_blank" rel="noopener">
-            <div class="icon-codepen"></div>
-          </a>
-          
-          
-          <a class="thread-item" href="http://www.simamedia.cn" target="_blank" rel="noopener"><i
-                    class="icon-circle-more"></i></a>
-          
-        </div>
-      </div>
-      
-    </div>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么快速配置一个好用的WebStorm"><span class="toc-number">1.</span> <span class="toc-text">怎么快速配置一个好用的WebStorm?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快捷键"><span class="toc-number">2.</span> <span class="toc-text">快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何快速打开一个项目？"><span class="toc-number">3.</span> <span class="toc-text">如何快速打开一个项目？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何还原设置？"><span class="toc-number"></span> <span class="toc-text">如何还原设置？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎样快速按照eslint来设置code-style"><span class="toc-number"></span> <span class="toc-text">怎样快速按照eslint来设置code style</span></a>
     
   </div>
 </aside>
@@ -185,7 +173,41 @@
     
     <section class="article-body markdown-body">
         
-        
+        <h3 id="怎么快速配置一个好用的WebStorm"><a href="#怎么快速配置一个好用的WebStorm" class="headerlink" title="怎么快速配置一个好用的WebStorm?"></a>怎么快速配置一个好用的WebStorm?</h3><blockquote>
+<p>以下是我的配置，好用不好用不知道了，你自己感受。</p>
+</blockquote>
+<ol>
+<li><a href="https://github.com/lihongbin100/config/blob/master/webstrom/settings.jar" target="_blank" rel="noopener">下载 settings.jar</a></li>
+<li><code>file &gt; import settings</code> 选择优化的jar包。</li>
+<li>重启一下吧。</li>
+</ol>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><ul>
+<li>打开设置：CMD+,</li>
+<li>格式化代码：alt+cmd+l</li>
+</ul>
+<h3 id="如何快速打开一个项目？"><a href="#如何快速打开一个项目？" class="headerlink" title="如何快速打开一个项目？"></a>如何快速打开一个项目？</h3><ol>
+<li>菜单栏 <code>tools -&gt; Create Command-line launcher</code></li>
+</ol>
+<p><img src="/images/68f81602baf80486581dd01d8dfe282e.png" alt="p1"></p>
+<ol start="2">
+<li>创建 全局命令行，ws 比较简单。</li>
+</ol>
+<p><img src="/images/6bcec79227528b146df3a6c6e0b8586e.png" alt="p2"></p>
+<ol start="3">
+<li>打开命令行输入 <code>ws app/</code>，<code>app/</code> 是你打开的项目完整目录，就可以瞬间打开了，一个“爽”！</li>
+</ol>
+<h2 id="如何还原设置？"><a href="#如何还原设置？" class="headerlink" title="如何还原设置？"></a>如何还原设置？</h2><ol>
+<li>关闭WebStorm</li>
+<li><code>cd ~/Library/Preferences/</code></li>
+<li><code>rm -rf WebStorm*</code> 这个*视你的WebStorm版本来定。</li>
+<li>搞定，重新启动 <code>WebStorm</code> ，会发现所有的配置全部还原了。</li>
+</ol>
+<h2 id="怎样快速按照eslint来设置code-style"><a href="#怎样快速按照eslint来设置code-style" class="headerlink" title="怎样快速按照eslint来设置code style"></a>怎样快速按照eslint来设置code style</h2><ol>
+<li>新建 <code>.eslintrc</code> 文件，右键选择 <code>Apply Eslint Code Style Rules</code>，搞定。</li>
+<li>当然你也可以开启WebStorm的Eslint自动化校验支持。</li>
+<li><code>Languages &amp; Frameworks &gt; JavaScript &gt; Code Quality Tools &gt; Eslint</code></li>
+</ol>
+
         
     </section>
 </article>

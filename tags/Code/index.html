@@ -185,7 +185,7 @@
     <section class="article-body markdown-body">
         
         <blockquote>
-<p>整理业界公开的技术学习资源和总结。</p>
+<p>整理业界公开的技术学习资源和总结,此文将持续更新。</p>
 </blockquote>
 <h2 id="大神分享"><a href="#大神分享" class="headerlink" title="大神分享"></a>大神分享</h2><ul>
 <li><a href="https://ppt.baomitu.com/d/1a530301#/45" target="_blank" rel="noopener">从零开始建设服务化的 Web 设计规范  - 八哥分享</a></li>
@@ -231,7 +231,41 @@
     
     <section class="article-body markdown-body">
         
-        
+        <h3 id="怎么快速配置一个好用的WebStorm"><a href="#怎么快速配置一个好用的WebStorm" class="headerlink" title="怎么快速配置一个好用的WebStorm?"></a>怎么快速配置一个好用的WebStorm?</h3><blockquote>
+<p>以下是我的配置，好用不好用不知道了，你自己感受。</p>
+</blockquote>
+<ol>
+<li><a href="https://github.com/lihongbin100/config/blob/master/webstrom/settings.jar" target="_blank" rel="noopener">下载 settings.jar</a></li>
+<li><code>file &gt; import settings</code> 选择优化的jar包。</li>
+<li>重启一下吧。</li>
+</ol>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><ul>
+<li>打开设置：CMD+,</li>
+<li>格式化代码：alt+cmd+l</li>
+</ul>
+<h3 id="如何快速打开一个项目？"><a href="#如何快速打开一个项目？" class="headerlink" title="如何快速打开一个项目？"></a>如何快速打开一个项目？</h3><ol>
+<li>菜单栏 <code>tools -&gt; Create Command-line launcher</code></li>
+</ol>
+<p><img src="/images/68f81602baf80486581dd01d8dfe282e.png" alt="p1"></p>
+<ol start="2">
+<li>创建 全局命令行，ws 比较简单。</li>
+</ol>
+<p><img src="/images/6bcec79227528b146df3a6c6e0b8586e.png" alt="p2"></p>
+<ol start="3">
+<li>打开命令行输入 <code>ws app/</code>，<code>app/</code> 是你打开的项目完整目录，就可以瞬间打开了，一个“爽”！</li>
+</ol>
+<h2 id="如何还原设置？"><a href="#如何还原设置？" class="headerlink" title="如何还原设置？"></a>如何还原设置？</h2><ol>
+<li>关闭WebStorm</li>
+<li><code>cd ~/Library/Preferences/</code></li>
+<li><code>rm -rf WebStorm*</code> 这个*视你的WebStorm版本来定。</li>
+<li>搞定，重新启动 <code>WebStorm</code> ，会发现所有的配置全部还原了。</li>
+</ol>
+<h2 id="怎样快速按照eslint来设置code-style"><a href="#怎样快速按照eslint来设置code-style" class="headerlink" title="怎样快速按照eslint来设置code style"></a>怎样快速按照eslint来设置code style</h2><ol>
+<li>新建 <code>.eslintrc</code> 文件，右键选择 <code>Apply Eslint Code Style Rules</code>，搞定。</li>
+<li>当然你也可以开启WebStorm的Eslint自动化校验支持。</li>
+<li><code>Languages &amp; Frameworks &gt; JavaScript &gt; Code Quality Tools &gt; Eslint</code></li>
+</ol>
+
         
     </section>
 </article>
