@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
-  <meta name="baidu-site-verification" content="lZK4Fz9goD" />
-  
-  
-
-  <title>
+    <meta charset="UTF-8"/>
+    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+    <meta name="baidu-site-verification" content="lZK4Fz9goD"/>
     
-    Archives: 2018/11 |
     
-    永度</title>
-  <meta name="author" content="yondu"/>
-  <meta name="version" content="1.0.0"/>
-  <meta name="keywords" content=""/>
-  <meta name="description" content="记录自己的读书，生活，学习的思考。"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
 
-  
-  
-  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
-  
+    <title>
+        
+        Archives: 2018/11 |
+        
+        永度</title>
+    <meta name="author" content="yondu"/>
+    <meta name="version" content="1.0.0"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="记录自己的读书，生活，学习的思考。"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
 
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
+    
+    
+    <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
 </head>
 <body>
 
 <div class="app">
-  <header class="header clearfix">
+    <header class="header clearfix">
     <div id="nav" class="nav">
     <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
     <a
@@ -149,7 +149,7 @@
 
 </header>
 
-  <div id="content" class="content">
+    <div id="content" class="content">
 
     
     
@@ -269,7 +269,7 @@
 </nav>
 
 </div>
-  <footer class="footer">
+    <footer class="footer">
   <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
   <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
   <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
@@ -311,7 +311,7 @@
     line-height: 100px;
     display: none;
     font-size: 30px">
-  更新完成
+    更新完成
 </div>
 
 
@@ -334,7 +334,7 @@
       console.log(nodes.navTags.attr('class'))
     })
 
-    
+      
 
     //当前页面打点
     $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
@@ -381,19 +381,11 @@
         });
       })
     })
-    //百度自动推送爬虫
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  });
+    //百度自动化推送
+    var img=new Image();
+    img.src="http://api.share.baidu.com/s.gif?r="+window.location.href+"&l=http://yondu.vip"
 
+  });
 </script>
 
 </body>

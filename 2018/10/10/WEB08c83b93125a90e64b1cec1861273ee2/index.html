@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
-  <meta name="baidu-site-verification" content="lZK4Fz9goD" />
-  
-  
+    <meta charset="UTF-8"/>
+    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+    <meta name="baidu-site-verification" content="lZK4Fz9goD"/>
+    
+    
 
-  <title>
-    
-    泰国旅行必知必会 |
-    
-    永度</title>
-  <meta name="author" content="yondu"/>
-  <meta name="version" content="1.0.0"/>
-  <meta name="keywords" content=""/>
-  <meta name="description" content="
+    <title>
+        
+        泰国旅行必知必会 |
+        
+        永度</title>
+    <meta name="author" content="yondu"/>
+    <meta name="version" content="1.0.0"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="
 泰国古称暹罗，官方语言是泰语，佛教国家。
 
 政治
@@ -23,22 +23,22 @@
 泰国有一条法律叫做“大不敬罪”，任何侵犯君主及王室的名譽、尊严的行为都将有可能被起诉并处以3-15年监禁，该法律不仅针对泰国人，还有外国人。并且讨论该法律的合理性问题也犯“大不敬”。
 现在的泰王是拉玛十世，玛哈·哇集拉隆功。他的父亲拉玛九世（普密蓬·阿杜德）2016年去世，泰国举行了一年的国丧。
 在泰国如果看到一个戴眼镜的王室画像那就是普密蓬国王，不戴眼镜的年轻的是哇集拉隆"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
 
-  
-  
-  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
-  
+    
+    
+    <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    
 
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
 </head>
 <body>
 
 <div class="app">
-  <header class="header clearfix">
+    <header class="header clearfix">
     <div id="nav" class="nav">
     <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
     <a
@@ -125,7 +125,7 @@
 
 </header>
 
-  <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
         
@@ -226,7 +226,7 @@
 
 
 </div>
-  <footer class="footer">
+    <footer class="footer">
   <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
   <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
   <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
@@ -268,7 +268,7 @@
     line-height: 100px;
     display: none;
     font-size: 30px">
-  更新完成
+    更新完成
 </div>
 
 
@@ -293,9 +293,9 @@
       console.log(nodes.navTags.attr('class'))
     })
 
-    
-    $(document.body).scrollspy({target: '#aside-inner'});
-    
+      
+    $(document.body).scrollspy({ target: '#aside-inner' });
+      
 
     //当前页面打点
     $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
@@ -342,19 +342,11 @@
         });
       })
     })
-    //百度自动推送爬虫
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  });
+    //百度自动化推送
+    var img=new Image();
+    img.src="http://api.share.baidu.com/s.gif?r="+window.location.href+"&l=http://yondu.vip"
 
+  });
 </script>
 
 </body>

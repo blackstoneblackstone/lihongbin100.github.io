@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
-  <meta name="baidu-site-verification" content="lZK4Fz9goD" />
-  
-  
+    <meta charset="UTF-8"/>
+    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+    <meta name="baidu-site-verification" content="lZK4Fz9goD"/>
+    
+    
 
-  <title>
-    
-    GTX Ajazz 鼠标如何在mac上设置编程键 |
-    
-    永度</title>
-  <meta name="author" content="yondu"/>
-  <meta name="version" content="1.0.0"/>
-  <meta name="keywords" content=""/>
-  <meta name="description" content="
+    <title>
+        
+        GTX Ajazz 鼠标如何在mac上设置编程键 |
+        
+        永度</title>
+    <meta name="author" content="yondu"/>
+    <meta name="version" content="1.0.0"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="
 想必很多喜欢外接鼠标+键盘组合来操作MAC或者macBook电脑的同学都会头疼，如果鼠标的可编程键可以设置成左右切屏幕该多好。当然键盘的快捷键Ctrl+right/left 是可以实现，但是切屏幕桌面的操作往往伴随着点击操作，所以最好使用鼠标的编程键来完成这个操作是最高效的。当然市面上可以买到带有mac驱动的鼠标可以直接在mac安装驱动程序来设置。但是我这里来介绍的是在mac上没有官方驱动程序的GTX Ajazz 鼠标的设置。
 
 GTX Ajazz 黑爵鼠标 Amazon
 这个鼠标可以安装额外"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-  <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
 
-  
-  
-  <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
-  
+    
+    
+    <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    
 
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
 </head>
 <body>
 
 <div class="app">
-  <header class="header clearfix">
+    <header class="header clearfix">
     <div id="nav" class="nav">
     <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
     <a
@@ -122,7 +122,7 @@ GTX Ajazz 黑爵鼠标 Amazon
 
 </header>
 
-  <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
         
@@ -181,7 +181,7 @@ GTX Ajazz 黑爵鼠标 Amazon
 
 
 </div>
-  <footer class="footer">
+    <footer class="footer">
   <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
   <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
   <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
@@ -223,7 +223,7 @@ GTX Ajazz 黑爵鼠标 Amazon
     line-height: 100px;
     display: none;
     font-size: 30px">
-  更新完成
+    更新完成
 </div>
 
 
@@ -248,9 +248,9 @@ GTX Ajazz 黑爵鼠标 Amazon
       console.log(nodes.navTags.attr('class'))
     })
 
-    
-    $(document.body).scrollspy({target: '#aside-inner'});
-    
+      
+    $(document.body).scrollspy({ target: '#aside-inner' });
+      
 
     //当前页面打点
     $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
@@ -297,19 +297,11 @@ GTX Ajazz 黑爵鼠标 Amazon
         });
       })
     })
-    //百度自动推送爬虫
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  });
+    //百度自动化推送
+    var img=new Image();
+    img.src="http://api.share.baidu.com/s.gif?r="+window.location.href+"&l=http://yondu.vip"
 
+  });
 </script>
 
 </body>
