@@ -359,8 +359,8 @@ IE video元素全屏，不能自定义控制条，解决方案是：采用div全
       })
     })
     //百度自动化推送
-    var img=new Image();
-    img.src="http://api.share.baidu.com/s.gif?r="+window.location.href+"&l=http://yondu.vip"
+    var img = new Image();
+    img.src = "http://api.share.baidu.com/s.gif?r=" + encodeURIComponent(window.location.href) + "&l=http://yondu.vip"
 
   });
 </script>

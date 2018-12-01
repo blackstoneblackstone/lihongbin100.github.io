@@ -313,8 +313,8 @@ page下包含多个目录，每个目录对应一个项目，都要包含main.js
       })
     })
     //百度自动化推送
-    var img=new Image();
-    img.src="http://api.share.baidu.com/s.gif?r="+window.location.href+"&l=http://yondu.vip"
+    var img = new Image();
+    img.src = "http://api.share.baidu.com/s.gif?r=" + encodeURIComponent(window.location.href) + "&l=http://yondu.vip"
 
   });
 </script>
