@@ -15,7 +15,18 @@
     <meta name="author" content="yondu"/>
     <meta name="version" content="1.0.0"/>
     <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
+    <meta name="description" content="
+这个问题让你有必要深刻的看看tabindex=&amp;quot;-1&amp;quot;的原理。
+
+由于这个问题实在不好描述，那就直接上图。
+问题如下
+解决后
+那我是怎么解决的呢？先来看看下面的使用代码。
+测试代码
+你可以在github上看到：https://github.com/lihongbin100/use-react-image-lightbox
+
+主要代码
+12345678910111213141516171819202122232425262728293031323334353637383940"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
     <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
@@ -111,40 +122,7 @@
     
 
     
-    <div class="author-meta">
-      
-      <div class="author-avatar">
-        <a href="/">
-          <img src="/images/actor.jpg" title="Sanonz">
-        </a>
-      </div>
-      
-      <div class="author-name">Steven</div>
-      <div class="author-work">Coder &amp; A life learner</div>
-      <div class="author-location">
-        <i class="icon-location vm"></i>
-        <span class="vm">Beijing, China</span>
-      </div>
-      
-      <div class="author-thread-wrap">
-        <div class="author-threads clearfix">
-          
-          <a class="thread-item" href="https://github.com/lihongbin100" target="_blank" rel="noopener"><i
-                    class="icon-github"></i></a>
-          
-          
-          <a title="codePen" class="thread-item" href="https://codepen.io/lihongbin100/pens/public/?grid_type=list" target="_blank" rel="noopener">
-            <div class="icon-codepen"></div>
-          </a>
-          
-          
-          <a class="thread-item" href="http://www.simamedia.cn" target="_blank" rel="noopener"><i
-                    class="icon-circle-more"></i></a>
-          
-        </div>
-      </div>
-      
-    </div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题如下"><span class="toc-number">1.</span> <span class="toc-text">问题如下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决后"><span class="toc-number">2.</span> <span class="toc-text">解决后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">3.</span> <span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决这个问题"><span class="toc-number">4.</span> <span class="toc-text">解决这个问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#官方解决"><span class="toc-number">5.</span> <span class="toc-text">官方解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
     
   </div>
 </aside>
@@ -185,7 +163,34 @@
     
     <section class="article-body markdown-body">
         
-        
+        <blockquote>
+<p>这个问题让你有必要深刻的看看<code>tabindex=&quot;-1&quot;</code>的原理。</p>
+</blockquote>
+<p>由于这个问题实在不好描述，那就直接上图。</p>
+<h2 id="问题如下"><a href="#问题如下" class="headerlink" title="问题如下"></a>问题如下</h2><p><img src="http://user-gold-cdn.xitu.io/2018/12/4/167751fc9c9b1bc9?w=770&amp;h=578&amp;f=gif&amp;s=2305962" alt=""></p>
+<h2 id="解决后"><a href="#解决后" class="headerlink" title="解决后"></a>解决后</h2><p><img src="http://user-gold-cdn.xitu.io/2018/12/4/167751ffb4df5134?w=566&amp;h=580&amp;f=gif&amp;s=3887706" alt=""></p>
+<p>那我是怎么解决的呢？先来看看下面的使用代码。</p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><blockquote>
+<p>你可以在github上看到：<a href="https://github.com/lihongbin100/use-react-image-lightbox" target="_blank" rel="noopener">https://github.com/lihongbin100/use-react-image-lightbox</a></p>
+</blockquote>
+<p>主要代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> Lightbox <span class="keyword">from</span> <span class="string">'react-image-lightbox'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'react-image-lightbox/style.css'</span> <span class="comment">// This only needs to be imported once in your app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> images = [</span><br><span class="line">  <span class="string">'//placekitten.com/1500/500'</span>,</span><br><span class="line">  <span class="string">'//placekitten.com/4000/3000'</span>,</span><br><span class="line">  <span class="string">'//placekitten.com/800/1200'</span>,</span><br><span class="line">  <span class="string">'//placekitten.com/1500/1500'</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">LightboxExample</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      photoIndex: <span class="number">0</span>,</span><br><span class="line">      isOpen: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; photoIndex, isOpen &#125; = <span class="keyword">this</span>.state</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div style=&#123;&#123; <span class="attr">height</span>: <span class="string">'100px'</span>, <span class="attr">width</span>: <span class="string">'400px'</span>, <span class="attr">background</span>: <span class="string">'#ccc'</span> &#125;&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div tabIndex="-1" style=&#123;&#123; height: '1000px', width: '400px', background: '#ddd' &#125;&#125;</span></span><br><span class="line"><span class="regexp">             onClick=&#123;() =&gt; this.setState(&#123; isOpen: true &#125;)&#125;&gt;</span></span><br><span class="line"><span class="regexp">          Open Lightbox</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">        &#123;isOpen &amp;&amp; (</span><br><span class="line">          &lt;Lightbox</span><br><span class="line">            <span class="comment">// 该prop解决关闭弹窗后下层元素滑动</span></span><br><span class="line">            reactModalProps=&#123;&#123; <span class="attr">shouldReturnFocusAfterClose</span>: <span class="literal">false</span> &#125;&#125;</span><br><span class="line">            mainSrc=&#123;images[photoIndex]&#125;</span><br><span class="line">            nextSrc=&#123;images[(photoIndex + <span class="number">1</span>) % images.length]&#125;</span><br><span class="line">            prevSrc=&#123;images[(photoIndex + images.length - <span class="number">1</span>) % images.length]&#125;</span><br><span class="line">            onCloseRequest=&#123;() =&gt; <span class="keyword">this</span>.setState(&#123; <span class="attr">isOpen</span>: <span class="literal">false</span> &#125;)&#125;</span><br><span class="line">            onMovePrevRequest=&#123;() =&gt;</span><br><span class="line">              <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                photoIndex: (photoIndex + images.length - <span class="number">1</span>) % images.length</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            onMoveNextRequest=&#123;() =&gt;</span><br><span class="line">              <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                photoIndex: (photoIndex + <span class="number">1</span>) % images.length</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">          /&gt;</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="解决这个问题"><a href="#解决这个问题" class="headerlink" title="解决这个问题"></a>解决这个问题</h2><blockquote>
+<p>这个问题就是tabindex的坑，由于底部高度为1000px的div，会有滑动条，而且用了tabindex=-1，react-image-lightbox 也使用了tabindex=-1，于是当关闭lightBox以后，会把焦点移到底部的div，底部div被获得焦点，于是浏览器把它置顶了。</p>
+</blockquote>
+<p>这个问题官方也有答案，但是我真的是找了一天啊！怪我。</p>
+<h2 id="官方解决"><a href="#官方解决" class="headerlink" title="官方解决"></a>官方解决</h2><blockquote>
+<p>来看看这个问题的答案吧：<br><a href="https://github.com/frontend-collective/react-image-lightbox/issues/60" target="_blank" rel="noopener">https://github.com/frontend-collective/react-image-lightbox/issues/60</a></p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reactModalProps=&#123;&#123; shouldReturnFocusAfterClose: false &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>完美解决，这个属性是react-modal的props。</p>
+<hr>
+<blockquote>
+<p>欢迎访问我的Blog：<a href="http://yondu.vip">http://yondu.vip</a></p>
+</blockquote>
+
         
     </section>
 </article>
