@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">16</span></li></ul>
     </div>
   </div>
 
@@ -205,120 +205,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/12/04/WEBe7a127a3d22671ecff980fac5ad647dd/">解决使用react-image-lightbox组件，关闭后元素自动滑动问题（tabindex）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/12/04/WEBe7a127a3d22671ecff980fac5ad647dd/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-12-03T16:00:00.000Z" itemprop="datePublished">2018-12-04</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>这个问题让你有必要深刻的看看<code>tabindex=&quot;-1&quot;</code>的原理。</p>
-</blockquote>
-<p>由于这个问题实在不好描述，那就直接上图。</p>
-<h2 id="问题如下"><a href="#问题如下" class="headerlink" title="问题如下"></a>问题如下</h2><p><img src="http://user-gold-cdn.xitu.io/2018/12/4/167751fc9c9b1bc9?w=770&amp;h=578&amp;f=gif&amp;s=2305962" alt=""></p>
-<h2 id="解决后"><a href="#解决后" class="headerlink" title="解决后"></a>解决后</h2><p><img src="http://user-gold-cdn.xitu.io/2018/12/4/167751ffb4df5134?w=566&amp;h=580&amp;f=gif&amp;s=3887706" alt=""></p>
-<p>那我是怎么解决的呢？先来看看下面的使用代码。</p>
-<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><blockquote>
-<p>你可以在github上看到：<a href="https://github.com/lihongbin100/use-react-image-lightbox" target="_blank" rel="noopener">https://github.com/lihongbin100/use-react-image-lightbox</a></p>
-</blockquote>
-<p>主要代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> Lightbox <span class="keyword">from</span> <span class="string">'react-image-lightbox'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'react-image-lightbox/style.css'</span> <span class="comment">// This only needs to be imported once in your app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> images = [</span><br><span class="line">  <span class="string">'//placekitten.com/1500/500'</span>,</span><br><span class="line">  <span class="string">'//placekitten.com/4000/3000'</span>,</span><br><span class="line">  <span class="string">'//placekitten.com/800/1200'</span>,</span><br><span class="line">  <span class="string">'//placekitten.com/1500/1500'</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">LightboxExample</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      photoIndex: <span class="number">0</span>,</span><br><span class="line">      isOpen: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; photoIndex, isOpen &#125; = <span class="keyword">this</span>.state</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div style=&#123;&#123; <span class="attr">height</span>: <span class="string">'100px'</span>, <span class="attr">width</span>: <span class="string">'400px'</span>, <span class="attr">background</span>: <span class="string">'#ccc'</span> &#125;&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div tabIndex="-1" style=&#123;&#123; height: '1000px', width: '400px', background: '#ddd' &#125;&#125;</span></span><br><span class="line"><span class="regexp">             onClick=&#123;() =&gt; this.setState(&#123; isOpen: true &#125;)&#125;&gt;</span></span><br><span class="line"><span class="regexp">          Open Lightbox</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">        &#123;isOpen &amp;&amp; (</span><br><span class="line">          &lt;Lightbox</span><br><span class="line">            <span class="comment">// 该prop解决关闭弹窗后下层元素滑动</span></span><br><span class="line">            reactModalProps=&#123;&#123; <span class="attr">shouldReturnFocusAfterClose</span>: <span class="literal">false</span> &#125;&#125;</span><br><span class="line">            mainSrc=&#123;images[photoIndex]&#125;</span><br><span class="line">            nextSrc=&#123;images[(photoIndex + <span class="number">1</span>) % images.length]&#125;</span><br><span class="line">            prevSrc=&#123;images[(photoIndex + images.length - <span class="number">1</span>) % images.length]&#125;</span><br><span class="line">            onCloseRequest=&#123;() =&gt; <span class="keyword">this</span>.setState(&#123; <span class="attr">isOpen</span>: <span class="literal">false</span> &#125;)&#125;</span><br><span class="line">            onMovePrevRequest=&#123;() =&gt;</span><br><span class="line">              <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                photoIndex: (photoIndex + images.length - <span class="number">1</span>) % images.length</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            onMoveNextRequest=&#123;() =&gt;</span><br><span class="line">              <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                photoIndex: (photoIndex + <span class="number">1</span>) % images.length</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">          /&gt;</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="解决这个问题"><a href="#解决这个问题" class="headerlink" title="解决这个问题"></a>解决这个问题</h2><blockquote>
-<p>这个问题就是tabindex的坑，由于底部高度为1000px的div，会有滑动条，而且用了tabindex=-1，react-image-lightbox 也使用了tabindex=-1，于是当关闭lightBox以后，会把焦点移到底部的div，底部div被获得焦点，于是浏览器把它置顶了。</p>
-</blockquote>
-<p>这个问题官方也有答案，但是我真的是找了一天啊！怪我。</p>
-<h2 id="官方解决"><a href="#官方解决" class="headerlink" title="官方解决"></a>官方解决</h2><blockquote>
-<p>来看看这个问题的答案吧：<br><a href="https://github.com/frontend-collective/react-image-lightbox/issues/60" target="_blank" rel="noopener">https://github.com/frontend-collective/react-image-lightbox/issues/60</a></p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
-<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reactModalProps=&#123;&#123; shouldReturnFocusAfterClose: false &#125;&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>完美解决，这个属性是react-modal的props。</p>
-<hr>
-<blockquote>
-<p>欢迎访问我的Blog：<a href="http://yondu.vip">http://yondu.vip</a></p>
-</blockquote>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/11/30/WEB569127e11cc8d5904c8985ef39c73cf6/">前端学习资源</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/11/30/WEB569127e11cc8d5904c8985ef39c73cf6/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-11-29T16:00:00.000Z" itemprop="datePublished">2018-11-30</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>整理业界公开的技术学习资源和总结,此文将持续更新。</p>
-</blockquote>
-<h2 id="大神分享"><a href="#大神分享" class="headerlink" title="大神分享"></a>大神分享</h2><ul>
-<li><a href="https://ppt.baomitu.com/d/1a530301#/45" target="_blank" rel="noopener">从零开始建设服务化的 Web 设计规范  - 八哥分享</a></li>
-<li><a href="https://www.w3cplus.com/web-reconstruction.html" target="_blank" rel="noopener">Web重构之道 - 大漠分享</a></li>
-</ul>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2018/11/30/WEB3f375a84f248e35cbf68bcb8ec245878/">前端开发利器 - WebStorm高级使用技巧</a>
         </h1>
         
@@ -382,6 +268,56 @@
 <li>当然你也可以开启WebStorm的Eslint自动化校验支持。</li>
 <li><code>Languages &amp; Frameworks &gt; JavaScript &gt; Code Quality Tools &gt; Eslint</code></li>
 </ol>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/11/30/WEB569127e11cc8d5904c8985ef39c73cf6/">前端学习资源</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/11/30/WEB569127e11cc8d5904c8985ef39c73cf6/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-11-29T16:00:00.000Z" itemprop="datePublished">2018-11-30</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <blockquote>
+<p>整理业界公开的技术学习资源和总结,此文将持续更新。</p>
+</blockquote>
+<h2 id="大神分享"><a href="#大神分享" class="headerlink" title="大神分享"></a>大神分享</h2><ul>
+<li><a href="https://ppt.baomitu.com/d/1a530301#/45" target="_blank" rel="noopener">从零开始建设服务化的 Web 设计规范  - 八哥分享</a></li>
+<li><a href="https://www.w3cplus.com/web-reconstruction.html" target="_blank" rel="noopener">Web重构之道 - 大漠分享</a></li>
+</ul>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul>
+<li><a href="https://musiclab.chromeexperiments.com/" target="_blank" rel="noopener">声音与动画</a></li>
+</ul>
 
         
     </section>
@@ -620,71 +556,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/09/17/WEB94144fe31bffb0bb3a5c339c5f25f753/">高效开发的工具</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/09/17/WEB94144fe31bffb0bb3a5c339c5f25f753/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-09-16T16:00:00.000Z" itemprop="datePublished">2018-09-17</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><ul>
-<li><a href="https://github.com/wsdjeg/vim-galore-zh_cn/blob/master/README.md" target="_blank" rel="noopener">vim 教程</a></li>
-<li><a href="https://spacevim.org/cn/" target="_blank" rel="noopener">spacevim</a>：好用不好学，但是应该下载一个。</li>
-</ul>
-<h2 id="sizeUp"><a href="#sizeUp" class="headerlink" title="sizeUp"></a>sizeUp</h2><blockquote>
-<p>简直太好用的MAC桌面管理工具。<a href="http://yondu.vip/2018/11/23/WEBaa298f2871007986189c3d9b7677ce76/">如何使用?</a></p>
-</blockquote>
-<h2 id="spotlight"><a href="#spotlight" class="headerlink" title="spotlight"></a>spotlight</h2><blockquote>
-<p>MAC自带的查找神器，当然最应该把他当作切换应用的神器。</p>
-</blockquote>
-<h2 id="网易有道词典"><a href="#网易有道词典" class="headerlink" title="网易有道词典"></a>网易有道词典</h2><blockquote>
-<p>没发现啥别的好用，就这个还可以。</p>
-</blockquote>
-<h2 id="sublime-Text"><a href="#sublime-Text" class="headerlink" title="sublime Text"></a>sublime Text</h2><blockquote>
-<p>最清凉的text编辑器，还能编辑代码，炸了。但是不推荐大家用这个编码，可视化和编程体验并不好，写点小玩意还可以。</p>
-</blockquote>
-<h2 id="GIPHY"><a href="#GIPHY" class="headerlink" title="GIPHY"></a>GIPHY</h2><blockquote>
-<p>简直太好用的gif图制作器。而且是免费的，直接appstore搜索就可以了。</p>
-</blockquote>
-<h2 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh my zsh"></a>oh my zsh</h2><blockquote>
-<p>你的macbook cmd 不装这个，效率直接降低一半。他还有一堆插件，比如添加alias，兼容Linux命令行，ll也可以用了，当然命令历史记录功能也很好用。就是牛逼！</p>
-</blockquote>
-<h2 id="autojump"><a href="#autojump" class="headerlink" title="autojump"></a>autojump</h2><blockquote>
-<p>配合zsh使用的快递定位到历史记录的目录。用起来就不肯放手。</p>
-</blockquote>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2018/09/11/WEBbc6de343cfbb94dd8e999b9481686620/">高效使用macbook</a>
         </h1>
         
@@ -904,122 +775,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
-<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
-</blockquote>
-<blockquote>
-<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
-</blockquote>
-<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
-<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
-</blockquote>
-<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
-<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
-</blockquote>
-<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
-<p>npm install express-generator </p>
-</blockquote>
-<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
-<p>express myapp<br>获得以下目录：</p>
-</blockquote>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
-<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
-<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>  <a href="https://juejin.im/post/5c03c8b4e51d457640742589" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c8f9e51d4529db2aa30f/likes.svg?style=flat-square" alt=""></a></p>
-<blockquote>
-<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
-</blockquote>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
-<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>wq！保存。</p>
-</li>
-</ol>
-<p>成功！</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
         </h1>
         
@@ -1197,12 +952,12 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEBfbb7b44a589bacdab862693eb3687168/">Openlayers开发热图</a>
+            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
         </h1>
         
         <div class="article-meta clearfix">
             <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBfbb7b44a589bacdab862693eb3687168/">
+  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
     
     <i class="icon-calendar"></i>
     
@@ -1226,83 +981,28 @@
     
     <section class="article-body markdown-body">
         
-        <blockquote>
-<p>简介：热力图采用PostGis数据库存储地图和人流点数据，通过Geoserver服务发布，前端采用OpenLayers引入并展现完成。</p>
-</blockquote>
-<p>##开发流程图</p>
-<p><div id="flowchart-0" class="flow-chart"></div></p>
-<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="Postgis数据准备"><a href="#Postgis数据准备" class="headerlink" title="Postgis数据准备"></a>Postgis数据准备</h3><blockquote>
-<p>the_geom用于存储坐标信息</p>
-</blockquote>
-<h4 id="企业客户地图："><a href="#企业客户地图：" class="headerlink" title="企业客户地图："></a>企业客户地图：</h4><ul>
-<li>WGS84</li>
-<li>Postgis 文件  </li>
-<li>monitor库</li>
-</ul>
-<h4 id="人流定位数据："><a href="#人流定位数据：" class="headerlink" title="人流定位数据："></a>人流定位数据：</h4><ul>
-<li>存入Postgis，坐标系：<code>EPSG:4326</code>  该表只存储5分钟内的定位数据，每5分钟刷新一次，并删除之前5分钟的数据 </li>
-<li>一个企业客户占一个表，一个表里含有多个楼层</li>
-<li>monitor库<br><strong>表示例：</strong></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>province_id</th>
-<th>city_id</th>
-<th>enterprise</th>
-<th>building</th>
-<th>floor</th>
-<th>the_geom</th>
-<th>postion_time</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>116</td>
-<td>11602</td>
-<td>zhongshanyiyuan</td>
-<td>ZS1</td>
-<td>F1</td>
-<td>0101000020E6100000000000C0E9D369410000000028F75141</td>
-<td>2016-08-08 10:00:00</td>
-</tr>
-</tbody>
-</table>
-<h4 id="AP点位数据"><a href="#AP点位数据" class="headerlink" title="AP点位数据"></a>AP点位数据</h4><p>存入Postgis，坐标系：<code>EPSG:4326</code><br><strong>表示例：</strong><br>|ft_id|by|fl_id|ft_name_cn|ft_name_en|ft_type|py_type|c_time|u_time|u_flag|the_geom|<br>|—|<br>|||        ZH0000110100100001|    XH1-B1-AP-001|||||||                            0101000020E61000001C29C7744A655E405CC51EBF08794340|</p>
-<h3 id="新建Geoserver图层"><a href="#新建Geoserver图层" class="headerlink" title="新建Geoserver图层"></a>新建Geoserver图层</h3><ul>
-<li>geoserver地址：<a href="http://10.8.122.77:9080/geoserver/" target="_blank" rel="noopener">http://10.8.122.77:9080/geoserver/</a></li>
-</ul>
-<p><img src="blob:/images/9d2ed800e5e5f70452c0c247004a518f.png" alt="Alt text"><br><img src="blob:/images/7af94e442d6feb858bc15a2eb4e6718e.png" alt="Alt text"><br><img src="blob:/images/78c06894437a2b7354ade6bfbbbd4940.png" alt="Alt text"></p>
-<h3 id="发布WMS服务-style-sld"><a href="#发布WMS服务-style-sld" class="headerlink" title="发布WMS服务 style sld"></a>发布WMS服务 <code>style sld</code></h3><h4 id="发布地图"><a href="#发布地图" class="headerlink" title="发布地图"></a>发布地图</h4><p><img src="./1470730642396.png" alt="Alt text">)</p>
-<h4 id="发布AP点位"><a href="#发布AP点位" class="headerlink" title="发布AP点位"></a>发布AP点位</h4><p><img src="./1470730713092.png" alt="Alt text">)</p>
-<h4 id="发布人流热图"><a href="#发布人流热图" class="headerlink" title="发布人流热图"></a>发布人流热图</h4><p><img src="./1470730768412.png" alt="Alt text">)</p>
-<blockquote>
-<p>热图样式设置</p>
+        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
+<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
 </blockquote>
 <blockquote>
-<p>一 环境部署<br>正常部署geoserver，本次版本是2.6<br>下载地址：<a href="http://geoserver.org/release/stable/" target="_blank" rel="noopener">http://geoserver.org/release/stable/</a><br>另外要下载<br>Extensions的wps扩展插件。<br>解压wps，将jar包放进geoserver部署的web-INF/lib中，重启geoserver。</p>
+<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
 </blockquote>
-<blockquote>
-<p>二 生成热力图的样式文件heatmap.sld</p>
+<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
+<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">StyledLayerDescriptor</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.opengis.net/sld StyledLayerDescriptor.xsd"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.opengis.net/sld"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:ogc</span>=<span class="string">"http://www.opengis.net/ogc"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xlink</span>=<span class="string">"http://www.w3.org/1999/xlink"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;<span class="name">NamedLayer</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Heatmap<span class="tag">&lt;/<span class="name">Name</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">UserStyle</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">Title</span>&gt;</span>Heatmap<span class="tag">&lt;/<span class="name">Title</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">Abstract</span>&gt;</span>A heatmap surface showing population density<span class="tag">&lt;/<span class="name">Abstract</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">FeatureTypeStyle</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;<span class="name">Transformation</span>&gt;</span>  </span><br><span class="line">             <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"gs:Heatmap"</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>data<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>weightAttr<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>jan_je<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>radiusPixels<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>radius<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>100<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>pixelsPerCell<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>10<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputBBOX<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_bbox<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputWidth<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_width<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputHeight<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_height<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">             <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">Transformation</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">Rule</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">RasterSymbolizer</span>&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- specify geometry attribute to pass validation --&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">Geometry</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ogc:PropertyName</span>&gt;</span>geom<span class="tag">&lt;/<span class="name">ogc:PropertyName</span>&gt;</span><span class="tag">&lt;/<span class="name">Geometry</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">Opacity</span>&gt;</span>0.6<span class="tag">&lt;/<span class="name">Opacity</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMap</span> <span class="attr">type</span>=<span class="string">"ramp"</span> &gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#0000FF"</span> <span class="attr">quantity</span>=<span class="string">"0"</span> <span class="attr">label</span>=<span class="string">"nodata"</span> <span class="attr">opacity</span>=<span class="string">"0"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#00FFFF"</span> <span class="attr">quantity</span>=<span class="string">"0.02"</span> <span class="attr">label</span>=<span class="string">"nodata"</span>  </span></span><br><span class="line"><span class="tag">                  <span class="attr">opacity</span>=<span class="string">"0"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#00FF00"</span> <span class="attr">quantity</span>=<span class="string">".1"</span> <span class="attr">label</span>=<span class="string">"nodata"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#FFFF00"</span> <span class="attr">quantity</span>=<span class="string">".5"</span> <span class="attr">label</span>=<span class="string">"values"</span> /&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#FF0000"</span> <span class="attr">quantity</span>=<span class="string">"1.0"</span> <span class="attr">label</span>=<span class="string">"values"</span> /&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">ColorMap</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">RasterSymbolizer</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">Rule</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;/<span class="name">FeatureTypeStyle</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;/<span class="name">UserStyle</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;/<span class="name">NamedLayer</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">StyledLayerDescriptor</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>weightAttr</code>标签指定权重字段，在这里我设置weightAttrz权重字段名称为jan_je。colormap中的热力图符号和范围设置，也是可以改和设置的。<br>而<code>&lt;ogc:PropertyName&gt;geom&lt;/ogc:PropertyName&gt;&lt;/Geometry&gt;</code>这里是指定渲染的图形字段，查看数据库空间数据表的图形字段名称，如果是geom就写geom，如果是the_geom就写the_geom，根据自己数据库中图形字段名称来。在<code>geoserver&gt;style</code>中发布这样的一个sld文件。  </p>
+<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
+<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
 </blockquote>
-<h3 id="Openlayers装载图层"><a href="#Openlayers装载图层" class="headerlink" title="Openlayers装载图层"></a>Openlayers装载图层</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> baseServer = <span class="string">"http://geoserver地址/geoserver/gcks/wms"</span>;</span><br><span class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> ol.Map(&#123;</span><br><span class="line">        target: <span class="string">'map'</span>,</span><br><span class="line">        layers: [</span><br><span class="line">            <span class="keyword">new</span> ol.layer.Tile(&#123;</span><br><span class="line">                source: <span class="keyword">new</span> ol.source.OSM()</span><br><span class="line">            &#125;)</span><br><span class="line">        ],</span><br><span class="line">        view: <span class="keyword">new</span> ol.View(&#123;</span><br><span class="line">            projection: <span class="string">'EPSG:900913'</span>,</span><br><span class="line">            center: [<span class="number">13541202.790897895</span>,<span class="number">4709549.109971935</span>],</span><br><span class="line">            zoom: <span class="number">19</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//人流定位数据图层</span></span><br><span class="line"><span class="keyword">var</span> layer1 = <span class="keyword">new</span> ol.layer.Image(&#123;</span><br><span class="line">        visible: <span class="literal">true</span>,</span><br><span class="line">        source: <span class="keyword">new</span> ol.source.ImageWMS(&#123;</span><br><span class="line">            ratio: <span class="number">1</span>,</span><br><span class="line">            url: baseServer,</span><br><span class="line">            serverType: <span class="string">"geoserver"</span>,</span><br><span class="line">            params: &#123;</span><br><span class="line">                FORMAT: <span class="string">'image/png'</span>,</span><br><span class="line">                VERSION: <span class="string">'1.1.0'</span>,</span><br><span class="line">                LAYERS: <span class="string">'gcks:mod_heatmap_5mins'</span>,</span><br><span class="line">                STYLES: <span class="string">''</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//地图数据图层</span></span><br><span class="line">    <span class="keyword">var</span> layer2 = <span class="keyword">new</span> ol.layer.Image(&#123;</span><br><span class="line">        visible: <span class="literal">true</span>,</span><br><span class="line">        source: <span class="keyword">new</span> ol.source.ImageWMS(&#123;</span><br><span class="line">            ratio: <span class="number">1</span>,</span><br><span class="line">            url: baseServer,</span><br><span class="line">            serverType: <span class="string">"geoserver"</span>,</span><br><span class="line">            params: &#123;</span><br><span class="line">                FORMAT: <span class="string">'image/png'</span>,</span><br><span class="line">                VERSION: <span class="string">'1.1.0'</span>,</span><br><span class="line">                LAYERS: <span class="string">'gcks:fl_info_1'</span>,</span><br><span class="line">                STYLES: <span class="string">''</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    map.addLayer(layer1);</span><br><span class="line">    map.addLayer(layer2);</span><br></pre></td></tr></table></figure>
-<p><strong>最终展示效果：</strong><br><img src="./1470731868345.png" alt="Alt text">)</p>
-<p><script src="https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script><script src="https://cdn.bootcss.com/flowchart/1.7.0/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
-e=>end: 结束
-p0=>operation: Postgis数据准备
-p1=>operation: 新建Geoserver图层
-p2=>operation: 发布WMS服务
-p3=>operation: Openlayers装载图层
-p4=>operation: 前端展示
-
-st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
-
+<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
+<p>npm install express-generator </p>
+</blockquote>
+<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
+<p>express myapp<br>获得以下目录：</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
+<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
         
     </section>
 </article>
@@ -1313,16 +1013,16 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">chrome web devtool技巧</a>
+            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
         </h1>
         
         <div class="article-meta clearfix">
             <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">
+  <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
     
     <i class="icon-calendar"></i>
     
-    <time datetime="2018-08-22T16:00:00.000Z" itemprop="datePublished">2018-08-23</time>
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
   </a>
 </div>
 
@@ -1342,32 +1042,103 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-        <h2 id="console"><a href="#console" class="headerlink" title="console"></a>console</h2><ul>
-<li><p><em>copy(x)</em>：</p>
+        <p>  <a href="https://juejin.im/post/5c03c8b4e51d457640742589" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c8f9e51d4529db2aa30f/likes.svg?style=flat-square" alt=""></a></p>
 <blockquote>
-<p>是一个很有用的工具函数方便你将任何东西拷贝到系统的粘贴板暂存。<br>给copy函数传入一个没有格式的JSON，会返回格式化的结果。</p>
+<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
 </blockquote>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><em>Eager evaluation</em></p>
-<blockquote>
-<p>选择该选项可以自动联想你所输入的变量的值，并自动打印出来。</p>
-</blockquote>
+<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><em>debug()</em> </p>
-<blockquote>
-<p>在执行到某个函数的时候暂停，你可以使用debug函数。debug(fn)接收一个函数作为参数，当每次该函数被调用时，Debugger就会在该函数的第一行中断执行。</p>
-</blockquote>
+<li><p>wq！保存。</p>
 </li>
-<li><p><em>暂停UI在Hover状态下的展示结果</em></p>
-<ul>
-<li>打开sources面板</li>
-<li>显示tooltip</li>
-<li>使用快捷键来暂停脚本执行(将鼠标停留在暂停的图标上查看快捷键 cmd+\ )</li>
-<li>回到Elements面板，然后像通常一样去检查元素。</li>
+</ol>
+<p>成功！</p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">通用性面试技巧</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
+<li>略正式。</li>
+<li>说话幽默，看着对方。</li>
+<li>回答问题到细节，避免面试官追问。</li>
+<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
 </ul>
-</li>
+<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
+<li>太喜欢你们公司</li>
+<li>没有成长空间</li>
 </ul>
-<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2>
+<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
+<li>急性子，为了做事推进，不太估计别人的感受。</li>
+<li>对做的事情要求太高，team有时压力会比较大。</li>
+</ul>
+<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
+<li>善于学习，高效学习，刻意练习，研究能力。</li>
+<li>有韧性。</li>
+<li>喜欢研究底层和新的技术，比如go语言。</li>
+</ul>
+<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
+<li>公司给不了我理想工作环境和状态。</li>
+<li>我理想的工作环境和状态。</li>
+</ul>
+<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
+<li>转了以后发现自己做的更好。</li>
+<li>学习能力强</li>
+</ul>
+<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
+<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
+<li>你觉得你们公司有什么不好的地方吗？</li>
+<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
+<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
+</ul>
+<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
+<li>死磕某个事</li>
+<li>坚持很久的事</li>
+<li>逆境不放弃</li>
+<li>面对压力，承担责任</li>
+<li>严谨细心，对自己做的产品自信</li>
+<li>面对诱惑，不浮躁</li>
+</ul>
+
         
     </section>
 </article>
@@ -1706,87 +1477,6 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">通用性面试技巧</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
-<li>略正式。</li>
-<li>说话幽默，看着对方。</li>
-<li>回答问题到细节，避免面试官追问。</li>
-<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
-</ul>
-<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
-<li>太喜欢你们公司</li>
-<li>没有成长空间</li>
-</ul>
-<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
-<li>急性子，为了做事推进，不太估计别人的感受。</li>
-<li>对做的事情要求太高，team有时压力会比较大。</li>
-</ul>
-<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
-<li>善于学习，高效学习，刻意练习，研究能力。</li>
-<li>有韧性。</li>
-<li>喜欢研究底层和新的技术，比如go语言。</li>
-</ul>
-<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
-<li>公司给不了我理想工作环境和状态。</li>
-<li>我理想的工作环境和状态。</li>
-</ul>
-<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
-<li>转了以后发现自己做的更好。</li>
-<li>学习能力强</li>
-</ul>
-<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
-<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
-<li>你觉得你们公司有什么不好的地方吗？</li>
-<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
-<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
-</ul>
-<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
-<li>死磕某个事</li>
-<li>坚持很久的事</li>
-<li>逆境不放弃</li>
-<li>面对压力，承担责任</li>
-<li>严谨细心，对自己做的产品自信</li>
-<li>面对诱惑，不浮躁</li>
-</ul>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2018/07/24/WEB0ca879a2c996cd655d738e0bd44f9d99/">linux命令</a>
         </h1>
         
@@ -1885,6 +1575,233 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><blockquote>
 <p>VPN分为三种模式：全局，PAC自动模式，手动模式<br>一般采用PAC自动模式，其原理就是官方持续更新一组域名的白名单库，只有在库里的域名才会走VPN，当然你也可以自己添加域名或者IP。</p>
 </blockquote>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">react-devtools 2.1.9版本 免翻墙下载和使用  闪烁解决方案</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-10T16:00:00.000Z" itemprop="datePublished">2018-07-11</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  <a href="https://juejin.im/post/5c03c99a6fb9a049e231c155" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c9dff265da616c6559ff/likes.svg?style=flat-square" alt=""></a></p>
+<blockquote>
+<p>如果不翻墙的话是不能安装chrome的插件的，因此不能下载react devtools， 网上搜到的都是1.3的版本，那个版本会出现react面板闪烁的情况，下载最新的版本就可以解决问题。</p>
+</blockquote>
+<ul>
+<li>crx下载地址<br>链接: <a href="https://pan.baidu.com/s/1slLL7JZ" target="_blank" rel="noopener">https://pan.baidu.com/s/1slLL7JZ</a> 密码: 75ws</li>
+</ul>
+<p><img src="/images/b929f46378debb6751e87c01daa22e5a.png" alt="Paste_Image.png"></p>
+<ul>
+<li>安装直接将crx拖拽到 chrome://extensions/ 里</li>
+</ul>
+<p><img src="/images/bb1e3a6a5fcafd543ec8594d233fb28f.png" alt="Paste_Image.png"></p>
+<ul>
+<li>重启chrome，F12看到react面板</li>
+</ul>
+<p><img src="/images/e7e7749bb8a86ff3dba3c94a9320dfc7.png" alt="Paste_Image.png"></p>
+<p>完美搞定！</p>
+<hr>
+<p>欢迎访问我的blog: <a href="http://yondu.vip">http://yondu.vip</a></p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">委托模式</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-09T16:00:00.000Z" itemprop="datePublished">2018-07-10</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  我们再来看 Go 语言这个模式，Go 语言的这个模式挺好玩儿的。声明一个 struct，跟 C 很一样，然后直接把这个 struct 类型放到另一个 struct 里。</p>
+<p>委托的简单示例</p>
+<p>我们来看几个示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Widget <span class="keyword">struct</span> &#123;  </span><br><span class="line">    X, Y <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Label <span class="keyword">struct</span> &#123; </span><br><span class="line">Widget        <span class="comment">// Embedding (delegation)  </span></span><br><span class="line">Text   <span class="keyword">string</span> <span class="comment">// Aggregation  </span></span><br><span class="line">X <span class="keyword">int</span>         <span class="comment">// Override </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(label Label)</span> <span class="title">Paint</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">// [0xc4200141e0] -Label.Paint("State")   </span></span><br><span class="line">fmt.Printf(<span class="string">"[%p] - Label.Paint(%q)\n"</span>,  &amp;label, label.Text)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面，</p>
+<ul>
+<li>我们声明了一个 Widget，其有 X,Y；</li>
+<li>然后用它来声明一个 Label，直接把 Widget 委托进去；</li>
+<li>然后再给 Label 声明并实现了一个 Paint() 方法。<br>于是，我们就可以这样编程了：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">label := Label&#123; Widget&#123;10, 10&#125;, &quot;State&quot;, 100 &#125;</span><br><span class="line"></span><br><span class="line">// X=100, Y=10, Text=State, Widget.X=10</span><br><span class="line">fmt.Printf(&quot;X=%d, Y=%d, Text=%s Widget.X=%d\n&quot;,label.X, label.Y, label.Text,label.Widget.X)</span><br><span class="line">fmt.Println()</span><br><span class="line"></span><br><span class="line">// &#123;Widget:&#123;X:10 Y:10&#125; Text:State X:100&#125; </span><br><span class="line">// &#123;&#123;10 10&#125; State 100&#125;</span><br><span class="line">fmt.Printf(&quot;%+v\n%v\n&quot;, label, label)</span><br><span class="line">label.Paint()</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，如果有成员变量重名，则需要手动地解决冲突。</p>
+<p>我们继续扩展代码。</p>
+<p>先来一个 Button：</p>
+<p>type Button struct {    Label // Embedding (delegation)}func NewButton(x, y int, text string) Button {    return Button{Label{Widget{x, y}, text, x}}}func (button Button) Paint() { // Override    fmt.Printf(“[%p] - Button.Paint(%q)\n”,         &amp;button, button.Text)}func (button Button) Click() {    fmt.Printf(“[%p] - Button.Click()\n”, &amp;button)}</p>
+<p>再来一个 ListBox：</p>
+<p>type ListBox struct {    Widget          // Embedding (delegation)    Texts  []string // Aggregation    Index  int      // Aggregation}func (listBox ListBox) Paint() {    fmt.Printf(“[%p] - ListBox.Paint(%q)\n”,         &amp;listBox, listBox.Texts)}func (listBox ListBox) Click() {    fmt.Printf(“[%p] - ListBox.Click()\n”, &amp;listBox)}</p>
+<p>然后，声明两个接口用于多态：</p>
+<p>type Painter interface {    Paint()}type Clicker interface {    Click()}</p>
+<p>于是我们就可以这样泛型地使用（注意其中的两个 for 循环）：</p>
+<p>button1 := Button{Label{Widget{10, 70}, “OK”, 10}}button2 := NewButton(50, 70, “Cancel”)listBox := ListBox{Widget{10, 40},     []string{“AL”, “AK”, “AZ”, “AR”}, 0}fmt.Println()//[0xc4200142d0] - Label.Paint(“State”)//[0xc420014300] - ListBox.Paint([“AL” “AK” “AZ” “AR”])//[0xc420014330] - Button.Paint(“OK”)//[0xc420014360] - Button.Paint(“Cancel”)for _, painter := range []Painter{label, listBox, button1, button2} {    painter.Paint()}fmt.Println()//[0xc420014450] - ListBox.Click()//[0xc420014480] - Button.Click()//[0xc4200144b0] - Button.Click()for _, widget := range []interface{}{label, listBox, button1, button2} {    if clicker, ok := widget.(Clicker); ok {        clicker.Click()    }}</p>
+<p>一个 Undo 的委托重构</p>
+<p>上面这个是 Go 语中的委托和接口多态的编程方式，其实是面向对象和原型编程综合的玩法。这个玩法可不可以玩得更有意思呢？这是可以的。</p>
+<p>首先，我们先声明一个数据容器，其中有 Add()、 Delete() 和 Contains() 方法。还有一个转字符串的方法。</p>
+<p>type IntSet struct {    data map[int]bool}func NewIntSet() IntSet {    return IntSet{make(map[int]bool)}}func (set <em>IntSet) Add(x int) {    set.data[x] = true}func (set </em>IntSet) Delete(x int) {    delete(set.data, x)}func (set <em>IntSet) Contains(x int) bool {    return set.data[x]}func (set </em>IntSet) String() string { // Satisfies fmt.Stringer interface    if len(set.data) == 0 {        return “{}”    }    ints := make([]int, 0, len(set.data))    for i := range set.data {        ints = append(ints, i)    }    sort.Ints(ints)    parts := make([]string, 0, len(ints))    for _, i := range ints {        parts = append(parts, fmt.Sprint(i))    }    return “{“ + strings.Join(parts, “,”) + “}”}</p>
+<p>我们如下使用这个数据容器：</p>
+<p>ints := NewIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Print(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}</p>
+<p>这个数据容器平淡无奇，我们想给它加一个 Undo 的功能。我们可以这样来：</p>
+<p>type UndoableIntSet struct { // Poor style    IntSet    // Embedding (delegation)    functions []func()}func NewUndoableIntSet() UndoableIntSet {    return UndoableIntSet{NewIntSet(), nil}}func (set <em>UndoableIntSet) Add(x int) { // Override    if !set.Contains(x) {        set.data[x] = true        set.functions = append(set.functions, func() { set.Delete(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set </em>UndoableIntSet) Delete(x int) { // Override    if set.Contains(x) {        delete(set.data, x)        set.functions = append(set.functions, func() { set.Add(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set *UndoableIntSet) Undo() error {    if len(set.functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(set.functions) - 1    if function := set.functions[index]; function != nil {        function()        set.functions[index] = nil // Free closure for garbage collection    }    set.functions = set.functions[:index]    return nil}</p>
+<p>于是就可以这样使用了：</p>
+<p>ints := NewUndoableIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Println(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}fmt.Println()for {    if err := ints.Undo(); err != nil {        break    }    fmt.Println(ints)}</p>
+<p>但是，需要注意的是，我们用了一个新的 UndoableIntSet 几乎重写了所有的 IntSet 和 “写” 相关的方法，这样就可以把操作记录下来，然后 Undo 了。</p>
+<p>但是，可能别的类也需要 Undo 的功能，我是不是要重写所有的需要这个功能的类啊？这样的代码类似，就是因为数据容器不一样，我就要去重写它们，这太二了。</p>
+<p>我们能不能利用前面学到的泛型编程、函数式编程、IoC 等范式来把这个事干得好一些呢？当然是可以的。</p>
+<p>如下所示：<br>  ● 我们先声明一个 Undo[] 的函数数组（其实是一个栈）。<br>  ● 并实现一个通用 Add()。其需要一个函数指针，并把这个函数指针存放到 Undo[] 函数数组中。<br>  ● 在 Undo() 的函数中，我们会遍历Undo[]函数数组，并执行之，执行完后就弹栈。<br>type Undo []func()func (undo <em>Undo) Add(function func()) {    </em>undo = append(<em>undo, function)}func (undo </em>Undo) Undo() error {    functions := <em>undo    if len(functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(functions) - 1    if function := functions[index]; function != nil {        function()        functions[index] = nil // Free closure for garbage collection    }    </em>undo = functions[:index]    return nil}</p>
+<p>那么我们的 IntSet 就可以改写成如下的形式：</p>
+<p>type IntSet struct {    data map[int]bool    undo Undo}func NewIntSet() IntSet {    return IntSet{data: make(map[int]bool)}}</p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">算法练级</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-07T16:00:00.000Z" itemprop="datePublished">2018-07-08</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="Two-Sum-algorithm"><a href="#Two-Sum-algorithm" class="headerlink" title="Two Sum algorithm"></a>Two Sum algorithm</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * twoSum indexOf 方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">       <span class="keyword">var</span> index = nums.indexOf(target-nums[i])</span><br><span class="line">       <span class="keyword">if</span> (index&gt;<span class="number">-1</span> &amp;&amp; index!=i)&#123;</span><br><span class="line">              <span class="keyword">return</span> [i,index]</span><br><span class="line">          &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * hash algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">	  <span class="keyword">var</span> map=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (map.hasOwnProperty(target-nums[i]))&#123;</span><br><span class="line">			<span class="keyword">return</span> [map[target-nums[i]],i]</span><br><span class="line">		&#125;</span><br><span class="line">        map[nums[i]]=i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * two point algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l=<span class="number">0</span>,r=nums.length<span class="number">-1</span>, newNums=nums.concat()</span><br><span class="line">		<span class="comment">//At first, sorting.</span></span><br><span class="line">		newNums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)</span><br><span class="line">		<span class="keyword">while</span>(l!=r)&#123;</span><br><span class="line">		<span class="keyword">var</span> m = newNums[l] + newNums[r] - target   </span><br><span class="line">		<span class="keyword">if</span> (m &lt; <span class="number">0</span>)&#123;</span><br><span class="line">			 l++	  </span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="comment">// lastIndexOf for solving : [3,3] and 6 is [0,1]</span></span><br><span class="line">				<span class="keyword">return</span> [nums.indexOf(newNums[l]),nums.lastIndexOf(newNums[r])]</span><br><span class="line">			&#125;</span><br><span class="line">			r--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> re=twoSum([<span class="number">2</span>,<span class="number">11</span>,<span class="number">7</span>,<span class="number">7</span>],<span class="number">9</span>)</span><br><span class="line"><span class="built_in">console</span>.log(re)</span><br></pre></td></tr></table></figure>
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/07/WEB949651b02953dd9d29ba3282d347045c/">代码规范</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/07/WEB949651b02953dd9d29ba3282d347045c/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-06T16:00:00.000Z" itemprop="datePublished">2018-07-07</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <ul>
+<li>二元运算符左右两边加空格<ul>
+<li>if, for 和括号之间加空格</li>
+<li>严格按照要求进行程序缩进<br>即使 if / for </li>
+<li>语句内部只有一句话，也要加上花括号</li>
+<li>变量名使用有意义的英文名，不要用a,b,c,s1,s2</li>
+<li>区分不同的逻辑块，逻辑块之间用空行隔开，简要注释每个部分做的事情</li>
+<li>多用 Helper Function 或子函数，不要所有程序都写在一个大函数里</li>
+</ul>
+</li>
+</ul>
 
         
     </section>
