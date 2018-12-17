@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>有道云笔记 - 笔记类知识管理软件</title>
+<style>
+html,body{padding:0;margin:0;min-width:960px}
+body{padding-top:25px;background:#f0f0f0 url(styles/images/bg-error.png) repeat-x;font-size:14px}
+#back{display:block;width:960px;height:25px;padding-top:455px;margin:0 auto;text-align:center;line-height:25px;background:url(styles/images/404.jpg) no-repeat}
+</style>
+</head>
+<body>
+<a href="http://note.youdao.com/" id="back">返回有道云笔记首页</a>
+</body>
+</html>
