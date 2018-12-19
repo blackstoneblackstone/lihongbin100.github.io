@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
+    <meta name="baidu-site-verification" content="lZK4Fz9goD"/>
+    
+    
+
+    <title>
+        
+        html5动画进阶之路 |
+        
+        程序员的自我修养</title>
+    <meta name="author" content="yondu"/>
+    <meta name="version" content="1.0.0"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="概述
+我们在微信朋友圈里经常看到很多人分享h5的链接，有的科技感十足，有的展示炫目，有的非常有创意，各大公司也把h5作为他们品牌传播，活动预热的很好方式。企业商户对于这种方式也很有好感，从而导致了h5制作行业涌进大批从业者，同时也成为众多程序员赚取外快的途径。
+
+现在说人话。。。
+先来讲讲当前h5行业的现状吧！
+h5制作网站
+低门槛的h5制作平台，不懂代码的人也可以来玩玩，如果你有一定的设计思维和作图能力，也能做出非常好看的h5作品。
+
+国内比较出名的h5制作网站有：
+
+兔展：设计感和创意感最强"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+
+    
+    
+    <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/3098335/79645466-8cb0-4d4a-b855-3f80a8c86a50.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+    <header class="header clearfix">
+    <div id="nav" class="nav">
+    <button id="open-panel" class="open-panel"><i class="icon-library"></i></button>
+    <a
+    id="updateBlog"
+    style="
+    float: right;
+    color: #fff;
+    margin-top: 10px;
+    margin-right: 20px;">
+      程序员的自我修养
+    </a>
+    <nav class="nav-inner">
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Code">Code</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Read">Read</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Life">Life</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/Media">Media</a>
+        </li>
+        
+        
+        
+        <li class="nav-item nav-item-tag">
+            <a id="nav-tag" class="nav-link" href="#">Tags</a>
+            <div id="nav-tags" class="nav-tag-wrap">
+                <i class="nav-tag-arrow"></i>
+                
+  <div class="widget-wrap">
+    <h3 class="widget-title">
+        <i class="icon-tag vm"></i>
+        <span class="vm">Tags</span>
+    </h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
+    </div>
+  </div>
+
+
+            </div>
+        </li>
+        
+        
+    </nav>
+</div>
+
+
+    <aside id="aside" class="aside">
+  <div id="aside-mask" class="aside-mask"></div>
+  <div id="aside-inner" class="aside-inner">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://yondu.vip"></form>
+
+    
+    
+    
+    
+
+    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#h5制作网站"><span class="toc-number">1.1.</span> <span class="toc-text">h5制作网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#h5制作的相关技术"><span class="toc-number">1.2.</span> <span class="toc-text">h5制作的相关技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用css实现："><span class="toc-number">1.2.1.</span> <span class="toc-text">使用css实现：</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+
+</header>
+
+    <div id="content" class="content"><article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            html5动画进阶之路
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/01/01/WEB67e717857d52dc570e7a3c6e98a19e29/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>我们在微信朋友圈里经常看到很多人分享h5的链接，有的科技感十足，有的展示炫目，有的非常有创意，各大公司也把h5作为他们品牌传播，活动预热的很好方式。企业商户对于这种方式也很有好感，从而导致了h5制作行业涌进大批从业者，同时也成为众多程序员赚取外快的途径。</p>
+</blockquote>
+<p>现在说人话。。。</p>
+<p>先来讲讲当前h5行业的现状吧！</p>
+<h3 id="h5制作网站"><a href="#h5制作网站" class="headerlink" title="h5制作网站"></a>h5制作网站</h3><blockquote>
+<p>低门槛的h5制作平台，不懂代码的人也可以来玩玩，如果你有一定的设计思维和作图能力，也能做出非常好看的h5作品。</p>
+</blockquote>
+<p>国内比较出名的h5制作网站有：</p>
+<ul>
+<li>兔展：设计感和创意感最强的平台，但是制作相对复杂，需要设计基础。</li>
+<li>易企秀：老牌的h5制作平台，不断迭代，有大量案例，使用别人做好的h5需要付费。生态圈还不错。</li>
+<li>初页：手机app，手机端快速制作h5。</li>
+<li>Epub360意派：设计师友好，自称专业级的。</li>
+</ul>
+<blockquote>
+<p>类似的平台还有很多，一直纳闷如此多同类产品是如何生存的，目前看易企秀通过付费制作的方式经营的还不错，但是淘宝上有很多仿该平台的源码，很便宜。未来的发展和商业模式并不明朗。</p>
+</blockquote>
+<p>以上的几个公司主要关注的是展示营销类的h5，对于h5游戏涉猎不多。对于h5游戏做的比较好的火舞游戏，<a href="http://gc.hgame.com/home/index/appid/100429" target="_blank" rel="noopener">百度h5游戏中心</a>，<a href="https://h5.07073.com/game" target="_blank" rel="noopener">07073游戏</a> 等。</p>
+<p>好啦，什么商业模式，什么产品思维，什么设计理念，我们都不懂，我们就是写代码的，那就来干货吧，这样才能好好干活。</p>
+<h3 id="h5制作的相关技术"><a href="#h5制作的相关技术" class="headerlink" title="h5制作的相关技术"></a>h5制作的相关技术</h3><blockquote>
+<p>h5的动画受制于web浏览器的局限，基本有三种动画的实现方式。 </p>
+<ul>
+<li>基于css的动画实现</li>
+<li>基于svg</li>
+<li>基于canvas</li>
+<li>webgl</li>
+</ul>
+</blockquote>
+<p>实践证明，当遇到复杂动画时，动画性能比较大致是这样的：svg &lt; css &lt; canvas &lt; webgl</p>
+<h4 id="使用css实现："><a href="#使用css实现：" class="headerlink" title="使用css实现："></a>使用css实现：</h4><blockquote>
+<p>css3确实要比过去强大很多，支持2d,3d的位移，缩放，透明度变化，旋转，过渡动画等，主要依赖css里的transform,transition,animation等属性，具体的使用方法参见w3school的教程。</p>
+</blockquote>
+<p><code>需要注意的是 transition和animation不能同时作用于相同的元素.</code></p>
+<blockquote>
+<p>当然也有很多的基于css的动画框架，让你快速构建动画。比较常用的有两类,css库和基于css动画的js库。</p>
+</blockquote>
+<p>1.css库：css动画都是全局的，调用比较简单，但是侵入性比较强，固定模式，不太灵活。</p>
+<ul>
+<li><a href="http://www.jq22.com/yanshi819" target="_blank" rel="noopener">animated.css</a> 最常用的低调的动画库</li>
+<li><a href="http://ianlunn.github.io/Hover/" target="_blank" rel="noopener">hover.css</a> 鼠标hover状态的动画库，移动端不可用</li>
+<li><a href="https://www.minimamente.com/example/magic_animations/" target="_blank" rel="noopener">magic animation</a> 比animate.css 奔放的动画库，动画尺度大</li>
+<li><a href="http://tobiasahlin.com/spinkit/" target="_blank" rel="noopener">spinkit</a> 几种css loading动画，不常用。</li>
+<li><a href="http://www.bootcss.com/p/buttons/" target="_blank" rel="noopener">buttons.css</a> 炫酷的按钮动画库，尤其是3d的按钮，是你想要的。</li>
+</ul>
+<p>2.js库</p>
+<ul>
+<li><a href="http://velocityjs.org/" target="_blank" rel="noopener">velocity</a></li>
+<li><a href="https://howlerjs.com/" target="_blank" rel="noopener">howlerjs</a></li>
+<li><a href="https://html2canvas.hertzen.com/" target="_blank" rel="noopener">html2canvas</a></li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+
+</div>
+
+
+</div>
+    <footer class="footer">
+  <a target="_blank" href="https://www.alonehero.com/">明忠的blog</a>,
+  <a target="_blank" href="https://www.cnblogs.com/cnblogs-jcy/">老纪的blog</a>,
+  <a target="_blank" href="http://www.zsfamily.cn/">张森的blog</a>,
+  <a target="_blank" href="https://kenthigh.github.io/">亚嵩的blog</a>,
+  <a target="_blank" href="https://coolshell.cn/">Cool Shell</a>,
+  <a target="_blank" href="https://scar007.github.io/">佳睿的blog</a>,
+  <a target="_blank" href="http://paulgraham.com">Paul Graham</a>,
+  <a target="_blank" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Flihongbin.xyz%2F">google search</a>
+</footer>
+
+<script>
+  //腾讯云分析
+  var _mtac = {};
+  (function () {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500419572");
+
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+  })();
+</script>
+
+
+
+</div>
+<div id="tip" style="left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+    position:fixed;
+    z-index:10;
+    height: 100px;
+    width: 200px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+    font-size: 30px">
+    更新完成
+</div>
+
+
+<script type="text/javascript" src="/js/scrollspy.min.js"></script>
+
+<script src="/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+  $(function () {
+    var nodes = {
+      nav: $('#nav'),
+      aside: $('#aside'),
+      navTags: $('#nav-tags')
+    };
+
+    $('#open-panel, #aside-mask').on('click', function () {
+      nodes.aside.toggleClass('panel-show');
+    });
+    $('#nav-tag').on('click', function (event) {
+      event.preventDefault();
+      console.log(nodes.navTags.attr('class'))
+      nodes.navTags.toggleClass('tag-show');
+      console.log(nodes.navTags.attr('class'))
+    })
+
+      
+    $(document.body).scrollspy({ target: '#aside-inner' });
+      
+
+    //当前页面打点
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
+      function (data) {
+        $("#seeNum").text(data.n)
+      })
+    $("#updateBlog").on("click", function (e) {
+      let url = "http://data.simamedia.cn:10000/refresh?shareKey=bf425fe49ab4933f78173872d6b8a3fd"
+      $.get(url,
+        function (data) {
+          $("#tip").fadeIn()
+          setTimeout(function () {
+            $("#tip").fadeOut()
+          }, 3000)
+        })
+    })
+    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=" + window.location.href, function (data) {
+      $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=" + window.location.href, function (data) {
+        wx.config(
+          data.sp
+        );
+        wx.ready(function () {
+          wx.onMenuShareTimeline({
+            title: window.document.title, // 分享标题
+            link: window.location.href, // 分享链接
+            imgUrl: 'http://yondu.vip/images/actor.jpg', // 分享图标
+            success: function () {
+            },
+            cancel: function () {
+            }
+          });
+          wx.onMenuShareAppMessage({
+            title: window.document.title, // 分享标题
+            desc: '欢迎访问我的blog，一起做一个终身学习者。', // 分享描述
+            link: window.location.href, // 分享链接
+            imgUrl: 'http://yondu.vip/images/actor.jpg', // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+            },
+            cancel: function () {
+            }
+          });
+        });
+      })
+    })
+    //百度自动化推送
+    var img = new Image();
+    img.src = "http://api.share.baidu.com/s.gif?r=" + encodeURIComponent(window.location.href) + "&l=http://yondu.vip"
+
+  });
+</script>
+
+</body>
+</html>
