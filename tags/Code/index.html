@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">33</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
     </div>
   </div>
 
@@ -150,6 +150,61 @@
 </header>
 
     <div id="content" class="content">
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2019/01/26/WEB9aad981a4ff1d84152e68ace80eddd33/">go语言实现图片合成</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2019/01/26/WEB9aad981a4ff1d84152e68ace80eddd33/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2019-01-25T16:00:00.000Z" itemprop="datePublished">2019-01-26</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  <a href="https://juejin.im/post/5c4c5f5351882525aa509b9f" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c4c5f8f5188252b7d0ebe5e/likes.svg?style=flat-square" alt=""></a></p>
+<blockquote>
+<p>go语言写起来真的好嗨哟！</p>
+</blockquote>
+<h2 id="先看效果"><a href="#先看效果" class="headerlink" title="先看效果"></a>先看效果</h2><p><img src="/images/2109e0c17a03e5ebc87eb5991191afa5.png" alt="image"></p>
+<h2 id="思路步骤"><a href="#思路步骤" class="headerlink" title="思路步骤"></a>思路步骤</h2><ul>
+<li>用到一个第三方库，<code>github.com/nfnt/resize</code> 用于调整大小。</li>
+<li>人像图片需要放在相框的后面。</li>
+<li>大小以相框为准，尤其是宽度，所以第一步就是把人像宽度变为相框宽度，或者小于相框宽度。</li>
+<li>然后合成，主要用到的方法是draw()。</li>
+<li>OK啦！</li>
+</ul>
+<h2 id="全部源码"><a href="#全部源码" class="headerlink" title="全部源码"></a>全部源码</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"errors"</span></span><br><span class="line">	<span class="string">"github.com/nfnt/resize"</span></span><br><span class="line">	<span class="string">"image"</span></span><br><span class="line">	<span class="string">"image/draw"</span></span><br><span class="line">	<span class="string">"image/jpeg"</span></span><br><span class="line">	<span class="string">"image/png"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	index := os.Args[<span class="number">2</span>]</span><br><span class="line">	imgC := os.Args[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">	<span class="comment">///upload/gy/oldpic/5c44b484198c3.jpg</span></span><br><span class="line">	k := <span class="string">"/opt/server/games-server/upload/gy/k"</span> + index + <span class="string">".png"</span></span><br><span class="line">	imgb, _ := os.Open(<span class="string">"/opt/server/games-server"</span> + imgC)</span><br><span class="line">	img, _ := jpeg.Decode(imgb)</span><br><span class="line">	<span class="keyword">defer</span> imgb.Close()</span><br><span class="line"></span><br><span class="line">	wmb, _ := os.Open(k)</span><br><span class="line">	watermark, _ := png.Decode(wmb)</span><br><span class="line">	<span class="keyword">defer</span> wmb.Close()</span><br><span class="line"></span><br><span class="line">	offset := image.Pt(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">	b := watermark.Bounds()</span><br><span class="line">	m := image.NewRGBA(b)</span><br><span class="line">	imgW := b.Size().X</span><br><span class="line">	imgH := b.Size().Y</span><br><span class="line">	wd := <span class="number">1400</span> / imgW</span><br><span class="line">	newImg := ImageResize(img, <span class="number">1400</span>, imgH*wd)</span><br><span class="line"></span><br><span class="line">	draw.Draw(m, newImg.Bounds().Add(image.Pt(<span class="number">50</span>, <span class="number">100</span>)), newImg, image.ZP, draw.Src)</span><br><span class="line">	draw.Draw(m, watermark.Bounds().Add(offset), watermark, image.ZP, draw.Over)</span><br><span class="line">	imgw, _ := os.Create(<span class="string">"/opt/server/games-server"</span> + strings.Replace(imgC, <span class="string">"oldpic"</span>, <span class="string">"newpic"</span>, <span class="number">-1</span>))</span><br><span class="line">	jpeg.Encode(imgw, m, &amp;jpeg.Options&#123;jpeg.DefaultQuality&#125;)</span><br><span class="line">	<span class="keyword">defer</span> imgw.Close()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 图片大小调整</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ImageResize</span><span class="params">(src image.Image, w, h <span class="keyword">int</span>)</span> <span class="title">image</span>.<span class="title">Image</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> resize.Resize(<span class="keyword">uint</span>(w), <span class="keyword">uint</span>(h), src, resize.Lanczos3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 图片裁剪 暂时没有用</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ImageCopy</span><span class="params">(src image.Image, x, y, w, h <span class="keyword">int</span>)</span> <span class="params">(image.Image, error)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> subImg image.Image</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> rgbImg, ok := src.(*image.YCbCr); ok &#123;</span><br><span class="line">		subImg = rgbImg.SubImage(image.Rect(x, y, x+w, y+h)).(*image.YCbCr) <span class="comment">//图片裁剪x0 y0 x1 y1</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> rgbImg, ok := src.(*image.RGBA); ok &#123;</span><br><span class="line">		subImg = rgbImg.SubImage(image.Rect(x, y, x+w, y+h)).(*image.RGBA) <span class="comment">//图片裁剪x0 y0 x1 y1</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> rgbImg, ok := src.(*image.NRGBA); ok &#123;</span><br><span class="line">		subImg = rgbImg.SubImage(image.Rect(x, y, x+w, y+h)).(*image.NRGBA) <span class="comment">//图片裁剪x0 y0 x1 y1</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> subImg, errors.New(<span class="string">"图片解码失败"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> subImg, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>欢迎访问我的Blog: <a href="http://yondu.vip">http://yondu.vip</a></p>
+
+        
+    </section>
+</article>
+
+
     <article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
@@ -787,6 +842,142 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
+<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
+</blockquote>
+<blockquote>
+<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+</blockquote>
+<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
+<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
+</blockquote>
+<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
+<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
+</blockquote>
+<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
+<p>npm install express-generator </p>
+</blockquote>
+<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
+<p>express myapp<br>获得以下目录：</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
+<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <ol>
+<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
+<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
+</li>
+<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
+</li>
+<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fixed 浏览器问题</p>
+</li>
+<li>弹出问题</li>
+<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片加载失败的时候的缺省图片问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
+<ol start="11">
+<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
+</ol>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
         </h1>
         
@@ -878,136 +1069,6 @@
 </ul>
 </li>
 </ul>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>  <a href="https://juejin.im/post/5c03c8b4e51d457640742589" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c8f9e51d4529db2aa30f/likes.svg?style=flat-square" alt=""></a></p>
-<blockquote>
-<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
-</blockquote>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
-<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>wq！保存。</p>
-</li>
-</ol>
-<p>成功！</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <ol>
-<li>IE不支滑动条在可滑动的状态下自定义宽度和隐藏，<br><strong>解决方法是</strong>：子div宽度加20px 父级overflow:hidden<ol start="2">
-<li>stylus遇到filter怎么写：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')'</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-<ol start="3">
-<li><p>IE video元素全屏，不能自定义控制条，解决方案是：<br>采用div全屏的方式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>//全屏该div</span><br><span class="line">   <span class="tag">&lt;<span class="name">video</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用getBoundingClientRect获取元素的位置，top只是距离窗口上部的距离，必须加上scrollTop才是准确的高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.top = e.target.getBoundingClientRect().top + scrollTop - <span class="number">70</span> + <span class="string">"px"</span>;</span><br><span class="line"><span class="keyword">this</span>.$refs.sliTip.style.left = e.target.getBoundingClientRect().left + scrollLeft - <span class="number">65</span> + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ie支持的渐变<br><code>background: linear-gradient(to bottom, #4e2c8d, rgba(78, 44, 141, 0.0))</code></p>
-</li>
-<li><p>IE 浏览器遇到symbol未定义的错误<br><strong>解决方法：</strong><br>安装babel-polyfill<br><code>npm install --save-dev babel-polyfill</code><br>页面引入：<br><code>&lt;script src=&quot;node_modules/babel-polyfill/dist/polyfill.min.js&quot;&gt;&lt;/script&gt;</code></p>
-</li>
-<li><p>vue 中用vue-route 打开一个页面<code>http://ip:port/index/30</code> 在页面中点击一个按钮需要调到<code>http://ip:port/index/40</code> 时，页面不会刷新，不会执行mounted ，可以用下面方法监听$route的变化来解决。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">   <span class="comment">// 如果路由有变化，会再次执行fetchdata方法</span></span><br><span class="line">   <span class="string">'$route'</span>: <span class="string">'fetchData'</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>fixed 浏览器问题</p>
-</li>
-<li>弹出问题</li>
-<li><p>settimeout 和 setInterval 独立于vue组件，因此在销毁组件的时候需要cleanTimeout 和 cleanInterVal<br><strong>代码示例：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将所有settimeout 和 setInterval 分别添加到两个数据中，在组件销毁前clean所有</span></span><br><span class="line">beforeDestroy: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//销毁所有setinterval clearTimeout</span></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.timeouts.length; i++) &#123;</span><br><span class="line">     clearTimeout(<span class="keyword">this</span>.timeouts[i])</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.intervals.length; i++) &#123;</span><br><span class="line">     clearInterval(<span class="keyword">this</span>.intervals[i])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片加载失败的时候的缺省图片问题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jade</span></span><br><span class="line">img(:src=<span class="string">"honor.name"</span>,@error=<span class="string">"errorImgFun"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//js 图片加载错误替换该图片</span></span><br><span class="line"><span class="keyword">var</span> noImg = <span class="built_in">require</span>(<span class="string">'../../img/index/honor_item_icon.png'</span>)</span><br><span class="line">errorImgFun(e)&#123;</span><br><span class="line">        e.target.src = noImg</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>有最大最小高度的时候使用：absolute  设置最小宽高</p>
-<ol start="11">
-<li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
-</ol>
 
         
     </section>
@@ -1314,12 +1375,12 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
+            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
         </h1>
         
         <div class="article-meta clearfix">
             <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
+  <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
     
     <i class="icon-calendar"></i>
     
@@ -1343,28 +1404,22 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
-<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
-</blockquote>
+        <p>  <a href="https://juejin.im/post/5c03c8b4e51d457640742589" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c8f9e51d4529db2aa30f/likes.svg?style=flat-square" alt=""></a></p>
 <blockquote>
-<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
 </blockquote>
-<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
-<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
-</blockquote>
-<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
-<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
-</blockquote>
-<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
-<p>npm install express-generator </p>
-</blockquote>
-<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
-<p>express myapp<br>获得以下目录：</p>
-</blockquote>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
-<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
-<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>wq！保存。</p>
+</li>
+</ol>
+<p>成功！</p>
+
         
     </section>
 </article>
@@ -1430,87 +1485,6 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 </li>
 </ul>
 <h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">通用性面试技巧</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
-<li>略正式。</li>
-<li>说话幽默，看着对方。</li>
-<li>回答问题到细节，避免面试官追问。</li>
-<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
-</ul>
-<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
-<li>太喜欢你们公司</li>
-<li>没有成长空间</li>
-</ul>
-<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
-<li>急性子，为了做事推进，不太估计别人的感受。</li>
-<li>对做的事情要求太高，team有时压力会比较大。</li>
-</ul>
-<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
-<li>善于学习，高效学习，刻意练习，研究能力。</li>
-<li>有韧性。</li>
-<li>喜欢研究底层和新的技术，比如go语言。</li>
-</ul>
-<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
-<li>公司给不了我理想工作环境和状态。</li>
-<li>我理想的工作环境和状态。</li>
-</ul>
-<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
-<li>转了以后发现自己做的更好。</li>
-<li>学习能力强</li>
-</ul>
-<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
-<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
-<li>你觉得你们公司有什么不好的地方吗？</li>
-<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
-<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
-</ul>
-<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
-<li>死磕某个事</li>
-<li>坚持很久的事</li>
-<li>逆境不放弃</li>
-<li>面对压力，承担责任</li>
-<li>严谨细心，对自己做的产品自信</li>
-<li>面对诱惑，不浮躁</li>
-</ul>
-
         
     </section>
 </article>
@@ -1849,16 +1823,16 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/07/24/WEB0ca879a2c996cd655d738e0bd44f9d99/">linux命令</a>
+            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">通用性面试技巧</a>
         </h1>
         
         <div class="article-meta clearfix">
             <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/24/WEB0ca879a2c996cd655d738e0bd44f9d99/">
+  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
     
     <i class="icon-calendar"></i>
     
-    <time datetime="2018-07-23T16:00:00.000Z" itemprop="datePublished">2018-07-24</time>
+    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
   </a>
 </div>
 
@@ -1878,8 +1852,47 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-        <h1 id="ab工具"><a href="#ab工具" class="headerlink" title="ab工具"></a>ab工具</h1><p> <code>ab -n 1000 -c 100 -v 3  https://mobile.vipkid.com.cn/rest/pd-activity/api/activity/user/activity/getActivityAwardDetailByActivityIdToMobile/47</code></p>
-<h1 id="查看文档神器-man"><a href="#查看文档神器-man" class="headerlink" title="查看文档神器 man"></a>查看文档神器 man</h1><p> <code>man</code></p>
+        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
+<li>略正式。</li>
+<li>说话幽默，看着对方。</li>
+<li>回答问题到细节，避免面试官追问。</li>
+<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
+</ul>
+<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
+<li>太喜欢你们公司</li>
+<li>没有成长空间</li>
+</ul>
+<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
+<li>急性子，为了做事推进，不太估计别人的感受。</li>
+<li>对做的事情要求太高，team有时压力会比较大。</li>
+</ul>
+<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
+<li>善于学习，高效学习，刻意练习，研究能力。</li>
+<li>有韧性。</li>
+<li>喜欢研究底层和新的技术，比如go语言。</li>
+</ul>
+<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
+<li>公司给不了我理想工作环境和状态。</li>
+<li>我理想的工作环境和状态。</li>
+</ul>
+<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
+<li>转了以后发现自己做的更好。</li>
+<li>学习能力强</li>
+</ul>
+<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
+<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
+<li>你觉得你们公司有什么不好的地方吗？</li>
+<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
+<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
+</ul>
+<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
+<li>死磕某个事</li>
+<li>坚持很久的事</li>
+<li>逆境不放弃</li>
+<li>面对压力，承担责任</li>
+<li>严谨细心，对自己做的产品自信</li>
+<li>面对诱惑，不浮躁</li>
+</ul>
 
         
     </section>
