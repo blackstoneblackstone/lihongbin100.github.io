@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE"/>
-    <meta name="baidu-site-verification" content="lZK4Fz9goD"/>
+    <meta charset="UTF-8" />
+    <meta name="google-site-verification" content="DlD3uB1OpBqyxkljyhDN2gEXDPbkY01Q1Asne0mnByE" />
+    <meta name="baidu-site-verification" content="lZK4Fz9goD" />
     
     
 
@@ -12,16 +12,16 @@
         JAVA 程序员必修课 |
         
         程序员的自我修养</title>
-    <meta name="author" content="yondu"/>
-    <meta name="version" content="1.0.0"/>
-    <meta name="keywords" content=""/>
+    <meta name="author" content="yondu" />
+    <meta name="version" content="1.0.0" />
+    <meta name="keywords" content="" />
     <meta name="description" content="一：常见模式与工具学习Java技术体系，设计模式，流行的框架与组件，常见的设计模式，编码必备，Spring5，做应用必不可少的最新框架，MyBatis，玩数据库必不可少的组件……
 二：工程化与工具工欲善其事必先利其器，选择好的工具，提升开发效率和团队协作效率，是必不可少的：Maven，项目管理，Jenkins，持续集成，Sonar，代码质量管理，Git，版本管理
 
-三：分布式架构高并发，高可用，海量数据，没有分布式的架构知识肯定是玩不转的，要了解分布式中的，分布式架构原理，分布式架构策略，分布式"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-    <meta name="baidu-site-verification" content="F0CXvmUgA9"/>
+三：分布式架构高并发，高可用，海量数据，没有分布式的架构知识肯定是玩不转的，要了解分布式中的，分布式架构原理，分布式架构策略，分布式" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="baidu-site-verification" content="F0CXvmUgA9" />
 
     
     
@@ -90,7 +90,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">22</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">40</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">24</span></li></ul>
     </div>
   </div>
 
@@ -240,32 +240,32 @@
     });
     $('#nav-tag').on('click', function (event) {
       event.preventDefault();
-      console.log(nodes.navTags.attr('class'))
+      console.log(nodes.navTags.attr('class'));
       nodes.navTags.toggleClass('tag-show');
-      console.log(nodes.navTags.attr('class'))
-    })
+      console.log(nodes.navTags.attr('class'));
+    });
 
       
     $(document.body).scrollspy({ target: '#aside-inner' });
       
 
     //当前页面打点
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=" + encodeURIComponent(location.pathname),
+    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
       function (data) {
-        $("#seeNum").text(data.n)
-      })
-    $("#updateBlog").on("click", function (e) {
-      let url = "http://data.simamedia.cn:10000/refresh?shareKey=bf425fe49ab4933f78173872d6b8a3fd"
+        $('#seeNum').text(data.n);
+      });
+    $('#updateBlog').on('click', function (e) {
+      let url = 'http://data.simamedia.cn:10000/refresh?shareKey=bf425fe49ab4933f78173872d6b8a3fd';
       $.get(url,
         function (data) {
-          $("#tip").fadeIn()
+          $('#tip').fadeIn();
           setTimeout(function () {
-            $("#tip").fadeOut()
-          }, 3000)
-        })
-    })
-    $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=" + window.location.href, function (data) {
-      $.get("http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=" + window.location.href, function (data) {
+            $('#tip').fadeOut();
+          }, 3000);
+        });
+    });
+    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+      $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
         wx.config(
           data.sp
         );
@@ -292,14 +292,37 @@
             }
           });
         });
-      })
-    })
+      });
+    });
     //百度自动化推送
     var img = new Image();
-    img.src = "http://api.share.baidu.com/s.gif?r=" + encodeURIComponent(window.location.href) + "&l=http://yondu.vip"
+    img.src = 'http://api.share.baidu.com/s.gif?r=' + encodeURIComponent(window.location.href) + '&l=http://yondu.vip';
 
   });
 </script>
+<a href="//blog.yondu.vip">
+    <div class="blog">
+        我的blog全新升级了，干货更多， 欢迎点击访问。
+    </div>
+</a>
+<style>
+    .blog {
+        background: rgba(0, 0, 0, 0.8);
+        color: #ffffff;
+        line-height: 80px;
+        font-size: 18px;
+        height: 80px;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
 
+    @media only screen and (max-width: 700px) {
+        .blog {
+            bottom: 40px;
+        }
+    }
+</style>
 </body>
 </html>
