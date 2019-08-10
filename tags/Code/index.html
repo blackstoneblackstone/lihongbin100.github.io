@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">19</span></li></ul>
     </div>
   </div>
 
@@ -417,62 +417,6 @@
 <blockquote>
 <p>欢迎访问我的Blog：<a href="http://yondu.vip">http://yondu.vip</a></p>
 </blockquote>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/11/30/WEB569127e11cc8d5904c8985ef39c73cf6/">前端学习资源</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/11/30/WEB569127e11cc8d5904c8985ef39c73cf6/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-11-29T16:00:00.000Z" itemprop="datePublished">2018-11-30</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>整理业界公开的技术学习资源和总结,此文将持续更新。</p>
-</blockquote>
-<h2 id="大神分享"><a href="#大神分享" class="headerlink" title="大神分享"></a>大神分享</h2><ul>
-<li><a href="https://ppt.baomitu.com/d/1a530301#/45" target="_blank" rel="noopener">从零开始建设服务化的 Web 设计规范  - 八哥分享</a></li>
-<li><a href="https://www.w3cplus.com/web-reconstruction.html" target="_blank" rel="noopener">Web重构之道 - 大漠分享</a></li>
-</ul>
-<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul>
-<li><a href="https://musiclab.chromeexperiments.com/" target="_blank" rel="noopener">声音与动画</a></li>
-<li><a href="http://pixijs.teamgbaws.net/header/" target="_blank" rel="noopener">Pixi液体星空</a></li>
-<li><a href="http://static.sucaihuo.com/jquery/31/3139/demo/index2.html" target="_blank" rel="noopener">Pixi液体ppt</a></li>
-<li></li>
-</ul>
-<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><ul>
-<li><a href="https://single-spa.js.org/docs/getting-started-overview.html" target="_blank" rel="noopener">插拔式单页应用解决方案single-spa</a></li>
-</ul>
 
         
     </section>
@@ -894,6 +838,108 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
+<p>yum安装的版本只有5.1，所以手动安装</p>
+</blockquote>
+<ol>
+<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
+<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
+<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
+<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
+<li>安装  <code>curl</code>: yum -y install curl-devel</li>
+<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
+<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
+<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
+<li><p>执行下面的配置</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制php-fpm.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>php-fpm 全局启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
+<p>14.成功</p>
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
+<li>yum 安装 <code>yum -y install nginx</code></li>
+<li>删除 /etc/nginx/conf.d下所有文件</li>
+<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
+ <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
+</li>
+</ol>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
+<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>开机启动</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>密码设置</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置全网访问<code>mysql -uroot -p</code></p>
+</li>
+</ol>
+<ul>
+<li>输入：<code>use mysql</code>;</li>
+<li>查询host输入： <code>select user,host from user</code>;</li>
+<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
+<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权用户</p>
+<ul>
+<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
+<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2018/08/31/WEB4e4304df630459611a83875b338f6bd5/">前端踩坑日记</a>
         </h1>
         
@@ -958,185 +1004,6 @@
 <ol start="11">
 <li>vue router 在IE9下无法使用hash的方式跳转<br><strong>解决方法</strong><br><code>router-view(:hashbang=&quot;true&quot;,:history=&quot;true&quot;)</code></li>
 </ol>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEBa47b3b1a347e1a5f9aba1c1b209b9a75/">数据工程师—java京东面试题</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBa47b3b1a347e1a5f9aba1c1b209b9a75/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>京东总部的位置有点捉急，周围荒芜人烟，位于一片农田之中，2016年末，刘强东开始将京东定义为一个技术型驱动的公司，开始打造众多的技术团队，技术氛围不错，但是面试官有些木讷。。。</p>
-</blockquote>
-<h2 id="面试题目"><a href="#面试题目" class="headerlink" title="面试题目"></a>面试题目</h2><ul>
-<li><p>多线程：executor原理 线程池﻿ <a href="http://www.iteye.com/topic/366591" target="_blank" rel="noopener"><em>全解</em></a></p>
-<ul>
-<li>Executor，Executors，ExecutorService，CompletionService，Future，Callable</li>
-<li>Executors类，提供了一系列工厂方法用于创先线程池，返回的线程池都实现了ExecutorService接口。</li>
-<li><code>public static ExecutorService newFixedThreadPool(int nThreads)</code><br>创建固定数目线程的线程池。</li>
-<li><code>public static ExecutorService newCachedThreadPool()</code><br>创建一个可缓存的线程池，调用execute 将重用以前构造的线程（如果线程可用）。如果现有线程没有可用的，则创建一个新线程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。</li>
-<li><code>public static ExecutorService newSingleThreadExecutor()</code><br>创建一个单线程化的Executor。</li>
-<li><code>public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)</code><br>创建一个支持定时及周期性的任务执行的线程池，多数情况下可用来替代Timer类。</li>
-<li><code>ExecutorService</code>与生命周期</li>
-<li><code>ExecutorService</code>扩展了<code>Executor</code>并添加了一些生命周期管理的方法。</li>
-<li>一个<code>Executor</code>的生命周期有三种状态，运行 ，关闭 ，终止 。<code>Executor</code>创建时处于运行状态。当调用<code>ExecutorService.shutdown()</code>后，处于关闭状态，<code>isShutdown()</code>方法返回<code>true</code>。这时，不应该再想<code>Executor</code>中添加任务，所有已添加的任务执行完毕后，<code>Executor</code>处于终止状态，<code>isTerminated()</code>返回<code>true</code>。</li>
-<li>如果<code>Executor</code>处于关闭状态，往<code>Executor</code>提交任务会抛出<code>unchecked exception RejectedExecutionException</code>。</li>
-<li>使用<code>Callable</code>，<code>Future</code>返回结果</li>
-<li><code>Future&lt;V&gt;</code>代表一个异步执行的操作，通过<code>get()</code>方法可以获得操作的结果，如果异步操作还没有完成，则，<code>get()</code>会使当前线程阻塞。<code>FutureTask&lt;V&gt;</code>实现了<code>Future&lt;V&gt;</code>和<code>Runable&lt;V&gt;</code>。<code>Callable</code>代表一个有返回值得操作。</li>
-<li><code>CompletionService</code><br>在刚在的例子中，getResult()方法的实现过程中，迭代了FutureTask的数组，如果任务还没有完成则当前线程会阻塞，如果我们希望任意字任务完成后就把其结果加到result中，而不用依次等待每个任务完成，可以使CompletionService。生产者submit()执行的任务。使用者take()已完成的任务，并按照完成这些任务的顺序处理它们的结果 。也就是调用CompletionService的take方法是，会返回按完成顺序放回任务的结果，CompletionService内部维护了一个阻塞队列BlockingQueue，如果没有任务完成，take()方法也会阻塞。修改刚才的例子使用CompletionService：</li>
-</ul>
-</li>
-<li><p>hashmap实现原理，hashtable和hashmap区别，为什么hashmap效率高不安全，concurrenthashmap 为什么线程安全，怎样实现的﻿.</p>
-</li>
-</ul>
-<p>在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。﻿</p>
-<p>HashMap底层就是一个数组结构，数组中的每一项又是一个链表。当新建一个HashMap的时候，就会初始化一个数组。</p>
-<blockquote>
-<p>详细介绍：<br><a href="https://m.baidu.com/from=1099a/bd_page_type=1/ssid=0/uid=0/baiduid=413D2B20C3D3C11AC539AAF3D13305A7/w=0_10_/t=zbios/l=3/tc?ref=www_zbios&amp;pu=sz%401320_480%2Ccuid%404B0037CA3B0622B1CB4F7EEC5575FA49D6DACDA0BFRRTQLMOLG%2Ccua%40750_1334_iphone_8.2.5.10_0%2Ccut%40iPhone8%252C1_9.3.1%2Cosname%40baiduboxapp%2Cctv%401%2Ccfrom%401099a%2Ccsrc%40browserf_box_txt%2Cta%40zbios_1_9.3_6_8.2%2Cusm%401%2Cvmgdb%400020100228y&amp;lid=8020123365899344056&amp;order=1&amp;fm=alop&amp;tj=www_normal_1_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%B7%B1%E5%85%A5Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%3AHashMap%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-%E8%8E%AB%E7%AD%89%E9%97%B2-...&amp;dict=30&amp;w_qd=IlPT2AEptyoA_yixHVCpJiIcOD5zt7xQoTlFsA3bdQdM&amp;sec=19961&amp;di=3350979bbb5eb6eb&amp;bdenc=1&amp;tch=124.0.43.45.0.0&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IDBqUKydH_j3mpI3ubvX7JRhdXTqqAp7YH5bugTCctxgDxn7g&amp;eqid=6f4d33b5773d98001000000358de8e56&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1490980440542%2C%22xpath%22%3A%22div-a-h3%22%7D" target="_blank" rel="noopener">hashmap原理全解</a><br><a href="http://m.blog.csdn.net/article/details?id=42199477" target="_blank" rel="noopener">hashtable原理全解</a></p>
-</blockquote>
-<ul>
-<li><p>手写单例模式示例，单链表倒序排列﻿</p>
-<ul>
-<li>单例模式的几种写法：详解点击：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">单例模式的七种写法</a><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法一：懒加载，线程不安全</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//写法二：懒加载，线程安全</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写法三：不能懒加载</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//写发四：写法三的变种</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Singleton instance = <span class="keyword">null</span>;  </span><br><span class="line">    <span class="keyword">static</span> &#123;  </span><br><span class="line">    instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//写法五：静态内部类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> SingletonHolder.INSTANCE;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//写法六：双重校验</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton; <span class="comment">//保证变量值统一 </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        <span class="keyword">synchronized</span> (Singleton.class) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">        &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> singleton;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>单链表倒序排列﻿</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * java 实现单链表的逆序 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Administrator </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleLinkedReverse</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义单链表，每个节点包含数据和下一个节点的地址</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        Node next;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.data = data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SingleLinkedReverse slr = <span class="keyword">new</span> SingleLinkedReverse();</span><br><span class="line">        <span class="comment">//定义两个链表</span></span><br><span class="line">        Node head, tail;</span><br><span class="line">        <span class="comment">//新建一个链表头结点</span></span><br><span class="line">        head = tail = slr.new Node(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//新建一个长度为10的链表tail</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            Node p = slr.new Node(i);</span><br><span class="line">            tail.next = p;</span><br><span class="line">            tail = p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//tail返回到头节点0 此时head在头结点</span></span><br><span class="line">        tail = head;</span><br><span class="line">        <span class="comment">//循环链表</span></span><br><span class="line">        <span class="keyword">while</span> (tail != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(tail.data + <span class="string">"  "</span>);</span><br><span class="line">            tail = tail.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        head = reverse(head);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(head.data + <span class="string">"  "</span>);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 核心算法</span></span><br><span class="line"><span class="comment">       前后交换位置</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title">reverse</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        Node p1, p2 = <span class="keyword">null</span>;</span><br><span class="line">        p1 = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            p2 = head.next;</span><br><span class="line">            head.next = p2.next;</span><br><span class="line">            p2.next = p1;</span><br><span class="line">            p1 = p2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口和抽象类区别，特点﻿ <a href="http://www.cnblogs.com/yongjiapei/p/5494894.html" target="_blank" rel="noopener">答案全解</a></p>
-<ol>
-<li>抽象类和接口都不能直接实例化，如果要实例化，抽象类变量必须指向实现所有抽象方法的子类对象，接口变量必须指向实现所有接口方法的类对象。</li>
-<li>抽象类要被子类继承，接口要被类实现。</li>
-<li>接口只能做方法申明，抽象类中可以做方法申明，也可以做方法实现</li>
-<li>接口里定义的变量只能是公共的静态的常量，抽象类中的变量是普通变量。</li>
-<li>抽象类里的抽象方法必须全部被子类所实现，如果子类不能全部实现父类抽象方法，那么该子类只能是抽象类。同样，一个实现接口的时候，如不能全部实现接口方法，那么该类也只能为抽象类。</li>
-<li>抽象方法只能申明，不能实现，接口是设计的结果 ，抽象类是重构的结果</li>
-<li>抽象类里可以没有抽象方法</li>
-<li>如果一个类里有抽象方法，那么这个类只能是抽象类</li>
-<li>抽象方法要被实现，所以不能是静态的，也不能是私有的。</li>
-<li>接口可继承接口，并可多继承接口，但类只能单根继承。</li>
-</ol>
-</li>
-<li><p>static 特点 执行顺序﻿</p>
-<ol>
-<li><p>父类的 static 语句和 static 成员变量﻿﻿</p>
-</li>
-<li><p>子类的 static 语句和 static 成员变量﻿</p>
-</li>
-<li><p>父类的 非 static 语句块和 非 static 成员变量﻿</p>
-</li>
-<li><p>父类的构造方法﻿﻿</p>
-</li>
-<li><p>子类的 非 static 语句块和 非 static 成员变量﻿</p>
-</li>
-<li><p>子类的构造方法</p>
-</li>
-</ol>
-</li>
-</ul>
-<ul>
-<li><p>sql的执行顺序﻿SQL Select语句完整的执行顺序： ﻿</p>
-<ol>
-<li>from子句组装来自不同数据源的数据；﻿</li>
-<li>where子句基于指定的条件对记录行进行筛选；﻿</li>
-<li>group by子句将数据划分为多个分组；﻿</li>
-<li>使用聚集函数进行计算；</li>
-<li>使用having子句筛选分组；﻿</li>
-<li>计算所有的表达式；﻿</li>
-<li>使用order by对结果集进行排序。﻿</li>
-<li>select 集合输出。</li>
-</ol>
-</li>
-<li><p>having﻿<br>  在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用。</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Customer,<span class="keyword">SUM</span>(OrderPrice) <span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">WHERE</span> Customer=<span class="string">'Bush'</span> <span class="keyword">OR</span> Customer=<span class="string">'Adams'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Customer</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">SUM</span>(OrderPrice)&gt;<span class="number">1500</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>innodb myisam的区别 和原理﻿ 答案全解</p>
-</li>
-<li><p>两种类型最主要的差别就是Innodb 支持事务处理与外键和行级锁。而MyISAM不支持.所以MyISAM往往就容易被人认为只适合在小项目中使用。﻿</p>
-</li>
-<li><p>作为使用MySQL的用户角度出发，Innodb和MyISAM都是比较喜欢的，如果数据库平台要达到需求：99.9%的稳定性，方便的扩展性和高可用性来说的话，MyISAM绝对是首选。</p>
-</li>
-</ul>
-<ul>
-<li>arraylist linkedlist区别﻿</li>
-<li>大概的区别<ol>
-<li>ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。 <ol start="2">
-<li>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。 </li>
-<li>对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。 </li>
-</ol>
-</li>
-</ol>
-</li>
-<li>ArrayList和LinkedList在性能上各有优缺点，都有各自所适用的地方，总的说来可以描述如下： </li>
-</ul>
-<ol>
-<li><p>对ArrayList和LinkedList而言，在列表末尾增加一个元素所花的开销都是固定的。对ArrayList而言，主要是在内部数组中增加一项，指向所添加的元素，偶尔可能会导致对数组重新进行分配；而对LinkedList而言，这个开销是统一的，分配一个内部Entry对象。</p>
-</li>
-<li><p>在ArrayList的中间插入或删除一个元素意味着这个列表中剩余的元素都会被移动；而在LinkedList的中间插入或删除一个元素的开销是固定的。</p>
-</li>
-<li><p>LinkedList不支持高效的随机元素访问。</p>
-</li>
-<li><p>ArrayList的空间浪费主要体现在在list列表的结尾预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗相当的空间</p>
-</li>
-</ol>
-<blockquote>
-<p>可以这样说：当操作是在一列数据的后面添加数据而不是在前面或中间,并且需要随机地访问其中的元素时,使用ArrayList会提供比较好的性能；当你的操作是在一列数据的前面或中间添加或删除数据,并且按照顺序访问其中的元素时,就应该使用LinkedList了</p>
-</blockquote>
-<p>###10. 基本请求类型</p>
-<blockquote>
-<p>HTTP协议中共定义了八种方法或者叫“动作”来表明对Request-URI指定的资源的 不同操作方式，具体介绍如下： </p>
-</blockquote>
-<ul>
-<li>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法。也可以利用向Web服务器发送’*’的请求来测试服务器的功能性。 </li>
-<li>HEAD：向服务器索要与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。 </li>
-<li>GET：向特定的资源发出请求。 </li>
-<li>POST：向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的创建和/或已有资源的修改。 </li>
-<li>PUT：向指定资源位置上传其最新内容。 </li>
-<li>DELETE：请求服务器删除Request-URI所标识的资源。 </li>
-<li><p>TRACE：回显服务器收到的请求，主要用于测试或诊断。 </p>
-</li>
-<li><p>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</p>
-</li>
-<li><p>响应状态码<br><a href="http://blog.sina.com.cn/s/blog_4ae187490100x9u7.html" target="_blank" rel="noopener"><em>全解</em></a><br><strong>301和302的区别</strong></p>
-</li>
-<li>302重定向是暂时的重定向，搜索引擎会抓取新的内容而保留旧的网址。因为服务器返回302代码，搜索引擎认为新的网址只是暂时的。 SEO 302好于301，但容易被劫持。</li>
-<li>301重定向是永久的重定向，搜索引擎在抓取新内容的同时也将旧的网址替换为重定向之后的网址。不会发生url劫持</li>
-<li>微服务什么概念<br>微服务是一项在云中部署应用和服务的新技术。大部分围绕微服务的争论都集中在容器或其他技术是否能很好的实施微服务，而红帽说API应该是重点。<br><a href="http://baike.baidu.com/link?url=KTVrC1Gc0J_orv8pR4eScEjIBlIKblnZj76buj2kvhS_xdlqb_hL2mtuqJWPkOqjfWkMWa1NyQrIvLujlH1W7Ff1Wfb7h8IFEThjmnLQZnRFNK3wHGxnNR7BJI_C3PjX" target="_blank" rel="noopener"><em>WiKi</em></a></li>
-</ul>
 
         
     </section>
@@ -1254,289 +1121,6 @@ p4=>operation: 前端展示
 
 st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
 
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">nodejs 后端开发之 express.js</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB50644934c974abdf2bc54a7a21983962/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><blockquote>
-<p>国内npm镜像库，淘宝的cnpm，可以有效的提高下载nodejs包的速度。</p>
-</blockquote>
-<blockquote>
-<p><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
-</blockquote>
-<h2 id="安装express"><a href="#安装express" class="headerlink" title="安装express"></a>安装express</h2><blockquote>
-<p>cnpm install express <code>(如果没有权限就加上sudo)</code><br><a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">express官网</a></p>
-</blockquote>
-<h2 id="安装jade"><a href="#安装jade" class="headerlink" title="安装jade"></a>安装jade</h2><blockquote>
-<p>cnpm install jade<br><a href="https://segmentfault.com/a/1190000000357534" target="_blank" rel="noopener">jade基本语法和使用方法</a></p>
-</blockquote>
-<h2 id="安装Express应用生成器"><a href="#安装Express应用生成器" class="headerlink" title="安装Express应用生成器"></a>安装Express应用生成器</h2><blockquote>
-<p>npm install express-generator </p>
-</blockquote>
-<h2 id="新建web项目"><a href="#新建web项目" class="headerlink" title="新建web项目"></a>新建web项目</h2><blockquote>
-<p>express myapp<br>获得以下目录：</p>
-</blockquote>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create : myapp</span><br><span class="line">create : myapp/package.json ：npm依赖包</span><br><span class="line">create : myapp/app.js ：入口文件</span><br><span class="line">create : myapp/public ：静态资源文件</span><br><span class="line">create : myapp/public/javascripts</span><br><span class="line">create : myapp/public/images</span><br><span class="line">create : myapp/routes ：路由</span><br><span class="line">create : myapp/routes/index.js</span><br><span class="line">create : myapp/routes/users.js</span><br><span class="line">create : myapp/public/stylesheets</span><br><span class="line">create : myapp/public/stylesheets/style.css</span><br><span class="line">create : myapp/views ：模板视图文件目录</span><br><span class="line">create : myapp/views/index.jade</span><br><span class="line">create : myapp/views/layout.jade</span><br><span class="line">create : myapp/views/error.jade</span><br><span class="line">create : myapp/bin</span><br><span class="line">create : myapp/bin/www ：服务启动函数</span><br></pre></td></tr></table></figure>
-<h2 id="安装第三方js插件包"><a href="#安装第三方js插件包" class="headerlink" title="安装第三方js插件包"></a>安装第三方js插件包</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g bower</span><br><span class="line">bower install jquery</span><br></pre></td></tr></table></figure>
-<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动这个应用（MacOS 或 Linux 平台）：</span><br><span class="line">DEBUG=myapp npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line">Windows 平台使用如下命令：</span><br><span class="line"><span class="built_in">set</span> DEBUG=myapp &amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-<h2 id="访问地址：http-localhost-3000"><a href="#访问地址：http-localhost-3000" class="headerlink" title="访问地址：http://localhost:3000/"></a>访问地址：<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></h2>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">阿里云ECS：php+nginx+mysql 快速安装脚手架</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEB29f2bcf52e76208eb8b006c76a036fc8/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><blockquote>
-<p>yum安装的版本只有5.1，所以手动安装</p>
-</blockquote>
-<ol>
-<li>百度云下载 php-5.6.16.tar.gz：<a href="https://pan.baidu.com/s/1eSxfhXg" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSxfhXg</a></li>
-<li><code>tar -xzvf php-5.6.16.tar.gz</code></li>
-<li>安装 <code>libxml2</code> : yum install libxml2-devel</li>
-<li>安装 <code>bzip2</code>: yum install bzip2 bzip2-devel</li>
-<li>安装  <code>curl</code>: yum -y install curl-devel</li>
-<li>安装 <code>libpng</code> :yum install libpng libpng-devel</li>
-<li>安装 <code>libmcrypt</code>:yum install libmcrypt libmcrypt-devel</li>
-<li>安装 <code>readline</code>: yum -y install readline readline-devel</li>
-<li><p>执行下面的配置</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc --<span class="built_in">enable</span>-inline-optimization --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-rpath --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --<span class="built_in">enable</span>-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --<span class="built_in">enable</span>-bcmath --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-sockets --with-curl --with-zlib --<span class="built_in">enable</span>-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear --with-gd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>复制php-fpm.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/lib/php-5.6.28/sapi/fpm/php-fpm.conf /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>php-fpm 全局启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin/php-fpm</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>12.启动 <code>php-fpm</code><br>13.新建index.php<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
-<p>14.成功</p>
-<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ol>
-<li>yum 安装 <code>yum -y install nginx</code></li>
-<li>删除 /etc/nginx/conf.d下所有文件</li>
-<li><p>配置自己的服务 <code>vim mysite.conf</code></p>
- <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="attribute">charset utf-8;</span></span><br><span class="line"><span class="attribute">    client_max_body_size 128M;</span></span><br><span class="line"><span class="attribute">    listen 80; </span></span><br><span class="line"><span class="attribute">    server_name www.wexue.top;</span></span><br><span class="line"><span class="attribute">    root        /opt/server/gmfitness-wx;</span></span><br><span class="line"><span class="attribute">    index       index.php index.html;</span></span><br><span class="line"><span class="attribute">    </span></span><br><span class="line"><span class="attribute">    access_log  /opt/log/access.log;</span></span><br><span class="line"><span class="attribute">    error_log   /opt/log/error.log;</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">    location / &#123;</span></span><br><span class="line"><span class="attribute">        # Redirect everything that isn't a real file to index.php</span></span><br><span class="line"><span class="attribute">        try_files $uri $uri/ /index.php$is_args$args;</span></span><br><span class="line"><span class="attribute">    &#125;</span></span><br><span class="line"><span class="attribute">    #转发</span></span><br><span class="line"><span class="attribute">    location /wxnotify &#123;</span></span><br><span class="line"><span class="attribute">                    proxy_pass http</span>://XXXXX/index<span class="variable">.php</span>?g=Restful&amp;m=Vip&amp;a=wxnotify;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span></span><br><span class="line">    <span class="comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ &#123;</span></span><br><span class="line">    <span class="comment">#    try_files $uri =404;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        <span class="comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span></span><br><span class="line">        try_files $uri =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.(ht|svn|git) &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动：yum自动安装了nginx的服务，<code>service nginx start</code> </p>
-</li>
-</ol>
-<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><ol>
-<li>yum安装<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-server mysql mysql-devel</span><br><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="2">
-<li><p>开机启动</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br><span class="line">chkconfig --list | grep mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>密码设置</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password <span class="string">'密码'</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置全网访问<code>mysql -uroot -p</code></p>
-</li>
-</ol>
-<ul>
-<li>输入：<code>use mysql</code>;</li>
-<li>查询host输入： <code>select user,host from user</code>;</li>
-<li>创建host（如果有”%”这个host值，则跳过这一步）</li>
-<li><p>如果没有”%”这个host值,就执行下面这两句:</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>授权用户</p>
-<ul>
-<li>任意主机以用户root和密码pwd连接到mysql服务器</li>
-<li>指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'tuser'</span>@<span class="string">'192.168.1.100'</span> IDENTIFIED BY <span class="string">'密码'</span> WITH GRANT OPTION; </span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>  <a href="https://juejin.im/post/5c03c8b4e51d457640742589" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c8f9e51d4529db2aa30f/likes.svg?style=flat-square" alt=""></a></p>
-<blockquote>
-<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
-</blockquote>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
-<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>wq！保存。</p>
-</li>
-</ol>
-<p>成功！</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">chrome web devtool技巧</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-22T16:00:00.000Z" itemprop="datePublished">2018-08-23</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="console"><a href="#console" class="headerlink" title="console"></a>console</h2><ul>
-<li><p><em>copy(x)</em>：</p>
-<blockquote>
-<p>是一个很有用的工具函数方便你将任何东西拷贝到系统的粘贴板暂存。<br>给copy函数传入一个没有格式的JSON，会返回格式化的结果。</p>
-</blockquote>
-</li>
-<li><p><em>Eager evaluation</em></p>
-<blockquote>
-<p>选择该选项可以自动联想你所输入的变量的值，并自动打印出来。</p>
-</blockquote>
-</li>
-<li><p><em>debug()</em> </p>
-<blockquote>
-<p>在执行到某个函数的时候暂停，你可以使用debug函数。debug(fn)接收一个函数作为参数，当每次该函数被调用时，Debugger就会在该函数的第一行中断执行。</p>
-</blockquote>
-</li>
-<li><p><em>暂停UI在Hover状态下的展示结果</em></p>
-<ul>
-<li>打开sources面板</li>
-<li>显示tooltip</li>
-<li>使用快捷键来暂停脚本执行(将鼠标停留在暂停的图标上查看快捷键 cmd+\ )</li>
-<li>回到Elements面板，然后像通常一样去检查元素。</li>
-</ul>
-</li>
-</ul>
-<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2>
         
     </section>
 </article>
@@ -1864,6 +1448,335 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <h2 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h2><ul>
 <li>选择你最引以为傲的项目，细细聊。</li>
 </ul>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">通用性面试技巧</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
+<li>略正式。</li>
+<li>说话幽默，看着对方。</li>
+<li>回答问题到细节，避免面试官追问。</li>
+<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
+</ul>
+<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
+<li>太喜欢你们公司</li>
+<li>没有成长空间</li>
+</ul>
+<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
+<li>急性子，为了做事推进，不太估计别人的感受。</li>
+<li>对做的事情要求太高，team有时压力会比较大。</li>
+</ul>
+<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
+<li>善于学习，高效学习，刻意练习，研究能力。</li>
+<li>有韧性。</li>
+<li>喜欢研究底层和新的技术，比如go语言。</li>
+</ul>
+<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
+<li>公司给不了我理想工作环境和状态。</li>
+<li>我理想的工作环境和状态。</li>
+</ul>
+<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
+<li>转了以后发现自己做的更好。</li>
+<li>学习能力强</li>
+</ul>
+<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
+<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
+<li>你觉得你们公司有什么不好的地方吗？</li>
+<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
+<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
+</ul>
+<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
+<li>死磕某个事</li>
+<li>坚持很久的事</li>
+<li>逆境不放弃</li>
+<li>面对压力，承担责任</li>
+<li>严谨细心，对自己做的产品自信</li>
+<li>面对诱惑，不浮躁</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/24/WEB0ca879a2c996cd655d738e0bd44f9d99/">linux命令</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/24/WEB0ca879a2c996cd655d738e0bd44f9d99/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-23T16:00:00.000Z" itemprop="datePublished">2018-07-24</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h1 id="ab工具"><a href="#ab工具" class="headerlink" title="ab工具"></a>ab工具</h1><p> <code>ab -n 1000 -c 100 -v 3  https://mobile.vipkid.com.cn/rest/pd-activity/api/activity/user/activity/getActivityAwardDetailByActivityIdToMobile/47</code></p>
+<h1 id="查看文档神器-man"><a href="#查看文档神器-man" class="headerlink" title="查看文档神器 man"></a>查看文档神器 man</h1><p> <code>man</code></p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">react-devtools 2.1.9版本 免翻墙下载和使用  闪烁解决方案</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/11/WEB4d3a3f98c967b374e27c3086d57b5756/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-10T16:00:00.000Z" itemprop="datePublished">2018-07-11</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  <a href="https://juejin.im/post/5c03c99a6fb9a049e231c155" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c9dff265da616c6559ff/likes.svg?style=flat-square" alt=""></a></p>
+<blockquote>
+<p>如果不翻墙的话是不能安装chrome的插件的，因此不能下载react devtools， 网上搜到的都是1.3的版本，那个版本会出现react面板闪烁的情况，下载最新的版本就可以解决问题。</p>
+</blockquote>
+<ul>
+<li>crx下载地址<br>链接: <a href="https://pan.baidu.com/s/1slLL7JZ" target="_blank" rel="noopener">https://pan.baidu.com/s/1slLL7JZ</a> 密码: 75ws</li>
+</ul>
+<p><img src="/images/b929f46378debb6751e87c01daa22e5a.png" alt="Paste_Image.png"></p>
+<ul>
+<li>安装直接将crx拖拽到 chrome://extensions/ 里</li>
+</ul>
+<p><img src="/images/bb1e3a6a5fcafd543ec8594d233fb28f.png" alt="Paste_Image.png"></p>
+<ul>
+<li>重启chrome，F12看到react面板</li>
+</ul>
+<p><img src="/images/e7e7749bb8a86ff3dba3c94a9320dfc7.png" alt="Paste_Image.png"></p>
+<p>完美搞定！</p>
+<hr>
+<p>欢迎访问我的blog: <a href="http://yondu.vip">http://yondu.vip</a></p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/11/WEBa4984f7e8dec6088ff67496c1fe1cc44/">未批恩搭建</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/11/WEBa4984f7e8dec6088ff67496c1fe1cc44/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-10T16:00:00.000Z" itemprop="datePublished">2018-07-11</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <blockquote>
+<p>用过很多VPN工具，免费的最不靠谱，收费的参差不齐，shadowsocks算是比较成熟而且一直在更新改动。</p>
+</blockquote>
+<h2 id="网站购买"><a href="#网站购买" class="headerlink" title="网站购买"></a>网站购买</h2><ul>
+<li><a href="https://ss-proxy.info/" target="_blank" rel="noopener">https://ss-proxy.info/</a>  </li>
+<li><a href="http://www.ss-proxy.net/" target="_blank" rel="noopener">http://www.ss-proxy.net/</a></li>
+<li><p><a href="https://acnet.xyz/" target="_blank" rel="noopener">https://acnet.xyz/</a></p>
+</li>
+<li><p>注册账号登录</p>
+</li>
+<li>选择购买服务，一般选择15块一个月的，比较稳定，而且基本满足需要。10块的太垃圾</li>
+</ul>
+<p><img src="/images/2b326f8c8b2d369e987581c5aef58154.png" alt="image.png"></p>
+<ul>
+<li>可以支付宝直接转账付款</li>
+</ul>
+<h2 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h2><p><a href="https://ss-proxy.info/downloads.php" target="_blank" rel="noopener">https://ss-proxy.info/downloads.php</a></p>
+<p><img src="/images/82037a97321cfae699af030536a4aca6.png" alt="image.png"></p>
+<p>有windows，mac， Android ，IOS不同版本，都比较方便</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>购买之后选择我的服务就能看到四个IP地址：</p>
+<p><img src="/images/853aecc7f304e52e3cae242236dc3b19.png" alt="image.png"></p>
+<ul>
+<li>日本的vpn一般是最快的，但有些人对欧美的需求更大，但是日本的足够了，唯一不好的就是看YouTube会有日语的广告！！</li>
+<li>这些IP是用于配置你的VPN客户端的，现在的客户端提供扫二维码配置的功能非常好用，点击普通图像</li>
+</ul>
+<p><img src="/images/85daf0ebd46d9127fc8b597a104926df.png" alt="image.png"><br>这样就配置成功了，选择某个服务就可以了，当然是要用密码的。</p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><blockquote>
+<p>VPN分为三种模式：全局，PAC自动模式，手动模式<br>一般采用PAC自动模式，其原理就是官方持续更新一组域名的白名单库，只有在库里的域名才会走VPN，当然你也可以自己添加域名或者IP。</p>
+</blockquote>
+<h2 id="IOS安装不了shadowscoks怎么办？"><a href="#IOS安装不了shadowscoks怎么办？" class="headerlink" title="IOS安装不了shadowscoks怎么办？"></a>IOS安装不了shadowscoks怎么办？</h2><p><img src="/images/b2c44764bbf0147a08b56cec64e978d5.png" alt="image"><br><img src="/images/b47ed7ee7ab83714f6e30c8346f24645.png" alt="image"><br><img src="/images/23cd33ff66bece7b2a74a35247fcd23d.png" alt="image"></p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">委托模式</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/07/10/WEB0ea43b923894036ce131460977f5980c/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2018-07-09T16:00:00.000Z" itemprop="datePublished">2018-07-10</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>  我们再来看 Go 语言这个模式，Go 语言的这个模式挺好玩儿的。声明一个 struct，跟 C 很一样，然后直接把这个 struct 类型放到另一个 struct 里。</p>
+<p>委托的简单示例</p>
+<p>我们来看几个示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Widget <span class="keyword">struct</span> &#123;  </span><br><span class="line">    X, Y <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Label <span class="keyword">struct</span> &#123; </span><br><span class="line">Widget        <span class="comment">// Embedding (delegation)  </span></span><br><span class="line">Text   <span class="keyword">string</span> <span class="comment">// Aggregation  </span></span><br><span class="line">X <span class="keyword">int</span>         <span class="comment">// Override </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(label Label)</span> <span class="title">Paint</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">// [0xc4200141e0] -Label.Paint("State")   </span></span><br><span class="line">fmt.Printf(<span class="string">"[%p] - Label.Paint(%q)\n"</span>,  &amp;label, label.Text)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面，</p>
+<ul>
+<li>我们声明了一个 Widget，其有 X,Y；</li>
+<li>然后用它来声明一个 Label，直接把 Widget 委托进去；</li>
+<li>然后再给 Label 声明并实现了一个 Paint() 方法。<br>于是，我们就可以这样编程了：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">label := Label&#123; Widget&#123;10, 10&#125;, &quot;State&quot;, 100 &#125;</span><br><span class="line"></span><br><span class="line">// X=100, Y=10, Text=State, Widget.X=10</span><br><span class="line">fmt.Printf(&quot;X=%d, Y=%d, Text=%s Widget.X=%d\n&quot;,label.X, label.Y, label.Text,label.Widget.X)</span><br><span class="line">fmt.Println()</span><br><span class="line"></span><br><span class="line">// &#123;Widget:&#123;X:10 Y:10&#125; Text:State X:100&#125; </span><br><span class="line">// &#123;&#123;10 10&#125; State 100&#125;</span><br><span class="line">fmt.Printf(&quot;%+v\n%v\n&quot;, label, label)</span><br><span class="line">label.Paint()</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，如果有成员变量重名，则需要手动地解决冲突。</p>
+<p>我们继续扩展代码。</p>
+<p>先来一个 Button：</p>
+<p>type Button struct {    Label // Embedding (delegation)}func NewButton(x, y int, text string) Button {    return Button{Label{Widget{x, y}, text, x}}}func (button Button) Paint() { // Override    fmt.Printf(“[%p] - Button.Paint(%q)\n”,         &amp;button, button.Text)}func (button Button) Click() {    fmt.Printf(“[%p] - Button.Click()\n”, &amp;button)}</p>
+<p>再来一个 ListBox：</p>
+<p>type ListBox struct {    Widget          // Embedding (delegation)    Texts  []string // Aggregation    Index  int      // Aggregation}func (listBox ListBox) Paint() {    fmt.Printf(“[%p] - ListBox.Paint(%q)\n”,         &amp;listBox, listBox.Texts)}func (listBox ListBox) Click() {    fmt.Printf(“[%p] - ListBox.Click()\n”, &amp;listBox)}</p>
+<p>然后，声明两个接口用于多态：</p>
+<p>type Painter interface {    Paint()}type Clicker interface {    Click()}</p>
+<p>于是我们就可以这样泛型地使用（注意其中的两个 for 循环）：</p>
+<p>button1 := Button{Label{Widget{10, 70}, “OK”, 10}}button2 := NewButton(50, 70, “Cancel”)listBox := ListBox{Widget{10, 40},     []string{“AL”, “AK”, “AZ”, “AR”}, 0}fmt.Println()//[0xc4200142d0] - Label.Paint(“State”)//[0xc420014300] - ListBox.Paint([“AL” “AK” “AZ” “AR”])//[0xc420014330] - Button.Paint(“OK”)//[0xc420014360] - Button.Paint(“Cancel”)for _, painter := range []Painter{label, listBox, button1, button2} {    painter.Paint()}fmt.Println()//[0xc420014450] - ListBox.Click()//[0xc420014480] - Button.Click()//[0xc4200144b0] - Button.Click()for _, widget := range []interface{}{label, listBox, button1, button2} {    if clicker, ok := widget.(Clicker); ok {        clicker.Click()    }}</p>
+<p>一个 Undo 的委托重构</p>
+<p>上面这个是 Go 语中的委托和接口多态的编程方式，其实是面向对象和原型编程综合的玩法。这个玩法可不可以玩得更有意思呢？这是可以的。</p>
+<p>首先，我们先声明一个数据容器，其中有 Add()、 Delete() 和 Contains() 方法。还有一个转字符串的方法。</p>
+<p>type IntSet struct {    data map[int]bool}func NewIntSet() IntSet {    return IntSet{make(map[int]bool)}}func (set <em>IntSet) Add(x int) {    set.data[x] = true}func (set </em>IntSet) Delete(x int) {    delete(set.data, x)}func (set <em>IntSet) Contains(x int) bool {    return set.data[x]}func (set </em>IntSet) String() string { // Satisfies fmt.Stringer interface    if len(set.data) == 0 {        return “{}”    }    ints := make([]int, 0, len(set.data))    for i := range set.data {        ints = append(ints, i)    }    sort.Ints(ints)    parts := make([]string, 0, len(ints))    for _, i := range ints {        parts = append(parts, fmt.Sprint(i))    }    return “{“ + strings.Join(parts, “,”) + “}”}</p>
+<p>我们如下使用这个数据容器：</p>
+<p>ints := NewIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Print(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}</p>
+<p>这个数据容器平淡无奇，我们想给它加一个 Undo 的功能。我们可以这样来：</p>
+<p>type UndoableIntSet struct { // Poor style    IntSet    // Embedding (delegation)    functions []func()}func NewUndoableIntSet() UndoableIntSet {    return UndoableIntSet{NewIntSet(), nil}}func (set <em>UndoableIntSet) Add(x int) { // Override    if !set.Contains(x) {        set.data[x] = true        set.functions = append(set.functions, func() { set.Delete(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set </em>UndoableIntSet) Delete(x int) { // Override    if set.Contains(x) {        delete(set.data, x)        set.functions = append(set.functions, func() { set.Add(x) })    } else {        set.functions = append(set.functions, nil)    }}func (set *UndoableIntSet) Undo() error {    if len(set.functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(set.functions) - 1    if function := set.functions[index]; function != nil {        function()        set.functions[index] = nil // Free closure for garbage collection    }    set.functions = set.functions[:index]    return nil}</p>
+<p>于是就可以这样使用了：</p>
+<p>ints := NewUndoableIntSet()for _, i := range []int{1, 3, 5, 7} {    ints.Add(i)    fmt.Println(ints)}for _, i := range []int{1, 2, 3, 4, 5, 6, 7} {    fmt.Println(i, ints.Contains(i), “ “)    ints.Delete(i)    fmt.Println(ints)}fmt.Println()for {    if err := ints.Undo(); err != nil {        break    }    fmt.Println(ints)}</p>
+<p>但是，需要注意的是，我们用了一个新的 UndoableIntSet 几乎重写了所有的 IntSet 和 “写” 相关的方法，这样就可以把操作记录下来，然后 Undo 了。</p>
+<p>但是，可能别的类也需要 Undo 的功能，我是不是要重写所有的需要这个功能的类啊？这样的代码类似，就是因为数据容器不一样，我就要去重写它们，这太二了。</p>
+<p>我们能不能利用前面学到的泛型编程、函数式编程、IoC 等范式来把这个事干得好一些呢？当然是可以的。</p>
+<p>如下所示：<br>  ● 我们先声明一个 Undo[] 的函数数组（其实是一个栈）。<br>  ● 并实现一个通用 Add()。其需要一个函数指针，并把这个函数指针存放到 Undo[] 函数数组中。<br>  ● 在 Undo() 的函数中，我们会遍历Undo[]函数数组，并执行之，执行完后就弹栈。<br>type Undo []func()func (undo <em>Undo) Add(function func()) {    </em>undo = append(<em>undo, function)}func (undo </em>Undo) Undo() error {    functions := <em>undo    if len(functions) == 0 {        return errors.New(“No functions to undo”)    }    index := len(functions) - 1    if function := functions[index]; function != nil {        function()        functions[index] = nil // Free closure for garbage collection    }    </em>undo = functions[:index]    return nil}</p>
+<p>那么我们的 IntSet 就可以改写成如下的形式：</p>
+<p>type IntSet struct {    data map[int]bool    undo Undo}func NewIntSet() IntSet {    return IntSet{data: make(map[int]bool)}}</p>
 
         
     </section>
