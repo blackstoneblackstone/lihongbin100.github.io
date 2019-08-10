@@ -87,7 +87,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">19</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">20</span></li></ul>
     </div>
   </div>
 
@@ -150,97 +150,6 @@
 </header>
 
     <div id="content" class="content">
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">算法练级</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/08/WEBa7220436e060eba7224a8533e699cee1/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-07-07T16:00:00.000Z" itemprop="datePublished">2018-07-08</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="Two-Sum-algorithm"><a href="#Two-Sum-algorithm" class="headerlink" title="Two Sum algorithm"></a>Two Sum algorithm</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * twoSum indexOf 方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">       <span class="keyword">var</span> index = nums.indexOf(target-nums[i])</span><br><span class="line">       <span class="keyword">if</span> (index&gt;<span class="number">-1</span> &amp;&amp; index!=i)&#123;</span><br><span class="line">              <span class="keyword">return</span> [i,index]</span><br><span class="line">          &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * hash algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">	  <span class="keyword">var</span> map=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (map.hasOwnProperty(target-nums[i]))&#123;</span><br><span class="line">			<span class="keyword">return</span> [map[target-nums[i]],i]</span><br><span class="line">		&#125;</span><br><span class="line">        map[nums[i]]=i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * two point algorithm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum =  <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l=<span class="number">0</span>,r=nums.length<span class="number">-1</span>, newNums=nums.concat()</span><br><span class="line">		<span class="comment">//At first, sorting.</span></span><br><span class="line">		newNums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)</span><br><span class="line">		<span class="keyword">while</span>(l!=r)&#123;</span><br><span class="line">		<span class="keyword">var</span> m = newNums[l] + newNums[r] - target   </span><br><span class="line">		<span class="keyword">if</span> (m &lt; <span class="number">0</span>)&#123;</span><br><span class="line">			 l++	  </span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="comment">// lastIndexOf for solving : [3,3] and 6 is [0,1]</span></span><br><span class="line">				<span class="keyword">return</span> [nums.indexOf(newNums[l]),nums.lastIndexOf(newNums[r])]</span><br><span class="line">			&#125;</span><br><span class="line">			r--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> re=twoSum([<span class="number">2</span>,<span class="number">11</span>,<span class="number">7</span>,<span class="number">7</span>],<span class="number">9</span>)</span><br><span class="line"><span class="built_in">console</span>.log(re)</span><br></pre></td></tr></table></figure>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/07/07/WEB949651b02953dd9d29ba3282d347045c/">代码规范</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/07/07/WEB949651b02953dd9d29ba3282d347045c/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-07-06T16:00:00.000Z" itemprop="datePublished">2018-07-07</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <ul>
-<li>二元运算符左右两边加空格<ul>
-<li>if, for 和括号之间加空格</li>
-<li>严格按照要求进行程序缩进<br>即使 if / for </li>
-<li>语句内部只有一句话，也要加上花括号</li>
-<li>变量名使用有意义的英文名，不要用a,b,c,s1,s2</li>
-<li>区分不同的逻辑块，逻辑块之间用空行隔开，简要注释每个部分做的事情</li>
-<li>多用 Helper Function 或子函数，不要所有程序都写在一个大函数里</li>
-</ul>
-</li>
-</ul>
-
-        
-    </section>
-</article>
-
-
     <article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
@@ -525,6 +434,107 @@
     <section class="article-body markdown-body">
         
           <div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="image" style="height:477;"><img data-media-type="image" src="/images/db54fcb8409a22fd61addf90c2da52f3.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">前端基础架构包含三部分：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">工具&nbsp;</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">规范&nbsp;</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">系统</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">工具包含：&nbsp;测试工具，代码管理（git，npm），代码品质（eslint，csslint），运行监测（console异常，接口异常，性能监测）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">库和框架：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">————————————————————————</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">尤雨溪</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">组件：<br>-&nbsp;接入型&nbsp;container<br>-&nbsp;展示型<br>-&nbsp;交互型&nbsp;比如各类加强版的表单组件，通常强调复用<br>-&nbsp;功能型&nbsp;比如&nbsp;<code>&amp;lt;router-view&amp;gt;</code>，<code>&amp;lt;transition&amp;gt;</code>，作为一种扩展、抽象机制存在。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">渲染变化侦测机制：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">-&nbsp;命令式（js）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">-&nbsp;声明式（css）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">view&nbsp;=&nbsp;render(state)</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div>
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2018/01/01/WEB67e717857d52dc570e7a3c6e98a19e29/">html5动画进阶之路</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <div class="article-tag-list">
+  <a class="article-date" href="/2018/01/01/WEB67e717857d52dc570e7a3c6e98a19e29/">
+    
+    <i class="icon-calendar"></i>
+    
+    <time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time>
+  </a>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag"></i>
+    <a class="article-tag-link" href="/tags/Code/">Code</a>
+</div>
+
+
+          <div class="article-tag-list">
+            <i class="icon-circle-more"></i>
+            <span class="article-tag-link" id="seeNum"></span>
+          </div>
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>我们在微信朋友圈里经常看到很多人分享h5的链接，有的科技感十足，有的展示炫目，有的非常有创意，各大公司也把h5作为他们品牌传播，活动预热的很好方式。企业商户对于这种方式也很有好感，从而导致了h5制作行业涌进大批从业者，同时也成为众多程序员赚取外快的途径。</p>
+</blockquote>
+<p>现在说人话。。。</p>
+<p>先来讲讲当前h5行业的现状吧！</p>
+<h3 id="h5制作网站"><a href="#h5制作网站" class="headerlink" title="h5制作网站"></a>h5制作网站</h3><blockquote>
+<p>低门槛的h5制作平台，不懂代码的人也可以来玩玩，如果你有一定的设计思维和作图能力，也能做出非常好看的h5作品。</p>
+</blockquote>
+<p>国内比较出名的h5制作网站有：</p>
+<ul>
+<li>兔展：设计感和创意感最强的平台，但是制作相对复杂，需要设计基础。</li>
+<li>易企秀：老牌的h5制作平台，不断迭代，有大量案例，使用别人做好的h5需要付费。生态圈还不错。</li>
+<li>初页：手机app，手机端快速制作h5。</li>
+<li>Epub360意派：设计师友好，自称专业级的。</li>
+</ul>
+<blockquote>
+<p>类似的平台还有很多，一直纳闷如此多同类产品是如何生存的，目前看易企秀通过付费制作的方式经营的还不错，但是淘宝上有很多仿该平台的源码，很便宜。未来的发展和商业模式并不明朗。</p>
+</blockquote>
+<p>以上的几个公司主要关注的是展示营销类的h5，对于h5游戏涉猎不多。对于h5游戏做的比较好的火舞游戏，<a href="http://gc.hgame.com/home/index/appid/100429" target="_blank" rel="noopener">百度h5游戏中心</a>，<a href="https://h5.07073.com/game" target="_blank" rel="noopener">07073游戏</a> 等。</p>
+<p>好啦，什么商业模式，什么产品思维，什么设计理念，我们都不懂，我们就是写代码的，那就来干货吧，这样才能好好干活。</p>
+<h3 id="h5制作的相关技术"><a href="#h5制作的相关技术" class="headerlink" title="h5制作的相关技术"></a>h5制作的相关技术</h3><blockquote>
+<p>h5的动画受制于web浏览器的局限，基本有三种动画的实现方式。 </p>
+<ul>
+<li>基于css的动画实现</li>
+<li>基于svg</li>
+<li>基于canvas</li>
+<li>webgl</li>
+</ul>
+</blockquote>
+<p>实践证明，当遇到复杂动画时，动画性能比较大致是这样的：svg &lt; css &lt; canvas &lt; webgl</p>
+<h4 id="使用css实现："><a href="#使用css实现：" class="headerlink" title="使用css实现："></a>使用css实现：</h4><blockquote>
+<p>css3确实要比过去强大很多，支持2d,3d的位移，缩放，透明度变化，旋转，过渡动画等，主要依赖css里的transform,transition,animation等属性，具体的使用方法参见w3school的教程。</p>
+</blockquote>
+<p><code>需要注意的是 transition和animation不能同时作用于相同的元素.</code></p>
+<blockquote>
+<p>当然也有很多的基于css的动画框架，让你快速构建动画。比较常用的有两类,css库和基于css动画的js库。</p>
+</blockquote>
+<p>1.css库：css动画都是全局的，调用比较简单，但是侵入性比较强，固定模式，不太灵活。</p>
+<ul>
+<li><a href="http://www.jq22.com/yanshi819" target="_blank" rel="noopener">animated.css</a> 最常用的低调的动画库</li>
+<li><a href="http://ianlunn.github.io/Hover/" target="_blank" rel="noopener">hover.css</a> 鼠标hover状态的动画库，移动端不可用</li>
+<li><a href="https://www.minimamente.com/example/magic_animations/" target="_blank" rel="noopener">magic animation</a> 比animate.css 奔放的动画库，动画尺度大</li>
+<li><a href="http://tobiasahlin.com/spinkit/" target="_blank" rel="noopener">spinkit</a> 几种css loading动画，不常用。</li>
+<li><a href="http://www.bootcss.com/p/buttons/" target="_blank" rel="noopener">buttons.css</a> 炫酷的按钮动画库，尤其是3d的按钮，是你想要的。</li>
+</ul>
+<p>2.js库</p>
+<ul>
+<li><a href="http://velocityjs.org/" target="_blank" rel="noopener">velocity</a></li>
+<li><a href="https://howlerjs.com/" target="_blank" rel="noopener">howlerjs</a></li>
+<li><a href="https://html2canvas.hertzen.com/" target="_blank" rel="noopener">html2canvas</a></li>
+<li><a href="https://animejs.com" target="_blank" rel="noopener">animejs</a></li>
+</ul>
+<h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><h3 id="annie2x"><a href="#annie2x" class="headerlink" title="annie2x"></a><a href="http://annie2x.com/" target="_blank" rel="noopener">annie2x</a></h3><blockquote>
+<p>Annie2x是一款Adobe Flash的插件，支持Flash cc 2015及以上和Adobe Animate 全线版本<br>，通过Annie2x插件能将FLA文件直接 CTRL+ENTER 一键发布成小程序 小游戏 HTML5等</p>
+</blockquote>
+<ul>
+<li><a href="">egret</a></li>
+<li><a href="">layabox</a></li>
+<li><a href="">pixijs</a></li>
+</ul>
+<h2 id="动画制作软件"><a href="#动画制作软件" class="headerlink" title="动画制作软件"></a>动画制作软件</h2><h2 id="3D"><a href="#3D" class="headerlink" title="3D"></a>3D</h2><p><a href="https://www.babylonjs.com/" target="_blank" rel="noopener">https://www.babylonjs.com/</a></p>
+
         
     </section>
 </article>
