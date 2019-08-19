@@ -92,7 +92,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">33</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
     </div>
   </div>
 
@@ -158,10 +158,10 @@
     <section class="article-body markdown-body">
         
         
-        <div id="aplayer-sljGwUtC" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
+        <div id="aplayer-wgYLRFuX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
 			  <script>
 				  var options = {"narrow":false,"autoplay":true,"showlrc":0,"mode":"order","mutex":true,"theme":"#e6d0b2","preload":"metadata","listmaxheight":"100%","music":[{"title":"财务、产品概况及股权结构","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/0.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"QQ的诞生","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"艰难的融资之路","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/2.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"腾讯游戏从哪里来","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/3.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"“赛马机制”","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/4.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"梁宁：一个CEO的价值感","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/5.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"3Q大战","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/7.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"腾讯和阿里的底层逻辑差异","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/8.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"马化腾的产品观（上）","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/9.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"马化腾的产品观（下）","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/10.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"},{"title":"腾讯的三宗罪","author":"张潇雨","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/11.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/tx/1.jpg"}]};
-				  options.element = document.getElementById("aplayer-sljGwUtC");
+				  options.element = document.getElementById("aplayer-wgYLRFuX");
 				  var ap = new APlayer(options);
 			    window.aplayers || (window.aplayers = []);
 				  window.aplayers.push(ap);
@@ -300,7 +300,7 @@
       
 
     //当前页面打点
-    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
+    $.get('http://blog.yondu.vip/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
       function (data) {
         $('#seeNum').text(data.n);
       });
@@ -314,8 +314,8 @@
           }, 3000);
         });
     });
-    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
-      $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+    $.get('http://blog.yondu.vip/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+      $.get('http://blog.yondu.vip/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
         wx.config(
           data.sp
         );
@@ -350,29 +350,6 @@
 
   });
 </script>
-<a href="//blog.yondu.vip">
-    <div class="blog">
-        我的blog全新升级了，干货更多， 欢迎点击访问。
-    </div>
-</a>
-<style>
-    .blog {
-        background: rgba(0, 0, 0, 0.8);
-        color: #ffffff;
-        line-height: 80px;
-        font-size: 18px;
-        height: 80px;
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-    }
 
-    @media only screen and (max-width: 700px) {
-        .blog {
-            bottom: 40px;
-        }
-    }
-</style>
 </body>
 </html>

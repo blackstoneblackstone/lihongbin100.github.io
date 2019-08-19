@@ -92,7 +92,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">33</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
     </div>
   </div>
 
@@ -191,10 +191,10 @@
     <section class="article-body markdown-body">
         
         
-        <div id="aplayer-ZAnOYzaW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
+        <div id="aplayer-DHmQBxZe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
 			  <script>
 				  var options = {"narrow":false,"autoplay":true,"showlrc":0,"mode":"order","mutex":true,"theme":"#e6d0b2","preload":"metadata","listmaxheight":"513px","music":[{"title":"【试听】买护肤品你到底该听谁的？","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/1.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"皮肤的三大功能","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/2.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"皮肤的健康管理","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/3.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"皮肤的年轻管理","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/4.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"基础护肤，三件套足够","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/5.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"护肤升级，钱该花在哪","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/6.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"护肤品使用秘笈","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/7.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"医学美容初入门","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/8.m4a","pic":"http://games.simamedia.cn/case/222.jpg"},{"title":"皮肤急救","author":"郝博士","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/skin/9.m4a","pic":"http://games.simamedia.cn/case/222.jpg"}]};
-				  options.element = document.getElementById("aplayer-ZAnOYzaW");
+				  options.element = document.getElementById("aplayer-DHmQBxZe");
 				  var ap = new APlayer(options);
 			    window.aplayers || (window.aplayers = []);
 				  window.aplayers.push(ap);
@@ -289,7 +289,7 @@
       
 
     //当前页面打点
-    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
+    $.get('http://blog.yondu.vip/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
       function (data) {
         $('#seeNum').text(data.n);
       });
@@ -303,8 +303,8 @@
           }, 3000);
         });
     });
-    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
-      $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+    $.get('http://blog.yondu.vip/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+      $.get('http://blog.yondu.vip/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
         wx.config(
           data.sp
         );
@@ -339,29 +339,6 @@
 
   });
 </script>
-<a href="//blog.yondu.vip">
-    <div class="blog">
-        我的blog全新升级了，干货更多， 欢迎点击访问。
-    </div>
-</a>
-<style>
-    .blog {
-        background: rgba(0, 0, 0, 0.8);
-        color: #ffffff;
-        line-height: 80px;
-        font-size: 18px;
-        height: 80px;
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-    }
 
-    @media only screen and (max-width: 700px) {
-        .blog {
-            bottom: 40px;
-        }
-    }
-</style>
 </body>
 </html>

@@ -93,7 +93,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">33</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
     </div>
   </div>
 
@@ -160,10 +160,10 @@
         
         <p><img src="/images/cf7a022289399c0dabc07523f8267d8f.png" alt="wx20181122-122859@2x.png"></p>
 
-        <div id="aplayer-EOBaCEVS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
+        <div id="aplayer-EJLNapSt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
 			  <script>
 				  var options = {"narrow":false,"autoplay":true,"showlrc":0,"mode":"order","mutex":true,"theme":"#e6d0b2","preload":"metadata","listmaxheight":"513px","music":[{"title":"试听","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/0.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"意识篇：四大转变让90后认可你","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/1.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"机制篇：五个机制让90后喜欢这个团队","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/2.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"方法篇：七招让90后工作有士气（上）","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/3.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"方法篇：七招让90后工作有士气（中）","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/4.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"方法篇：七招让90后工作有士气（下）","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/5.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"修炼篇：三种品格让90后愿意跟随你","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/6.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"},{"title":"氛围篇：三个规则让90后充满正能量","author":"李国刚","url":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/class/90/7.mp3","pic":"http://yondu-blog.oss-cn-beijing.aliyuncs.com/case/222.jpg"}]};
-				  options.element = document.getElementById("aplayer-EOBaCEVS");
+				  options.element = document.getElementById("aplayer-EJLNapSt");
 				  var ap = new APlayer(options);
 			    window.aplayers || (window.aplayers = []);
 				  window.aplayers.push(ap);
@@ -267,7 +267,7 @@
       
 
     //当前页面打点
-    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
+    $.get('http://blog.yondu.vip/index.php?g=Restful&m=Blog&a=hit&pid=0&url=' + encodeURIComponent(location.pathname),
       function (data) {
         $('#seeNum').text(data.n);
       });
@@ -281,8 +281,8 @@
           }, 3000);
         });
     });
-    $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
-      $.get('http://data.simamedia.cn/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+    $.get('http://blog.yondu.vip/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
+      $.get('http://blog.yondu.vip/index.php?g=Restful&m=Oauth&a=wechatJs&url=' + window.location.href, function (data) {
         wx.config(
           data.sp
         );
@@ -317,29 +317,6 @@
 
   });
 </script>
-<a href="//blog.yondu.vip">
-    <div class="blog">
-        我的blog全新升级了，干货更多， 欢迎点击访问。
-    </div>
-</a>
-<style>
-    .blog {
-        background: rgba(0, 0, 0, 0.8);
-        color: #ffffff;
-        line-height: 80px;
-        font-size: 18px;
-        height: 80px;
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-    }
 
-    @media only screen and (max-width: 700px) {
-        .blog {
-            bottom: 40px;
-        }
-    }
-</style>
 </body>
 </html>
