@@ -1166,6 +1166,10 @@ body {
     padding: 10px 0 0 30px;
   }
 }
+#updateBlog {
+  margin-right: 30px;
+  writing-mode: vertical-rl;
+}
 .nav {
   position: relative;
   z-index: 80;
