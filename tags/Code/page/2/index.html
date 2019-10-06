@@ -81,7 +81,7 @@
         <span class="vm">Tags</span>
     </h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">40</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">25</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Media/">Media</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Read/">Read</a><span class="tag-list-count">23</span></li></ul>
     </div>
   </div>
 
@@ -149,543 +149,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">PHP+crontab 完美实现定时任务</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBe861143d368beef7e7a5d02597c4b8f7/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>  <a href="https://juejin.im/post/5c03c8b4e51d457640742589" target="_blank" rel="noopener"><img src="https://badge.juejin.im/entry/5c03c8f9e51d4529db2aa30f/likes.svg?style=flat-square" alt=""></a></p>
-<blockquote>
-<p>PHP由于是顺序执行的脚本语言，多线程编程困难，因此PHP的定时任务相比较JAVA 困难的多，使用Sleep会导致性能极差和系统资源损失，下面我介绍一种高性能，又简单的方式来解决这个问题。</p>
-</blockquote>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
-<li><p>编写restful接口，可以用TP这样的框架，或者直接写PHP文件，完成任务逻辑。例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用TP框架建立restful接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OauthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    完成上课提醒</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">classReminder</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//查看今天所有课程</span></span><br><span class="line">        $courses = D(<span class="string">"course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"cday"</span> =&gt; date(<span class="string">"Y-m-d"</span>)))-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</span><br><span class="line">            $cstime = strtotime($course[<span class="string">'cstime'</span>]);</span><br><span class="line">            $currtime = time();</span><br><span class="line">            $cc = $cstime - $currtime;</span><br><span class="line">            <span class="keyword">if</span> ($cc &lt; <span class="number">60</span> * <span class="number">60</span> &amp;&amp; $cc &gt; <span class="number">5</span> * <span class="number">60</span>) &#123;</span><br><span class="line">                $ucc = D(<span class="string">"user_card_course"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>]))-&gt;select();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($ucc <span class="keyword">as</span> $uc) &#123;</span><br><span class="line">                    $re = D(<span class="string">"wxmsg"</span>)-&gt;where(<span class="keyword">array</span>(<span class="string">"userid"</span> =&gt; $uc[<span class="string">"userid"</span>], <span class="string">"courseid"</span> =&gt; $course[<span class="string">"id"</span>], <span class="string">"type"</span> =&gt; <span class="string">"上课提醒"</span>))-&gt;find();</span><br><span class="line">                    <span class="keyword">if</span> ($re) &#123;</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">"发送过了"</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $user = D(<span class="string">"oauth_user"</span>)-&gt;find($uc[<span class="string">"userid"</span>]);</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;sendTemMsgForClassReminder($user[<span class="string">"openid"</span>], $course[<span class="string">"id"</span>], $uc[<span class="string">"userid"</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>linux添加定时任务，crontab  -e  编辑任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每晚2点备份mysql</span></span><br><span class="line">0 2 * * *  /opt/mysqlBack/bkMysql.sh </span><br><span class="line"><span class="comment">#每15分钟（每小时的 0 15 30 45 分启动），访问接口，并将日志输出到log</span></span><br><span class="line">*/15 * * * * wget http://localhost/classreminder &gt;/opt/server/gmfitness-schedule/classreminder.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>wq！保存。</p>
-</li>
-</ol>
-<p>成功！</p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEBfbb7b44a589bacdab862693eb3687168/">Openlayers开发热图</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBfbb7b44a589bacdab862693eb3687168/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>简介：热力图采用PostGis数据库存储地图和人流点数据，通过Geoserver服务发布，前端采用OpenLayers引入并展现完成。</p>
-</blockquote>
-<p>##开发流程图</p>
-<p><div id="flowchart-0" class="flow-chart"></div></p>
-<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="Postgis数据准备"><a href="#Postgis数据准备" class="headerlink" title="Postgis数据准备"></a>Postgis数据准备</h3><blockquote>
-<p>the_geom用于存储坐标信息</p>
-</blockquote>
-<h4 id="企业客户地图："><a href="#企业客户地图：" class="headerlink" title="企业客户地图："></a>企业客户地图：</h4><ul>
-<li>WGS84</li>
-<li>Postgis 文件  </li>
-<li>monitor库</li>
-</ul>
-<h4 id="人流定位数据："><a href="#人流定位数据：" class="headerlink" title="人流定位数据："></a>人流定位数据：</h4><ul>
-<li>存入Postgis，坐标系：<code>EPSG:4326</code>  该表只存储5分钟内的定位数据，每5分钟刷新一次，并删除之前5分钟的数据 </li>
-<li>一个企业客户占一个表，一个表里含有多个楼层</li>
-<li>monitor库<br><strong>表示例：</strong></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>province_id</th>
-<th>city_id</th>
-<th>enterprise</th>
-<th>building</th>
-<th>floor</th>
-<th>the_geom</th>
-<th>postion_time</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>116</td>
-<td>11602</td>
-<td>zhongshanyiyuan</td>
-<td>ZS1</td>
-<td>F1</td>
-<td>0101000020E6100000000000C0E9D369410000000028F75141</td>
-<td>2016-08-08 10:00:00</td>
-</tr>
-</tbody>
-</table>
-<h4 id="AP点位数据"><a href="#AP点位数据" class="headerlink" title="AP点位数据"></a>AP点位数据</h4><p>存入Postgis，坐标系：<code>EPSG:4326</code><br><strong>表示例：</strong><br>|ft_id|by|fl_id|ft_name_cn|ft_name_en|ft_type|py_type|c_time|u_time|u_flag|the_geom|<br>|—|<br>|||        ZH0000110100100001|    XH1-B1-AP-001|||||||                            0101000020E61000001C29C7744A655E405CC51EBF08794340|</p>
-<h3 id="新建Geoserver图层"><a href="#新建Geoserver图层" class="headerlink" title="新建Geoserver图层"></a>新建Geoserver图层</h3><ul>
-<li>geoserver地址：<a href="http://10.8.122.77:9080/geoserver/" target="_blank" rel="noopener">http://10.8.122.77:9080/geoserver/</a></li>
-</ul>
-<p><img src="blob:/images/9d2ed800e5e5f70452c0c247004a518f.png" alt="Alt text"><br><img src="blob:/images/7af94e442d6feb858bc15a2eb4e6718e.png" alt="Alt text"><br><img src="blob:/images/78c06894437a2b7354ade6bfbbbd4940.png" alt="Alt text"></p>
-<h3 id="发布WMS服务-style-sld"><a href="#发布WMS服务-style-sld" class="headerlink" title="发布WMS服务 style sld"></a>发布WMS服务 <code>style sld</code></h3><h4 id="发布地图"><a href="#发布地图" class="headerlink" title="发布地图"></a>发布地图</h4><p><img src="./1470730642396.png" alt="Alt text">)</p>
-<h4 id="发布AP点位"><a href="#发布AP点位" class="headerlink" title="发布AP点位"></a>发布AP点位</h4><p><img src="./1470730713092.png" alt="Alt text">)</p>
-<h4 id="发布人流热图"><a href="#发布人流热图" class="headerlink" title="发布人流热图"></a>发布人流热图</h4><p><img src="./1470730768412.png" alt="Alt text">)</p>
-<blockquote>
-<p>热图样式设置</p>
-</blockquote>
-<blockquote>
-<p>一 环境部署<br>正常部署geoserver，本次版本是2.6<br>下载地址：<a href="http://geoserver.org/release/stable/" target="_blank" rel="noopener">http://geoserver.org/release/stable/</a><br>另外要下载<br>Extensions的wps扩展插件。<br>解压wps，将jar包放进geoserver部署的web-INF/lib中，重启geoserver。</p>
-</blockquote>
-<blockquote>
-<p>二 生成热力图的样式文件heatmap.sld</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">StyledLayerDescriptor</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.opengis.net/sld StyledLayerDescriptor.xsd"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.opengis.net/sld"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:ogc</span>=<span class="string">"http://www.opengis.net/ogc"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xlink</span>=<span class="string">"http://www.w3.org/1999/xlink"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;<span class="name">NamedLayer</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Heatmap<span class="tag">&lt;/<span class="name">Name</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">UserStyle</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">Title</span>&gt;</span>Heatmap<span class="tag">&lt;/<span class="name">Title</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">Abstract</span>&gt;</span>A heatmap surface showing population density<span class="tag">&lt;/<span class="name">Abstract</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">FeatureTypeStyle</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;<span class="name">Transformation</span>&gt;</span>  </span><br><span class="line">             <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"gs:Heatmap"</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>data<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>weightAttr<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>jan_je<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>radiusPixels<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>radius<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>100<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>pixelsPerCell<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>10<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputBBOX<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_bbox<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputWidth<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_width<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"parameter"</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>outputHeight<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">"env"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>wms_height<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span>  </span><br><span class="line">                 <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">             <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">Transformation</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">Rule</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">RasterSymbolizer</span>&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- specify geometry attribute to pass validation --&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">Geometry</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ogc:PropertyName</span>&gt;</span>geom<span class="tag">&lt;/<span class="name">ogc:PropertyName</span>&gt;</span><span class="tag">&lt;/<span class="name">Geometry</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">Opacity</span>&gt;</span>0.6<span class="tag">&lt;/<span class="name">Opacity</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMap</span> <span class="attr">type</span>=<span class="string">"ramp"</span> &gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#0000FF"</span> <span class="attr">quantity</span>=<span class="string">"0"</span> <span class="attr">label</span>=<span class="string">"nodata"</span> <span class="attr">opacity</span>=<span class="string">"0"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#00FFFF"</span> <span class="attr">quantity</span>=<span class="string">"0.02"</span> <span class="attr">label</span>=<span class="string">"nodata"</span>  </span></span><br><span class="line"><span class="tag">                  <span class="attr">opacity</span>=<span class="string">"0"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#00FF00"</span> <span class="attr">quantity</span>=<span class="string">".1"</span> <span class="attr">label</span>=<span class="string">"nodata"</span>/&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#FFFF00"</span> <span class="attr">quantity</span>=<span class="string">".5"</span> <span class="attr">label</span>=<span class="string">"values"</span> /&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">ColorMapEntry</span> <span class="attr">color</span>=<span class="string">"#FF0000"</span> <span class="attr">quantity</span>=<span class="string">"1.0"</span> <span class="attr">label</span>=<span class="string">"values"</span> /&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">ColorMap</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">RasterSymbolizer</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">Rule</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;/<span class="name">FeatureTypeStyle</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;/<span class="name">UserStyle</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;/<span class="name">NamedLayer</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">StyledLayerDescriptor</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>weightAttr</code>标签指定权重字段，在这里我设置weightAttrz权重字段名称为jan_je。colormap中的热力图符号和范围设置，也是可以改和设置的。<br>而<code>&lt;ogc:PropertyName&gt;geom&lt;/ogc:PropertyName&gt;&lt;/Geometry&gt;</code>这里是指定渲染的图形字段，查看数据库空间数据表的图形字段名称，如果是geom就写geom，如果是the_geom就写the_geom，根据自己数据库中图形字段名称来。在<code>geoserver&gt;style</code>中发布这样的一个sld文件。  </p>
-</blockquote>
-<h3 id="Openlayers装载图层"><a href="#Openlayers装载图层" class="headerlink" title="Openlayers装载图层"></a>Openlayers装载图层</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> baseServer = <span class="string">"http://geoserver地址/geoserver/gcks/wms"</span>;</span><br><span class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> ol.Map(&#123;</span><br><span class="line">        target: <span class="string">'map'</span>,</span><br><span class="line">        layers: [</span><br><span class="line">            <span class="keyword">new</span> ol.layer.Tile(&#123;</span><br><span class="line">                source: <span class="keyword">new</span> ol.source.OSM()</span><br><span class="line">            &#125;)</span><br><span class="line">        ],</span><br><span class="line">        view: <span class="keyword">new</span> ol.View(&#123;</span><br><span class="line">            projection: <span class="string">'EPSG:900913'</span>,</span><br><span class="line">            center: [<span class="number">13541202.790897895</span>,<span class="number">4709549.109971935</span>],</span><br><span class="line">            zoom: <span class="number">19</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//人流定位数据图层</span></span><br><span class="line"><span class="keyword">var</span> layer1 = <span class="keyword">new</span> ol.layer.Image(&#123;</span><br><span class="line">        visible: <span class="literal">true</span>,</span><br><span class="line">        source: <span class="keyword">new</span> ol.source.ImageWMS(&#123;</span><br><span class="line">            ratio: <span class="number">1</span>,</span><br><span class="line">            url: baseServer,</span><br><span class="line">            serverType: <span class="string">"geoserver"</span>,</span><br><span class="line">            params: &#123;</span><br><span class="line">                FORMAT: <span class="string">'image/png'</span>,</span><br><span class="line">                VERSION: <span class="string">'1.1.0'</span>,</span><br><span class="line">                LAYERS: <span class="string">'gcks:mod_heatmap_5mins'</span>,</span><br><span class="line">                STYLES: <span class="string">''</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//地图数据图层</span></span><br><span class="line">    <span class="keyword">var</span> layer2 = <span class="keyword">new</span> ol.layer.Image(&#123;</span><br><span class="line">        visible: <span class="literal">true</span>,</span><br><span class="line">        source: <span class="keyword">new</span> ol.source.ImageWMS(&#123;</span><br><span class="line">            ratio: <span class="number">1</span>,</span><br><span class="line">            url: baseServer,</span><br><span class="line">            serverType: <span class="string">"geoserver"</span>,</span><br><span class="line">            params: &#123;</span><br><span class="line">                FORMAT: <span class="string">'image/png'</span>,</span><br><span class="line">                VERSION: <span class="string">'1.1.0'</span>,</span><br><span class="line">                LAYERS: <span class="string">'gcks:fl_info_1'</span>,</span><br><span class="line">                STYLES: <span class="string">''</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    map.addLayer(layer1);</span><br><span class="line">    map.addLayer(layer2);</span><br></pre></td></tr></table></figure>
-<p><strong>最终展示效果：</strong><br><img src="./1470731868345.png" alt="Alt text">)</p>
-<p><script src="https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script><script src="https://cdn.bootcss.com/flowchart/1.7.0/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
-e=>end: 结束
-p0=>operation: Postgis数据准备
-p1=>operation: 新建Geoserver图层
-p2=>operation: 发布WMS服务
-p3=>operation: Openlayers装载图层
-p4=>operation: 前端展示
-
-st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/31/WEBa47b3b1a347e1a5f9aba1c1b209b9a75/">数据工程师—java京东面试题</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/31/WEBa47b3b1a347e1a5f9aba1c1b209b9a75/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-30T16:00:00.000Z" itemprop="datePublished">2018-08-31</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <blockquote>
-<p>京东总部的位置有点捉急，周围荒芜人烟，位于一片农田之中，2016年末，刘强东开始将京东定义为一个技术型驱动的公司，开始打造众多的技术团队，技术氛围不错，但是面试官有些木讷。。。</p>
-</blockquote>
-<h2 id="面试题目"><a href="#面试题目" class="headerlink" title="面试题目"></a>面试题目</h2><ul>
-<li><p>多线程：executor原理 线程池﻿ <a href="http://www.iteye.com/topic/366591" target="_blank" rel="noopener"><em>全解</em></a></p>
-<ul>
-<li>Executor，Executors，ExecutorService，CompletionService，Future，Callable</li>
-<li>Executors类，提供了一系列工厂方法用于创先线程池，返回的线程池都实现了ExecutorService接口。</li>
-<li><code>public static ExecutorService newFixedThreadPool(int nThreads)</code><br>创建固定数目线程的线程池。</li>
-<li><code>public static ExecutorService newCachedThreadPool()</code><br>创建一个可缓存的线程池，调用execute 将重用以前构造的线程（如果线程可用）。如果现有线程没有可用的，则创建一个新线程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。</li>
-<li><code>public static ExecutorService newSingleThreadExecutor()</code><br>创建一个单线程化的Executor。</li>
-<li><code>public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)</code><br>创建一个支持定时及周期性的任务执行的线程池，多数情况下可用来替代Timer类。</li>
-<li><code>ExecutorService</code>与生命周期</li>
-<li><code>ExecutorService</code>扩展了<code>Executor</code>并添加了一些生命周期管理的方法。</li>
-<li>一个<code>Executor</code>的生命周期有三种状态，运行 ，关闭 ，终止 。<code>Executor</code>创建时处于运行状态。当调用<code>ExecutorService.shutdown()</code>后，处于关闭状态，<code>isShutdown()</code>方法返回<code>true</code>。这时，不应该再想<code>Executor</code>中添加任务，所有已添加的任务执行完毕后，<code>Executor</code>处于终止状态，<code>isTerminated()</code>返回<code>true</code>。</li>
-<li>如果<code>Executor</code>处于关闭状态，往<code>Executor</code>提交任务会抛出<code>unchecked exception RejectedExecutionException</code>。</li>
-<li>使用<code>Callable</code>，<code>Future</code>返回结果</li>
-<li><code>Future&lt;V&gt;</code>代表一个异步执行的操作，通过<code>get()</code>方法可以获得操作的结果，如果异步操作还没有完成，则，<code>get()</code>会使当前线程阻塞。<code>FutureTask&lt;V&gt;</code>实现了<code>Future&lt;V&gt;</code>和<code>Runable&lt;V&gt;</code>。<code>Callable</code>代表一个有返回值得操作。</li>
-<li><code>CompletionService</code><br>在刚在的例子中，getResult()方法的实现过程中，迭代了FutureTask的数组，如果任务还没有完成则当前线程会阻塞，如果我们希望任意字任务完成后就把其结果加到result中，而不用依次等待每个任务完成，可以使CompletionService。生产者submit()执行的任务。使用者take()已完成的任务，并按照完成这些任务的顺序处理它们的结果 。也就是调用CompletionService的take方法是，会返回按完成顺序放回任务的结果，CompletionService内部维护了一个阻塞队列BlockingQueue，如果没有任务完成，take()方法也会阻塞。修改刚才的例子使用CompletionService：</li>
-</ul>
-</li>
-<li><p>hashmap实现原理，hashtable和hashmap区别，为什么hashmap效率高不安全，concurrenthashmap 为什么线程安全，怎样实现的﻿.</p>
-</li>
-</ul>
-<p>在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。﻿</p>
-<p>HashMap底层就是一个数组结构，数组中的每一项又是一个链表。当新建一个HashMap的时候，就会初始化一个数组。</p>
-<blockquote>
-<p>详细介绍：<br><a href="https://m.baidu.com/from=1099a/bd_page_type=1/ssid=0/uid=0/baiduid=413D2B20C3D3C11AC539AAF3D13305A7/w=0_10_/t=zbios/l=3/tc?ref=www_zbios&amp;pu=sz%401320_480%2Ccuid%404B0037CA3B0622B1CB4F7EEC5575FA49D6DACDA0BFRRTQLMOLG%2Ccua%40750_1334_iphone_8.2.5.10_0%2Ccut%40iPhone8%252C1_9.3.1%2Cosname%40baiduboxapp%2Cctv%401%2Ccfrom%401099a%2Ccsrc%40browserf_box_txt%2Cta%40zbios_1_9.3_6_8.2%2Cusm%401%2Cvmgdb%400020100228y&amp;lid=8020123365899344056&amp;order=1&amp;fm=alop&amp;tj=www_normal_1_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%B7%B1%E5%85%A5Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%3AHashMap%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-%E8%8E%AB%E7%AD%89%E9%97%B2-...&amp;dict=30&amp;w_qd=IlPT2AEptyoA_yixHVCpJiIcOD5zt7xQoTlFsA3bdQdM&amp;sec=19961&amp;di=3350979bbb5eb6eb&amp;bdenc=1&amp;tch=124.0.43.45.0.0&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IDBqUKydH_j3mpI3ubvX7JRhdXTqqAp7YH5bugTCctxgDxn7g&amp;eqid=6f4d33b5773d98001000000358de8e56&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1490980440542%2C%22xpath%22%3A%22div-a-h3%22%7D" target="_blank" rel="noopener">hashmap原理全解</a><br><a href="http://m.blog.csdn.net/article/details?id=42199477" target="_blank" rel="noopener">hashtable原理全解</a></p>
-</blockquote>
-<ul>
-<li><p>手写单例模式示例，单链表倒序排列﻿</p>
-<ul>
-<li>单例模式的几种写法：详解点击：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">单例模式的七种写法</a><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法一：懒加载，线程不安全</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//写法二：懒加载，线程安全</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写法三：不能懒加载</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//写发四：写法三的变种</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Singleton instance = <span class="keyword">null</span>;  </span><br><span class="line">    <span class="keyword">static</span> &#123;  </span><br><span class="line">    instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//写法五：静态内部类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> SingletonHolder.INSTANCE;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//写法六：双重校验</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton; <span class="comment">//保证变量值统一 </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        <span class="keyword">synchronized</span> (Singleton.class) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">        &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> singleton;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>单链表倒序排列﻿</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * java 实现单链表的逆序 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Administrator </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleLinkedReverse</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义单链表，每个节点包含数据和下一个节点的地址</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        Node next;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.data = data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SingleLinkedReverse slr = <span class="keyword">new</span> SingleLinkedReverse();</span><br><span class="line">        <span class="comment">//定义两个链表</span></span><br><span class="line">        Node head, tail;</span><br><span class="line">        <span class="comment">//新建一个链表头结点</span></span><br><span class="line">        head = tail = slr.new Node(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//新建一个长度为10的链表tail</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            Node p = slr.new Node(i);</span><br><span class="line">            tail.next = p;</span><br><span class="line">            tail = p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//tail返回到头节点0 此时head在头结点</span></span><br><span class="line">        tail = head;</span><br><span class="line">        <span class="comment">//循环链表</span></span><br><span class="line">        <span class="keyword">while</span> (tail != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(tail.data + <span class="string">"  "</span>);</span><br><span class="line">            tail = tail.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        head = reverse(head);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(head.data + <span class="string">"  "</span>);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 核心算法</span></span><br><span class="line"><span class="comment">       前后交换位置</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title">reverse</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        Node p1, p2 = <span class="keyword">null</span>;</span><br><span class="line">        p1 = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (head.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            p2 = head.next;</span><br><span class="line">            head.next = p2.next;</span><br><span class="line">            p2.next = p1;</span><br><span class="line">            p1 = p2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口和抽象类区别，特点﻿ <a href="http://www.cnblogs.com/yongjiapei/p/5494894.html" target="_blank" rel="noopener">答案全解</a></p>
-<ol>
-<li>抽象类和接口都不能直接实例化，如果要实例化，抽象类变量必须指向实现所有抽象方法的子类对象，接口变量必须指向实现所有接口方法的类对象。</li>
-<li>抽象类要被子类继承，接口要被类实现。</li>
-<li>接口只能做方法申明，抽象类中可以做方法申明，也可以做方法实现</li>
-<li>接口里定义的变量只能是公共的静态的常量，抽象类中的变量是普通变量。</li>
-<li>抽象类里的抽象方法必须全部被子类所实现，如果子类不能全部实现父类抽象方法，那么该子类只能是抽象类。同样，一个实现接口的时候，如不能全部实现接口方法，那么该类也只能为抽象类。</li>
-<li>抽象方法只能申明，不能实现，接口是设计的结果 ，抽象类是重构的结果</li>
-<li>抽象类里可以没有抽象方法</li>
-<li>如果一个类里有抽象方法，那么这个类只能是抽象类</li>
-<li>抽象方法要被实现，所以不能是静态的，也不能是私有的。</li>
-<li>接口可继承接口，并可多继承接口，但类只能单根继承。</li>
-</ol>
-</li>
-<li><p>static 特点 执行顺序﻿</p>
-<ol>
-<li><p>父类的 static 语句和 static 成员变量﻿﻿</p>
-</li>
-<li><p>子类的 static 语句和 static 成员变量﻿</p>
-</li>
-<li><p>父类的 非 static 语句块和 非 static 成员变量﻿</p>
-</li>
-<li><p>父类的构造方法﻿﻿</p>
-</li>
-<li><p>子类的 非 static 语句块和 非 static 成员变量﻿</p>
-</li>
-<li><p>子类的构造方法</p>
-</li>
-</ol>
-</li>
-</ul>
-<ul>
-<li><p>sql的执行顺序﻿SQL Select语句完整的执行顺序： ﻿</p>
-<ol>
-<li>from子句组装来自不同数据源的数据；﻿</li>
-<li>where子句基于指定的条件对记录行进行筛选；﻿</li>
-<li>group by子句将数据划分为多个分组；﻿</li>
-<li>使用聚集函数进行计算；</li>
-<li>使用having子句筛选分组；﻿</li>
-<li>计算所有的表达式；﻿</li>
-<li>使用order by对结果集进行排序。﻿</li>
-<li>select 集合输出。</li>
-</ol>
-</li>
-<li><p>having﻿<br>  在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用。</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Customer,<span class="keyword">SUM</span>(OrderPrice) <span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">WHERE</span> Customer=<span class="string">'Bush'</span> <span class="keyword">OR</span> Customer=<span class="string">'Adams'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Customer</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">SUM</span>(OrderPrice)&gt;<span class="number">1500</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>innodb myisam的区别 和原理﻿ 答案全解</p>
-</li>
-<li><p>两种类型最主要的差别就是Innodb 支持事务处理与外键和行级锁。而MyISAM不支持.所以MyISAM往往就容易被人认为只适合在小项目中使用。﻿</p>
-</li>
-<li><p>作为使用MySQL的用户角度出发，Innodb和MyISAM都是比较喜欢的，如果数据库平台要达到需求：99.9%的稳定性，方便的扩展性和高可用性来说的话，MyISAM绝对是首选。</p>
-</li>
-</ul>
-<ul>
-<li>arraylist linkedlist区别﻿</li>
-<li>大概的区别<ol>
-<li>ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。 <ol start="2">
-<li>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。 </li>
-<li>对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。 </li>
-</ol>
-</li>
-</ol>
-</li>
-<li>ArrayList和LinkedList在性能上各有优缺点，都有各自所适用的地方，总的说来可以描述如下： </li>
-</ul>
-<ol>
-<li><p>对ArrayList和LinkedList而言，在列表末尾增加一个元素所花的开销都是固定的。对ArrayList而言，主要是在内部数组中增加一项，指向所添加的元素，偶尔可能会导致对数组重新进行分配；而对LinkedList而言，这个开销是统一的，分配一个内部Entry对象。</p>
-</li>
-<li><p>在ArrayList的中间插入或删除一个元素意味着这个列表中剩余的元素都会被移动；而在LinkedList的中间插入或删除一个元素的开销是固定的。</p>
-</li>
-<li><p>LinkedList不支持高效的随机元素访问。</p>
-</li>
-<li><p>ArrayList的空间浪费主要体现在在list列表的结尾预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗相当的空间</p>
-</li>
-</ol>
-<blockquote>
-<p>可以这样说：当操作是在一列数据的后面添加数据而不是在前面或中间,并且需要随机地访问其中的元素时,使用ArrayList会提供比较好的性能；当你的操作是在一列数据的前面或中间添加或删除数据,并且按照顺序访问其中的元素时,就应该使用LinkedList了</p>
-</blockquote>
-<p>###10. 基本请求类型</p>
-<blockquote>
-<p>HTTP协议中共定义了八种方法或者叫“动作”来表明对Request-URI指定的资源的 不同操作方式，具体介绍如下： </p>
-</blockquote>
-<ul>
-<li>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法。也可以利用向Web服务器发送’*’的请求来测试服务器的功能性。 </li>
-<li>HEAD：向服务器索要与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。 </li>
-<li>GET：向特定的资源发出请求。 </li>
-<li>POST：向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的创建和/或已有资源的修改。 </li>
-<li>PUT：向指定资源位置上传其最新内容。 </li>
-<li>DELETE：请求服务器删除Request-URI所标识的资源。 </li>
-<li><p>TRACE：回显服务器收到的请求，主要用于测试或诊断。 </p>
-</li>
-<li><p>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</p>
-</li>
-<li><p>响应状态码<br><a href="http://blog.sina.com.cn/s/blog_4ae187490100x9u7.html" target="_blank" rel="noopener"><em>全解</em></a><br><strong>301和302的区别</strong></p>
-</li>
-<li>302重定向是暂时的重定向，搜索引擎会抓取新的内容而保留旧的网址。因为服务器返回302代码，搜索引擎认为新的网址只是暂时的。 SEO 302好于301，但容易被劫持。</li>
-<li>301重定向是永久的重定向，搜索引擎在抓取新内容的同时也将旧的网址替换为重定向之后的网址。不会发生url劫持</li>
-<li>微服务什么概念<br>微服务是一项在云中部署应用和服务的新技术。大部分围绕微服务的争论都集中在容器或其他技术是否能很好的实施微服务，而红帽说API应该是重点。<br><a href="http://baike.baidu.com/link?url=KTVrC1Gc0J_orv8pR4eScEjIBlIKblnZj76buj2kvhS_xdlqb_hL2mtuqJWPkOqjfWkMWa1NyQrIvLujlH1W7Ff1Wfb7h8IFEThjmnLQZnRFNK3wHGxnNR7BJI_C3PjX" target="_blank" rel="noopener"><em>WiKi</em></a></li>
-</ul>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/30/WEB5422c3159943474af69c34718541a586/">正则表达式</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/30/WEB5422c3159943474af69c34718541a586/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-29T16:00:00.000Z" itemprop="datePublished">2018-08-30</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="可视化展示"><a href="#可视化展示" class="headerlink" title="可视化展示"></a>可视化展示</h2><p><a href="https://regexper.com/" target="_blank" rel="noopener">正则表达式可视化展示</a></p>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">chrome web devtool技巧</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/23/WEB22d5af1e61555b3472fd1706820ee334/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-22T16:00:00.000Z" itemprop="datePublished">2018-08-23</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="console"><a href="#console" class="headerlink" title="console"></a>console</h2><ul>
-<li><p><em>copy(x)</em>：</p>
-<blockquote>
-<p>是一个很有用的工具函数方便你将任何东西拷贝到系统的粘贴板暂存。<br>给copy函数传入一个没有格式的JSON，会返回格式化的结果。</p>
-</blockquote>
-</li>
-<li><p><em>Eager evaluation</em></p>
-<blockquote>
-<p>选择该选项可以自动联想你所输入的变量的值，并自动打印出来。</p>
-</blockquote>
-</li>
-<li><p><em>debug()</em> </p>
-<blockquote>
-<p>在执行到某个函数的时候暂停，你可以使用debug函数。debug(fn)接收一个函数作为参数，当每次该函数被调用时，Debugger就会在该函数的第一行中断执行。</p>
-</blockquote>
-</li>
-<li><p><em>暂停UI在Hover状态下的展示结果</em></p>
-<ul>
-<li>打开sources面板</li>
-<li>显示tooltip</li>
-<li>使用快捷键来暂停脚本执行(将鼠标停留在暂停的图标上查看快捷键 cmd+\ )</li>
-<li>回到Elements面板，然后像通常一样去检查元素。</li>
-</ul>
-</li>
-</ul>
-<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2>
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">通用性面试技巧</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <div class="article-tag-list">
-  <a class="article-date" href="/2018/08/16/WEB56edc46e27ac07b8174128b06501e151/">
-    
-    <i class="icon-calendar"></i>
-    
-    <time datetime="2018-08-15T16:00:00.000Z" itemprop="datePublished">2018-08-16</time>
-  </a>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag"></i>
-    <a class="article-tag-link" href="/tags/Code/">Code</a>
-</div>
-
-
-          <div class="article-tag-list">
-            <i class="icon-circle-more"></i>
-            <span class="article-tag-link" id="seeNum"></span>
-          </div>
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="形象和谈吐"><a href="#形象和谈吐" class="headerlink" title="形象和谈吐"></a>形象和谈吐</h3><ul>
-<li>略正式。</li>
-<li>说话幽默，看着对方。</li>
-<li>回答问题到细节，避免面试官追问。</li>
-<li>要面试官的微信，对于不懂的问题，回去准备发给他。</li>
-</ul>
-<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><h4 id="为什么离开公司？"><a href="#为什么离开公司？" class="headerlink" title="为什么离开公司？"></a>为什么离开公司？</h4><ul>
-<li>太喜欢你们公司</li>
-<li>没有成长空间</li>
-</ul>
-<h4 id="自己的缺点？"><a href="#自己的缺点？" class="headerlink" title="自己的缺点？"></a>自己的缺点？</h4><ul>
-<li>急性子，为了做事推进，不太估计别人的感受。</li>
-<li>对做的事情要求太高，team有时压力会比较大。</li>
-</ul>
-<h4 id="自己的优点？"><a href="#自己的优点？" class="headerlink" title="自己的优点？"></a>自己的优点？</h4><ul>
-<li>善于学习，高效学习，刻意练习，研究能力。</li>
-<li>有韧性。</li>
-<li>喜欢研究底层和新的技术，比如go语言。</li>
-</ul>
-<h4 id="为什么换工作比较勤？"><a href="#为什么换工作比较勤？" class="headerlink" title="为什么换工作比较勤？"></a>为什么换工作比较勤？</h4><ul>
-<li>公司给不了我理想工作环境和状态。</li>
-<li>我理想的工作环境和状态。</li>
-</ul>
-<h4 id="为什么转前端？"><a href="#为什么转前端？" class="headerlink" title="为什么转前端？"></a>为什么转前端？</h4><ul>
-<li>转了以后发现自己做的更好。</li>
-<li>学习能力强</li>
-</ul>
-<h4 id="你有什么问题？"><a href="#你有什么问题？" class="headerlink" title="你有什么问题？"></a>你有什么问题？</h4><ul>
-<li>一线经理还在写代码吗？不懂技术细节怎么带团队。</li>
-<li>你觉得你们公司有什么不好的地方吗？</li>
-<li>我能帮贵公司做点什么？能不能给我些资料，我先了解下。</li>
-<li>面试官对你的评价，指出你的不足和需要改进的地方。</li>
-</ul>
-<h3 id="提现自己的能力"><a href="#提现自己的能力" class="headerlink" title="提现自己的能力"></a>提现自己的能力</h3><ul>
-<li>死磕某个事</li>
-<li>坚持很久的事</li>
-<li>逆境不放弃</li>
-<li>面对压力，承担责任</li>
-<li>严谨细心，对自己做的产品自信</li>
-<li>面对诱惑，不浮躁</li>
-</ul>
-
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2018/08/16/E3C81D48B22B434E8B5664FB3C2CB7CF/">前端面试题</a>
         </h1>
         
@@ -715,7 +178,7 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-        <p>  <img src="/images/4e16bef09ee1c0434683d553a0d1a050.png" alt="follow-iu-8_img_885_590.jpg">  </p>
+        <p>  <img src="/images/14ce7daa04ff1962eb118bd1f0088fa5.png" alt="follow-iu-8_img_885_590.jpg">  </p>
 <h2 id="javascript"><a href="#javascript" class="headerlink" title="javascript"></a>javascript</h2><ul>
 <li><p>有一个全局变量 a，有一个全局函数 b，实现一个方法bindData，执行后，a的任何赋值都会触发b的执行。</p>
 <blockquote>
@@ -1148,7 +611,9 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <p>用过很多VPN工具，免费的最不靠谱，收费的参差不齐，shadowsocks算是比较成熟而且一直在更新改动。</p>
 </blockquote>
 <h2 id="网站购买"><a href="#网站购买" class="headerlink" title="网站购买"></a>网站购买</h2><ul>
-<li><p><a href="https://acnet.xyz/aff.php?aff=2078" target="_blank" rel="noopener">https://acnet.xyz/aff.php?aff=2078</a></p>
+<li><a href="https://ss-proxy.info/" target="_blank" rel="noopener">https://ss-proxy.info/</a>  </li>
+<li><a href="http://www.ss-proxy.net/" target="_blank" rel="noopener">http://www.ss-proxy.net/</a></li>
+<li><p><a href="https://acnet.xyz/" target="_blank" rel="noopener">https://acnet.xyz/</a></p>
 </li>
 <li><p>注册账号登录</p>
 </li>
@@ -1171,6 +636,7 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><blockquote>
 <p>VPN分为三种模式：全局，PAC自动模式，手动模式<br>一般采用PAC自动模式，其原理就是官方持续更新一组域名的白名单库，只有在库里的域名才会走VPN，当然你也可以自己添加域名或者IP。</p>
 </blockquote>
+<h2 id="IOS安装不了shadowscoks怎么办？"><a href="#IOS安装不了shadowscoks怎么办？" class="headerlink" title="IOS安装不了shadowscoks怎么办？"></a>IOS安装不了shadowscoks怎么办？</h2><p><img src="/images/7abfb7278bb55069eeeab893d81ef5d4.png" alt="image"><br><img src="/images/b47ed7ee7ab83714f6e30c8346f24645.png" alt="image"><br><img src="/images/41cf63f0801891744a7808534c9a5c62.png" alt="image"></p>
 
         
     </section>
@@ -1427,7 +893,7 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-          <div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">这篇文章重点介绍&nbsp;Prolog&nbsp;语言。Prolog（Programming&nbsp;in&nbsp;Logic&nbsp;的缩写）是一种逻辑编程语言。它创建在逻辑学的理论基础之上，最初被运用于自然语言等研究领域。现在它已被广泛地应用在人工智能的研究中，可以用来建造专家系统、自然语言理解、智能知识库等。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;语言最早由艾克斯马赛大学（Aix-Marseille&nbsp;University）的&nbsp;Alain&nbsp;Colmerauer&nbsp;与&nbsp;Philippe&nbsp;Roussel&nbsp;等人于&nbsp;20&nbsp;年代&nbsp;60&nbsp;年代末研究开发的。1972&nbsp;年被公认为是&nbsp;Prolog&nbsp;语言正式诞生的年份，自&nbsp;1972&nbsp;年以后，分支出多种&nbsp;Prolog&nbsp;的方言。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">最主要的两种方言为&nbsp;Edinburgh&nbsp;和&nbsp;Aix-Marseille。最早的&nbsp;Prolog&nbsp;解释器由&nbsp;Roussel&nbsp;建造，而第一个&nbsp;Prolog&nbsp;编译器则是&nbsp;David&nbsp;Warren&nbsp;编写的。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;一直在北美和欧洲被广泛使用。日本政府曾经为了建造智能计算机而用&nbsp;Prolog&nbsp;来开发&nbsp;ICOT&nbsp;第五代计算机系统。在早期的机器智能研究领域，Prolog&nbsp;曾经是主要的开发工具。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">20&nbsp;世纪&nbsp;80&nbsp;年代&nbsp;Borland&nbsp;开发的&nbsp;Turbo&nbsp;Prolog，进一步普及了&nbsp;Prolog&nbsp;的使用。1995&nbsp;年确定了&nbsp;ISO&nbsp;Prolog&nbsp;标准。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">有别于一般的函数式语言，Prolog&nbsp;的程序是基于谓词逻辑的理论。最基本的写法是定立对象与对象之间的关系，之后可以用询问目标的方式来查询各种对象之间的关系。系统会自动进行匹配及回溯，找出所询问的答案。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;代码中以大写字母开头的元素是变量，字符串、数字或以小写字母开头的元素是常量。下划线（_）被称为匿名变量。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;font-size:16;"><span style="font-size:18px;font-family:Verdana;">Prolog&nbsp;的语言特征</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">逻辑编程是靠推理，比如下面的示例：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">program&nbsp;mortal(X)&nbsp;:-&nbsp;philosopher(X).philosopher(Socrates).philosopher(Plato).philosopher(Aristotle).mortal_report:-write(‘Known&nbsp;mortals&nbsp;are:’),&nbsp;nl,&nbsp;mortal(X),write(X),nl,fail.</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">我们可以看到下面的几个步骤。</span></div><ol yne-block-type="list" style="list-style-type:decimal;"><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">先定义一个规则：哲学家是人类。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">然后陈述事实：苏格拉底、亚里士多德、柏拉图都是哲学家。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">然后，我们问，谁是人类？于是就会输出苏格拉底、亚里士多德、柏拉图。</span></li></ol><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">下面是逻辑编程范式的几个特征。</span></div><ul yne-block-type="list" style="list-style-type:disc;"><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">逻辑编程的要点是将正规的逻辑风格带入计算机程序设计之中。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">逻辑编程建立了描述一个问题里的世界的逻辑模型。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">逻辑编程的目标是对它的模型建立新的陈述。</span></li></ul><ul yne-block-type="list" style="list-style-type:disc;"><ul yne-block-type="list" style="list-style-type:circle"><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">通过陈述事实——因果关系。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">程序自动推导出相关的逻辑。</span></li></ul></ul><div yne-bulb-block="paragraph" style="white-space: pre-wrap;font-size:16;"><span style="font-size:18px;font-family:Verdana;">经典问题：地图着色问题</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">我们再来看一个经典的四色地图问题。任何一个地图，相同区域不能用相同颜色，只要用四种不同的颜色就够了。</span></div><div yne-bulb-block="image" style="text-align:center;width:620;align:center;height:321;"><img data-media-type="image" src="/images/501d469bdfdff61afb8a5bb8177edd59.png" alt="" style="width:620px;"></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">首先，定义四种颜色。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">color(red).color(green).color(blue).color(yellow).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">然后，定义一个规则：相邻的两个地区不能用相同的颜色。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">neighbor(StateAColor,&nbsp;StateBColor)&nbsp;:-&nbsp;color(StateAColor),&nbsp;color(StateBColor),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StateAColor&nbsp;\=&nbsp;StateBColor.&nbsp;/<em>&nbsp;\=&nbsp;is&nbsp;the&nbsp;not&nbsp;equal&nbsp;operator&nbsp;</em>/</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">最前面的两个条件：</span><span style="font-size:16px;font-family:Courier New;color:#353535;">color(StateAColor)</span><span style="font-size:16px;color:#353535;">&nbsp;和&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">color(StateBColor)</span><span style="font-size:16px;color:#353535;">&nbsp;表明了两个变量&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">StateAColor</span><span style="font-size:16px;color:#353535;">&nbsp;和&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">StateBColor</span><span style="font-size:16px;color:#353535;">。然后，第三个条件：&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">StateAColor&nbsp;\=&nbsp;StateBColor</span><span style="font-size:16px;color:#353535;">&nbsp;表示颜色不能相同。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">接下来的事就比较简单了。我们描述事实就好了，描述哪些区域是相邻的事实。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">比如，下面描述了&nbsp;BW&nbsp;和&nbsp;BY&nbsp;是相邻的。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;font-family:Courier New;color:#353535;">germany(BW,&nbsp;BY)&nbsp;:-&nbsp;neighbor(BW,&nbsp;BY).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">下面则描述多个区&nbsp;BW、&nbsp;BY、&nbsp;SL、&nbsp;RP、&nbsp;和&nbsp;ND&nbsp;的相邻关系：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;font-family:Courier New;color:#353535;">germany(BW,&nbsp;BY,&nbsp;SL,&nbsp;RP,&nbsp;HE)&nbsp;:-&nbsp;neighbor(BW,&nbsp;BY),&nbsp;neighbor(BW,&nbsp;RP),&nbsp;neighbor(BW,&nbsp;HE).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">于是，我们就可以描述整个德国地图的相邻关系了。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">germany(SH,&nbsp;MV,&nbsp;HH,&nbsp;HB,&nbsp;NI,&nbsp;ST,&nbsp;BE,&nbsp;BB,&nbsp;SN,&nbsp;NW,&nbsp;HE,&nbsp;TH,&nbsp;RP,&nbsp;SL,&nbsp;BW,&nbsp;BY)&nbsp;:-&nbsp;neighbor(SH,&nbsp;NI),&nbsp;neighbor(SH,&nbsp;HH),&nbsp;neighbor(SH,&nbsp;MV),neighbor(HH,&nbsp;NI),neighbor(MV,&nbsp;NI),&nbsp;neighbor(MV,&nbsp;BB),neighbor(NI,&nbsp;HB),&nbsp;neighbor(NI,&nbsp;BB),&nbsp;neighbor(NI,&nbsp;ST),&nbsp;neighbor(NI,&nbsp;TH),neighbor(NI,&nbsp;HE),&nbsp;neighbor(NI,&nbsp;NW),neighbor(ST,&nbsp;BB),&nbsp;neighbor(ST,&nbsp;SN),&nbsp;neighbor(ST,&nbsp;TH),neighbor(BB,&nbsp;BE),&nbsp;neighbor(BB,&nbsp;SN),neighbor(NW,&nbsp;HE),&nbsp;neighbor(NW,&nbsp;RP),neighbor(SN,&nbsp;TH),&nbsp;neighbor(SN,&nbsp;BY),neighbor(RP,&nbsp;SL),&nbsp;neighbor(RP,&nbsp;HE),&nbsp;neighbor(RP,&nbsp;BW),neighbor(HE,&nbsp;BW),&nbsp;neighbor(HE,&nbsp;TH),&nbsp;neighbor(HE,&nbsp;BY),neighbor(TH,&nbsp;BY),neighbor(BW,&nbsp;BY).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">最后，我们使用如下语句，就可以让&nbsp;Prolog&nbsp;推导到各个地区的颜色。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">?-&nbsp;germany(SH,&nbsp;MV,&nbsp;HH,&nbsp;HB,&nbsp;NI,&nbsp;ST,&nbsp;BE,&nbsp;BB,&nbsp;SN,&nbsp;NW,&nbsp;HE,&nbsp;TH,&nbsp;RP,&nbsp;SL,&nbsp;BW,&nbsp;BY).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;font-size:16;"><span style="font-size:18px;font-family:Verdana;">小结</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;这种逻辑编程，把业务逻辑或是说算法抽象成只关心规则、事实和问题的推导这样的标准方式，不需要关心程序控制，也不需要关心具体的实现算法。只需要给出可以用于推导的规则和相关的事实，问题就可以被通过逻辑推导来解决掉。是不是很有意思，也很好玩？</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">如果有兴趣，你可以学习一下，这里推荐两个学习资源：</span></div><ul yne-block-type="list" style="list-style-type:disc;"><li style="list-style-position:inside;"><a href="http://www.doc.gold.ac.uk/~mas02gw/prolog_tutorial/prologpages/" target="_blank" rel="noopener"><span style="font-size:16px;color:#1abc9c;">Prolog&nbsp;Tutorial</span></a></li><li style="list-style-position:inside;"><a href="http://www.learnprolognow.org" target="_blank" rel="noopener"><span style="font-size:16px;color:#1abc9c;">Learn&nbsp;Prolog&nbsp;Now!</span></a></li></ul><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><br></div>
+          <div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">这篇文章重点介绍&nbsp;Prolog&nbsp;语言。Prolog（Programming&nbsp;in&nbsp;Logic&nbsp;的缩写）是一种逻辑编程语言。它创建在逻辑学的理论基础之上，最初被运用于自然语言等研究领域。现在它已被广泛地应用在人工智能的研究中，可以用来建造专家系统、自然语言理解、智能知识库等。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;语言最早由艾克斯马赛大学（Aix-Marseille&nbsp;University）的&nbsp;Alain&nbsp;Colmerauer&nbsp;与&nbsp;Philippe&nbsp;Roussel&nbsp;等人于&nbsp;20&nbsp;年代&nbsp;60&nbsp;年代末研究开发的。1972&nbsp;年被公认为是&nbsp;Prolog&nbsp;语言正式诞生的年份，自&nbsp;1972&nbsp;年以后，分支出多种&nbsp;Prolog&nbsp;的方言。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">最主要的两种方言为&nbsp;Edinburgh&nbsp;和&nbsp;Aix-Marseille。最早的&nbsp;Prolog&nbsp;解释器由&nbsp;Roussel&nbsp;建造，而第一个&nbsp;Prolog&nbsp;编译器则是&nbsp;David&nbsp;Warren&nbsp;编写的。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;一直在北美和欧洲被广泛使用。日本政府曾经为了建造智能计算机而用&nbsp;Prolog&nbsp;来开发&nbsp;ICOT&nbsp;第五代计算机系统。在早期的机器智能研究领域，Prolog&nbsp;曾经是主要的开发工具。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">20&nbsp;世纪&nbsp;80&nbsp;年代&nbsp;Borland&nbsp;开发的&nbsp;Turbo&nbsp;Prolog，进一步普及了&nbsp;Prolog&nbsp;的使用。1995&nbsp;年确定了&nbsp;ISO&nbsp;Prolog&nbsp;标准。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">有别于一般的函数式语言，Prolog&nbsp;的程序是基于谓词逻辑的理论。最基本的写法是定立对象与对象之间的关系，之后可以用询问目标的方式来查询各种对象之间的关系。系统会自动进行匹配及回溯，找出所询问的答案。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;代码中以大写字母开头的元素是变量，字符串、数字或以小写字母开头的元素是常量。下划线（_）被称为匿名变量。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;font-size:16;"><span style="font-size:18px;font-family:Verdana;">Prolog&nbsp;的语言特征</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">逻辑编程是靠推理，比如下面的示例：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">program&nbsp;mortal(X)&nbsp;:-&nbsp;philosopher(X).philosopher(Socrates).philosopher(Plato).philosopher(Aristotle).mortal_report:-write(‘Known&nbsp;mortals&nbsp;are:’),&nbsp;nl,&nbsp;mortal(X),write(X),nl,fail.</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">我们可以看到下面的几个步骤。</span></div><ol yne-block-type="list" style="list-style-type:decimal;"><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">先定义一个规则：哲学家是人类。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">然后陈述事实：苏格拉底、亚里士多德、柏拉图都是哲学家。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">然后，我们问，谁是人类？于是就会输出苏格拉底、亚里士多德、柏拉图。</span></li></ol><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">下面是逻辑编程范式的几个特征。</span></div><ul yne-block-type="list" style="list-style-type:disc;"><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">逻辑编程的要点是将正规的逻辑风格带入计算机程序设计之中。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">逻辑编程建立了描述一个问题里的世界的逻辑模型。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">逻辑编程的目标是对它的模型建立新的陈述。</span></li></ul><ul yne-block-type="list" style="list-style-type:disc;"><ul yne-block-type="list" style="list-style-type:circle"><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">通过陈述事实——因果关系。</span></li><li style="list-style-position:inside;"><span style="font-size:16px;color:#353535;">程序自动推导出相关的逻辑。</span></li></ul></ul><div yne-bulb-block="paragraph" style="white-space: pre-wrap;font-size:16;"><span style="font-size:18px;font-family:Verdana;">经典问题：地图着色问题</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">我们再来看一个经典的四色地图问题。任何一个地图，相同区域不能用相同颜色，只要用四种不同的颜色就够了。</span></div><div yne-bulb-block="image" style="text-align:center;width:620;align:center;height:321;"><img data-media-type="image" src="/images/f14d4cb6d5263f47f972fcb47d264225.png" alt="" style="width:620px;"></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">首先，定义四种颜色。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">color(red).color(green).color(blue).color(yellow).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">然后，定义一个规则：相邻的两个地区不能用相同的颜色。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">neighbor(StateAColor,&nbsp;StateBColor)&nbsp;:-&nbsp;color(StateAColor),&nbsp;color(StateBColor),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StateAColor&nbsp;\=&nbsp;StateBColor.&nbsp;/<em>&nbsp;\=&nbsp;is&nbsp;the&nbsp;not&nbsp;equal&nbsp;operator&nbsp;</em>/</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">最前面的两个条件：</span><span style="font-size:16px;font-family:Courier New;color:#353535;">color(StateAColor)</span><span style="font-size:16px;color:#353535;">&nbsp;和&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">color(StateBColor)</span><span style="font-size:16px;color:#353535;">&nbsp;表明了两个变量&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">StateAColor</span><span style="font-size:16px;color:#353535;">&nbsp;和&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">StateBColor</span><span style="font-size:16px;color:#353535;">。然后，第三个条件：&nbsp;</span><span style="font-size:16px;font-family:Courier New;color:#353535;">StateAColor&nbsp;\=&nbsp;StateBColor</span><span style="font-size:16px;color:#353535;">&nbsp;表示颜色不能相同。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">接下来的事就比较简单了。我们描述事实就好了，描述哪些区域是相邻的事实。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">比如，下面描述了&nbsp;BW&nbsp;和&nbsp;BY&nbsp;是相邻的。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;font-family:Courier New;color:#353535;">germany(BW,&nbsp;BY)&nbsp;:-&nbsp;neighbor(BW,&nbsp;BY).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">下面则描述多个区&nbsp;BW、&nbsp;BY、&nbsp;SL、&nbsp;RP、&nbsp;和&nbsp;ND&nbsp;的相邻关系：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;font-family:Courier New;color:#353535;">germany(BW,&nbsp;BY,&nbsp;SL,&nbsp;RP,&nbsp;HE)&nbsp;:-&nbsp;neighbor(BW,&nbsp;BY),&nbsp;neighbor(BW,&nbsp;RP),&nbsp;neighbor(BW,&nbsp;HE).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">于是，我们就可以描述整个德国地图的相邻关系了。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">germany(SH,&nbsp;MV,&nbsp;HH,&nbsp;HB,&nbsp;NI,&nbsp;ST,&nbsp;BE,&nbsp;BB,&nbsp;SN,&nbsp;NW,&nbsp;HE,&nbsp;TH,&nbsp;RP,&nbsp;SL,&nbsp;BW,&nbsp;BY)&nbsp;:-&nbsp;neighbor(SH,&nbsp;NI),&nbsp;neighbor(SH,&nbsp;HH),&nbsp;neighbor(SH,&nbsp;MV),neighbor(HH,&nbsp;NI),neighbor(MV,&nbsp;NI),&nbsp;neighbor(MV,&nbsp;BB),neighbor(NI,&nbsp;HB),&nbsp;neighbor(NI,&nbsp;BB),&nbsp;neighbor(NI,&nbsp;ST),&nbsp;neighbor(NI,&nbsp;TH),neighbor(NI,&nbsp;HE),&nbsp;neighbor(NI,&nbsp;NW),neighbor(ST,&nbsp;BB),&nbsp;neighbor(ST,&nbsp;SN),&nbsp;neighbor(ST,&nbsp;TH),neighbor(BB,&nbsp;BE),&nbsp;neighbor(BB,&nbsp;SN),neighbor(NW,&nbsp;HE),&nbsp;neighbor(NW,&nbsp;RP),neighbor(SN,&nbsp;TH),&nbsp;neighbor(SN,&nbsp;BY),neighbor(RP,&nbsp;SL),&nbsp;neighbor(RP,&nbsp;HE),&nbsp;neighbor(RP,&nbsp;BW),neighbor(HE,&nbsp;BW),&nbsp;neighbor(HE,&nbsp;TH),&nbsp;neighbor(HE,&nbsp;BY),neighbor(TH,&nbsp;BY),neighbor(BW,&nbsp;BY).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">最后，我们使用如下语句，就可以让&nbsp;Prolog&nbsp;推导到各个地区的颜色。</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;padding:16px 24px 16px 16px;margin:16px 0px;font-size:16;"><span style="font-size:12px;font-family:monospace;color:#353535;">?-&nbsp;germany(SH,&nbsp;MV,&nbsp;HH,&nbsp;HB,&nbsp;NI,&nbsp;ST,&nbsp;BE,&nbsp;BB,&nbsp;SN,&nbsp;NW,&nbsp;HE,&nbsp;TH,&nbsp;RP,&nbsp;SL,&nbsp;BW,&nbsp;BY).</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;font-size:16;"><span style="font-size:18px;font-family:Verdana;">小结</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">Prolog&nbsp;这种逻辑编程，把业务逻辑或是说算法抽象成只关心规则、事实和问题的推导这样的标准方式，不需要关心程序控制，也不需要关心具体的实现算法。只需要给出可以用于推导的规则和相关的事实，问题就可以被通过逻辑推导来解决掉。是不是很有意思，也很好玩？</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><span style="font-size:16px;color:#353535;">如果有兴趣，你可以学习一下，这里推荐两个学习资源：</span></div><ul yne-block-type="list" style="list-style-type:disc;"><li style="list-style-position:inside;"><a href="http://www.doc.gold.ac.uk/~mas02gw/prolog_tutorial/prologpages/" target="_blank" rel="noopener"><span style="font-size:16px;color:#1abc9c;">Prolog&nbsp;Tutorial</span></a></li><li style="list-style-position:inside;"><a href="http://www.learnprolognow.org" target="_blank" rel="noopener"><span style="font-size:16px;color:#1abc9c;">Learn&nbsp;Prolog&nbsp;Now!</span></a></li></ul><div yne-bulb-block="paragraph" style="white-space: pre-wrap;margin:3px 0px 16px;font-size:16;"><br></div>
         
     </section>
 </article>
@@ -1588,7 +1054,7 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-          <div yne-bulb-block="heading" yne-bulb-level="3" id="61turu1521991115398" style="white-space: pre-wrap;"><span style="font-size:16px;color:#393939;font-weight:bold;">以MAC为例！</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="heading" yne-bulb-level="2" id="46omea1521992146184" style="white-space: pre-wrap;"><span style="font-size:20px;font-weight:bold;">必备软件工具：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">1.&nbsp;VPN软件：每个公司都有会有自己的vpn吧，如果没有那就自己搭建一个，建议使用shadowscoks。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">2.&nbsp;host：相信开发过程中要配置很多测试环境的host，推荐使用SwitchHosts。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">其实有VPN基本上，就可以在自己的电脑上开发了，但是有些手机端的页面还是需要用到不同机型的手机来调试的。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">那就需要让你的手机连接上你的电脑的网络，这样不只可以共享电脑连接公司网络的VPN还能共享host。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">3.&nbsp;mac上使用fiddler比较复杂，但是有一款MAC的专属神器：charles</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">charles4.2.1&nbsp;下载地址：<a href="https://www.charlesproxy.com/assets/release/4.2.1/charles-proxy-4.2.1.dmg" target="_blank" rel="noopener"><span style="font-size:13px;font-family:SimHei,STHeiti;color:#003884;background-color:#ffffff;">https://www.charlesproxy.com/assets/release/4.2.1/charles-proxy-4.2.1.dmg</span></a></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="color:#393939;">charles破解jar包：</span><a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener"><span style="color:#003884;text-decoration:underline;">https://www.zzzmode.com/mytools/charles/</span></a></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">输入RegisterName(此名称随意，用于显示&nbsp;Registered&nbsp;to&nbsp;xxx)，选择已安装的版本，点击生成，并下载charles.jar文件</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">替换本地charles.jar文件</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">macOS:&nbsp;</span><span style="font-size:12px;font-family:Courier New;color:#c7254e;background-color:#f9f2f4;">/Applications/Charles.app/Contents/Java/charles.jar</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><br></div><div yne-bulb-block="heading" yne-bulb-level="3" id="24glif1521992823243" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><br></div><div yne-bulb-block="heading" yne-bulb-level="2" id="8wbly1521993580261" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><span style="font-size:20px;font-family:Courier New;color:#df402a;font-weight:bold;">使用方法：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">1.&nbsp;打开charles&nbsp;，配置http&nbsp;proxy</span></div><div yne-bulb-block="image" style="height:350;"><img data-media-type="image" src="/images/5dbb9394e4d8a2f3a7806748a297b18d.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">2.&nbsp;设置端口</span></div><div yne-bulb-block="image" style="height:496;"><img data-media-type="image" src="/images/e3abde0ace963f3250d506ec74768029.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">3.查看电脑的内网IP地址：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">MAC命令：ifconfig</span></div><div yne-bulb-block="image" style="height:311;"><img data-media-type="image" src="/images/6670029918a9455a8ce29073b48b33cf.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">4.&nbsp;保证手机与电脑处于同一局域网内，然后配置手机的代理</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">打开WIFI设置-&gt;选择你连接的WIFI热点-&gt;选择代理-&gt;手动</span></div><div yne-bulb-block="image" style="height:583;"><img data-media-type="image" src="/images/96733f210cc695d8c7369b3faeefbc88.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">5.此时就可以访问了，大功告成！！！</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">charles还可以查看请求情况，当然https查看不了。</span></div><div yne-bulb-block="image" style="height:512;"><img data-media-type="image" src="/images/f7dc7d99a90a4dc0fe0155a5e90bb5c7.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div>
+          <div yne-bulb-block="heading" yne-bulb-level="3" id="61turu1521991115398" style="white-space: pre-wrap;"><span style="font-size:16px;color:#393939;font-weight:bold;">以MAC为例！</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="heading" yne-bulb-level="2" id="46omea1521992146184" style="white-space: pre-wrap;"><span style="font-size:20px;font-weight:bold;">必备软件工具：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">1.&nbsp;VPN软件：每个公司都有会有自己的vpn吧，如果没有那就自己搭建一个，建议使用shadowscoks。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">2.&nbsp;host：相信开发过程中要配置很多测试环境的host，推荐使用SwitchHosts。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">其实有VPN基本上，就可以在自己的电脑上开发了，但是有些手机端的页面还是需要用到不同机型的手机来调试的。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">那就需要让你的手机连接上你的电脑的网络，这样不只可以共享电脑连接公司网络的VPN还能共享host。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">3.&nbsp;mac上使用fiddler比较复杂，但是有一款MAC的专属神器：charles</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">charles4.2.1&nbsp;下载地址：<a href="https://www.charlesproxy.com/assets/release/4.2.1/charles-proxy-4.2.1.dmg" target="_blank" rel="noopener"><span style="font-size:13px;font-family:SimHei,STHeiti;color:#003884;background-color:#ffffff;">https://www.charlesproxy.com/assets/release/4.2.1/charles-proxy-4.2.1.dmg</span></a></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="color:#393939;">charles破解jar包：</span><a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener"><span style="color:#003884;text-decoration:underline;">https://www.zzzmode.com/mytools/charles/</span></a></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">输入RegisterName(此名称随意，用于显示&nbsp;Registered&nbsp;to&nbsp;xxx)，选择已安装的版本，点击生成，并下载charles.jar文件</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">替换本地charles.jar文件</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">macOS:&nbsp;</span><span style="font-size:12px;font-family:Courier New;color:#c7254e;background-color:#f9f2f4;">/Applications/Charles.app/Contents/Java/charles.jar</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><br></div><div yne-bulb-block="heading" yne-bulb-level="3" id="24glif1521992823243" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><br></div><div yne-bulb-block="heading" yne-bulb-level="2" id="8wbly1521993580261" style="white-space: pre-wrap;line-height:1.42857;line-height:1.42857;"><span style="font-size:20px;font-family:Courier New;color:#df402a;font-weight:bold;">使用方法：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">1.&nbsp;打开charles&nbsp;，配置http&nbsp;proxy</span></div><div yne-bulb-block="image" style="height:350;"><img data-media-type="image" src="/images/1c1cabb3a6dab08a02681bb94dd8133f.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">2.&nbsp;设置端口</span></div><div yne-bulb-block="image" style="height:496;"><img data-media-type="image" src="/images/49def3fb018033aaad717b4303302372.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">3.查看电脑的内网IP地址：</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">MAC命令：ifconfig</span></div><div yne-bulb-block="image" style="height:311;"><img data-media-type="image" src="/images/72bc740300965b1b90d39d580f21eb68.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">4.&nbsp;保证手机与电脑处于同一局域网内，然后配置手机的代理</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">打开WIFI设置-&gt;选择你连接的WIFI热点-&gt;选择代理-&gt;手动</span></div><div yne-bulb-block="image" style="height:583;"><img data-media-type="image" src="/images/0f554541691379e684bf595fcb1fd201.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">5.此时就可以访问了，大功告成！！！</span></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><span style="font-family:Arial;color:#333333;background-color:#ffffff;">charles还可以查看请求情况，当然https查看不了。</span></div><div yne-bulb-block="image" style="height:512;"><img data-media-type="image" src="/images/7cad1609596a2fde9543aa6f37ffb4df.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div>
         
     </section>
 </article>
@@ -1628,7 +1094,7 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     
     <section class="article-body markdown-body">
         
-          <div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="image" style="height:477;"><img data-media-type="image" src="/images/db54fcb8409a22fd61addf90c2da52f3.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">前端基础架构包含三部分：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">工具&nbsp;</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">规范&nbsp;</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">系统</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">工具包含：&nbsp;测试工具，代码管理（git，npm），代码品质（eslint，csslint），运行监测（console异常，接口异常，性能监测）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">库和框架：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">————————————————————————</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">尤雨溪</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">组件：<br>-&nbsp;接入型&nbsp;container<br>-&nbsp;展示型<br>-&nbsp;交互型&nbsp;比如各类加强版的表单组件，通常强调复用<br>-&nbsp;功能型&nbsp;比如&nbsp;<code>&amp;lt;router-view&amp;gt;</code>，<code>&amp;lt;transition&amp;gt;</code>，作为一种扩展、抽象机制存在。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">渲染变化侦测机制：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">-&nbsp;命令式（js）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">-&nbsp;声明式（css）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">view&nbsp;=&nbsp;render(state)</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div>
+          <div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="image" style="height:477;"><img data-media-type="image" src="/images/0a669af32738d674f139d8b885e2c1d3.png" alt=""></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">前端基础架构包含三部分：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">工具&nbsp;</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">规范&nbsp;</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">系统</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">工具包含：&nbsp;测试工具，代码管理（git，npm），代码品质（eslint，csslint），运行监测（console异常，接口异常，性能监测）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">库和框架：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">————————————————————————</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">尤雨溪</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">组件：<br>-&nbsp;接入型&nbsp;container<br>-&nbsp;展示型<br>-&nbsp;交互型&nbsp;比如各类加强版的表单组件，通常强调复用<br>-&nbsp;功能型&nbsp;比如&nbsp;<code>&amp;lt;router-view&amp;gt;</code>，<code>&amp;lt;transition&amp;gt;</code>，作为一种扩展、抽象机制存在。</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">渲染变化侦测机制：</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">-&nbsp;命令式（js）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">-&nbsp;声明式（css）</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;">view&nbsp;=&nbsp;render(state)</div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div><div yne-bulb-block="paragraph" style="white-space: pre-wrap;"><br></div>
         
     </section>
 </article>
@@ -1639,7 +1105,7 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2018/01/01/WEB67e717857d52dc570e7a3c6e98a19e29/">微信html5进阶之路</a>
+            <a href="/2018/01/01/WEB67e717857d52dc570e7a3c6e98a19e29/">html5动画进阶之路</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -1718,7 +1184,17 @@ st->p0->p1->p2->p3->p4->e</textarea><textarea id="flowchart-0-options" style="di
 <li><a href="http://velocityjs.org/" target="_blank" rel="noopener">velocity</a></li>
 <li><a href="https://howlerjs.com/" target="_blank" rel="noopener">howlerjs</a></li>
 <li><a href="https://html2canvas.hertzen.com/" target="_blank" rel="noopener">html2canvas</a></li>
+<li><a href="https://animejs.com" target="_blank" rel="noopener">animejs</a></li>
 </ul>
+<h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><h3 id="annie2x"><a href="#annie2x" class="headerlink" title="annie2x"></a><a href="http://annie2x.com/" target="_blank" rel="noopener">annie2x</a></h3><blockquote>
+<p>Annie2x是一款Adobe Flash的插件，支持Flash cc 2015及以上和Adobe Animate 全线版本<br>，通过Annie2x插件能将FLA文件直接 CTRL+ENTER 一键发布成小程序 小游戏 HTML5等</p>
+</blockquote>
+<ul>
+<li><a href="">egret</a></li>
+<li><a href="">layabox</a></li>
+<li><a href="">pixijs</a></li>
+</ul>
+<h2 id="动画制作软件"><a href="#动画制作软件" class="headerlink" title="动画制作软件"></a>动画制作软件</h2><h2 id="3D"><a href="#3D" class="headerlink" title="3D"></a>3D</h2><p><a href="https://www.babylonjs.com/" target="_blank" rel="noopener">https://www.babylonjs.com/</a></p>
 
         
     </section>
